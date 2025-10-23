@@ -1,11 +1,13 @@
-<script setup lang="ts"></script>
+<!-- Test Screen with some buttons to test accessing our Backend -->
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <div style="background-color: white; height: 100vh; display: flex; justify-content: center; align-items: center;">
+    <TestButton />
+    <DataButton />
+  </div>
 </template>
 
-<style scoped></style>
+<script setup lang="ts">
+import TestButton from './components/TestButton.vue'
+import DataButton from './components/DataButton.vue'
+</script>
