@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
-
-from app.routers import test_router, data_router
+from .routers import test_router, data_router
 
 app = FastAPI(title="Air Project API",
               description="Welcome to our Plant API",
@@ -19,6 +18,6 @@ app.add_middleware(
 )
 
 
-app.include_router(test_router.test_router)
+app.include_router(test_router)
 
-app.include_router(data_router.data_router)
+app.include_router(data_router)

@@ -1,8 +1,7 @@
 from fastapi import APIRouter
 from starlette import status
-from app.schemas.test_schema import TestResponse
+from app.schemas import TestResponse
 from app.services import test_service
-
 
 test_router = APIRouter(prefix="", tags=["Test"])
 

@@ -1,8 +1,8 @@
-from app.schemas.data_schema import DataSetHeaders
 import pandas as pd
 from pathlib import Path
+from app.schemas import DataSetHeaders
 
-DATASET_PATH = Path(__file__).parent.parent / "dataset/plant_growth_data.csv"
+DATASET_PATH = Path(__file__).parent.parent / "dataset/plant_dataset_raw.csv"
 
 """ -----------------------------------------------------------------------------------------------
 Helper method that interacts with the dataset. Todo: Maybe extract this functionality into a 

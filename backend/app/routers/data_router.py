@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from starlette import status
-from app.schemas.data_schema import DataSetHeaders
+from app.schemas import DataSetHeaders
 from app.services import data_service
 
 data_router = APIRouter(prefix="/data", tags=["Data"])
