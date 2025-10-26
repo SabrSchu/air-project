@@ -1,7 +1,13 @@
 from pydantic import BaseModel
 
+
 """ -----------------------------------------------------------------------------------------------
-Simple pydantic schema, where we can determine the request/response formats and input validation
+ Schema for response format of plant information
 ----------------------------------------------------------------------------------------------- """
-class DataSetHeaders(BaseModel):
-    headers: list[str]
+class Plant(BaseModel):
+    name: str
+    growth: str
+    soil: str
+    sunlight: str
+    watering: str
+    fertilization: str
