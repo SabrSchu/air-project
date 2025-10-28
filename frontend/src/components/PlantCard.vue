@@ -7,14 +7,30 @@ import ThermometerIcon from 'vue-material-design-icons/Thermometer.vue'
 import HeartIcon from 'vue-material-design-icons/Heart.vue'
 import { ref } from 'vue'
 
-let name = "Monstera";
-let description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec condimentum velit vel augue rutrum, in mattis nibh ornare.";
+const props = defineProps({
+  name: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    default: "No description available"
+  },
+  waterAmount: {
+    type: Number,
+    required: true
+  },
+  sunlightAmount: {
+    type: Number,
+    required: true
+  }
+});
+
+const isLiked = ref(false)
 
 function showMessage() {
   console.log('Hello World');
 }
-
-const isLiked = ref(false)
 
 function toggleLike() {
   isLiked.value = !isLiked.value
@@ -23,6 +39,23 @@ function toggleLike() {
   }
   else {
     console.log('Liked this plant!')
+  }
+}
+
+function filledCircles(type: string) {
+  switch (type) {
+    case 'water':
+      if (props.waterAmount <= 25) return 1;
+      if (props.waterAmount <= 50) return 2;
+      if (props.waterAmount <= 75) return 3;
+      return 4;
+    case 'sunlight':
+      if (props.sunlightAmount <= 25) return 1;
+      if (props.sunlightAmount <= 50) return 2;
+      if (props.sunlightAmount <= 75) return 3;
+      return 4;
+    default:
+      return 0;
   }
 }
 </script>
@@ -40,7 +73,6 @@ function toggleLike() {
         Let's find out more!
       </button>
     </div>
-
     <div class="value-box">
       <div class="favorite-box">
         <HeartIcon :style="{ color: isLiked ? 'red' : 'black' }" @click="toggleLike" />
@@ -49,22 +81,24 @@ function toggleLike() {
         <div class="water-icon-wrapper">
           <WaterIcon :size="25" />
         </div>
-        <CircleIcon style="color: deepskyblue;" :size="15" />
-        <CircleIcon :size="15" />
-        <CircleIcon :size="15" />
-        <CircleIcon :size="15" />
+        <CircleIcon
+            v-for="index in 4"
+            :key="index"
+            :size="15"
+            :style="{ color: index <= filledCircles('water') ? 'deepskyblue' : 'currentColor' }"
+        />
       </div>
-
       <div class="sun-value">
         <div class="sun-icon-wrapper">
           <WeatherSunnyIcon :size="25" />
         </div>
-        <CircleIcon style="color: orange" :size="15" />
-        <CircleIcon style="color: orange" :size="15" />
-        <CircleIcon :size="15" />
-        <CircleIcon :size="15" />
+        <CircleIcon
+            v-for="index in 4"
+            :key="index"
+            :size="15"
+            :style="{ color: index <= filledCircles('sunlight') ? 'orange' : 'currentColor' }"
+        />
       </div>
-
       <div class="temperature-value">
         <div class="temperature-icon-wrapper">
           <ThermometerIcon :size="25" />

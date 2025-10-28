@@ -1,6 +1,12 @@
 <template>
   <div class="main-div">
-    <PlantCard />
+    <PlantCard
+        v-for="plant in testJson"
+        :key="plant.id"
+    :name="plant.name"
+    :description="plant.description"
+    :water-amount="plant.watering"
+    :sunlight-amount="plant.sunlight"/>
   </div>
   <div class="button-div">
     <TestButton />
@@ -12,6 +18,7 @@
 import TestButton from './components/TestButton.vue'
 import DataButton from './components/DataButton.vue'
 import PlantCard from './components/PlantCard.vue'
+import testJson from './assets/test-plants.json'
 </script>
 
 <style scoped>
@@ -20,7 +27,7 @@ import PlantCard from './components/PlantCard.vue'
   flex-direction: column;
   align-items: center;
   /*if more then one card*/
-  gap: 1rem;
+  gap: 0.5rem;
 }
 
 .button-div {

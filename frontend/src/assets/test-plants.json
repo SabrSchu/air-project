@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "Aloe Vera",
+    "growth": "slow",
+    "soil": "sandy",
+    "sunlight": 35,
+    "watering": 75,
+    "fertilization": "Balanced",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec condimentum velit vel augue rutrum, in mattis nibh ornare."
+  },
+  {
+    "id": 2,
+    "name": "Basil",
+    "growth": "fast",
+    "soil": "well-drained",
+    "sunlight": 65,
+    "watering": 45,
+    "fertilization": "Organic"
+  },
+  {
+    "id": 3,
+    "name": "Kaktus",
+    "growth": "slow",
+    "soil": "dry",
+    "sunlight": 100,
+    "watering": 5,
+    "fertilization": "Organic",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec condimentum velit vel augue rutrum, in mattis nibh ornare."
+  }
+]
+
