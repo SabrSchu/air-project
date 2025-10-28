@@ -1,11 +1,29 @@
 <script setup lang="ts">
 import DemoPlant from '@/assets/DemoPlant.jpg'
+import WaterIcon from 'vue-material-design-icons/Water.vue'
+import WeatherSunnyIcon from 'vue-material-design-icons/WeatherSunny.vue'
+import CircleIcon from 'vue-material-design-icons/Circle.vue'
+import ThermometerIcon from 'vue-material-design-icons/Thermometer.vue'
+import HeartIcon from 'vue-material-design-icons/Heart.vue'
+import { ref } from 'vue'
 
 let name = "Monstera";
 let description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec condimentum velit vel augue rutrum, in mattis nibh ornare.";
 
 function showMessage() {
   console.log('Hello World');
+}
+
+const isLiked = ref(false)
+
+function toggleLike() {
+  isLiked.value = !isLiked.value
+  if (isLiked.value === false) {
+    console.log('Disliked this plant!')
+  }
+  else {
+    console.log('Liked this plant!')
+  }
 }
 </script>
 
@@ -14,36 +32,70 @@ function showMessage() {
     <img class="plant-image" :src="DemoPlant" alt="Demo Plant" />
 
     <div class="text-box">
-
       <h1>{{ name }}</h1>
 
-      <p>
-        {{ description }}
-      </p>
+      <p>{{ description }}</p>
 
       <button class="button-more-info" @click="showMessage">
         Let's find out more!
       </button>
+    </div>
+
+    <div class="value-box">
+      <div class="favorite-box">
+        <HeartIcon :style="{ color: isLiked ? 'red' : 'black' }" @click="toggleLike" />
+      </div>
+      <div class="water-value">
+        <div class="water-icon-wrapper">
+          <WaterIcon :size="25" />
+        </div>
+        <CircleIcon style="color: deepskyblue;" :size="15" />
+        <CircleIcon :size="15" />
+        <CircleIcon :size="15" />
+        <CircleIcon :size="15" />
+      </div>
+
+      <div class="sun-value">
+        <div class="sun-icon-wrapper">
+          <WeatherSunnyIcon :size="25" />
+        </div>
+        <CircleIcon style="color: orange" :size="15" />
+        <CircleIcon style="color: orange" :size="15" />
+        <CircleIcon :size="15" />
+        <CircleIcon :size="15" />
+      </div>
+
+      <div class="temperature-value">
+        <div class="temperature-icon-wrapper">
+          <ThermometerIcon :size="25" />
+        </div>
+        <CircleIcon style="color: red" :size="15" />
+        <CircleIcon style="color: red" :size="15" />
+        <CircleIcon style="color: red" :size="15" />
+        <CircleIcon style="color: red" :size="15" />
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
 .plant-card {
+  position: relative;
   max-width: 600px;
   max-height: 200px;
   display: flex;
   flex-direction: row;
   align-items: stretch;
   border: 2px solid #333;
-  border-radius: 10px;
+  border-radius: 1rem;
   overflow: hidden;
 }
 
 .plant-image {
-  width: 30%;
+  width: 20%;
   object-fit: cover;
   padding: 1.5rem;
+  border-radius: 2rem;
 }
 
 .text-box {
@@ -56,7 +108,6 @@ function showMessage() {
   margin-top: 0.1rem;
   margin-bottom: 0.25rem;
 }
-
 .text-box p {
   margin-top: 0.25rem;
 }
@@ -64,15 +115,71 @@ function showMessage() {
 .button-more-info {
   align-self: center;
   width: 60%;
-  height: 25px;
+  height: 15%;
   color: white;
   background-color: darkgreen;
-  border-radius: 10px;
+  border-radius: 1rem;
+  transition: transform 0.2s ease;
+}
+.button-more-info:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+.button-more-info:active {
+  transform: scale(0.95);
 }
 
-.score-box {
+.value-box {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   display: flex;
   width:20%;
-  border: black solid 1px;
+  padding-top: 2rem;
+  /*Just for development
+  border: black solid 2px;*/
+}
+
+.favorite-box {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  transition: transform 0.2s ease;
+}
+.favorite-box:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+}
+.favorite-box:active {
+  transform: scale(0.95);
+}
+
+.water-value,
+.sun-value,
+.temperature-value {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0.5rem;
+  transition: transform 0.2s ease;
+}
+.water-icon-wrapper,
+.temperature-icon-wrapper,
+.sun-icon-wrapper {
+  transition: transform 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+.water-icon-wrapper:hover,
+.temperature-icon-wrapper:hover,
+.sun-icon-wrapper:hover{
+  cursor: pointer;
+  transform: scale(1.2);
+}
+.water-icon-wrapper:active,
+.temperature-icon-wrapper:active,
+.sun-icon-wrapper:active{
+  transform: scale(0.95);
 }
 </style>

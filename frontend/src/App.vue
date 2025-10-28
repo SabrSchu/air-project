@@ -19,6 +19,8 @@ import PlantCard from './components/PlantCard.vue'
   display: flex;
   flex-direction: column;
   align-items: center;
+  /*if more then one card*/
+  gap: 1rem;
 }
 
 .button-div {
