@@ -1,4 +1,6 @@
 <template>
+  <NavBar/>
+  <Header/>
   <div class="main-div">
     <PlantCard
         v-for="plant in testJson"
@@ -11,14 +13,30 @@
   <div class="button-div">
     <TestButton />
     <DataButton />
-  </div>
 </template>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+*{
+  font-family: 'Poppins', sans-serif;
+  color: black;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+}
+
+</style>
 
 <script setup lang="ts">
 import TestButton from './components/TestButton.vue'
 import DataButton from './components/DataButton.vue'
 import PlantCard from './components/PlantCard.vue'
 import testJson from './assets/test-plants.json'
+import NavBar from "@/components/NavBar.vue";
+import Header from "@/components/Header.vue";
 </script>
 
 <style scoped>
