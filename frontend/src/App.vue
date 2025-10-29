@@ -10,9 +10,6 @@
     :water-amount="plant.watering"
     :sunlight-amount="plant.sunlight"/>
   </div>
-  <div class="button-div">
-    <TestButton />
-    <DataButton />
 </template>
 
 <style>
