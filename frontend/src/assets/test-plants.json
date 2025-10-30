@@ -27,6 +27,36 @@
     "watering": 5,
     "fertilization": "Organic",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec condimentum velit vel augue rutrum, in mattis nibh ornare."
+  },
+  {
+    "id": 3,
+    "name": "Kaktus",
+    "growth": "slow",
+    "soil": "dry",
+    "sunlight": 100,
+    "watering": 5,
+    "fertilization": "Organic",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec condimentum velit vel augue rutrum, in mattis nibh ornare."
+  },
+  {
+    "id": 3,
+    "name": "Kaktus",
+    "growth": "slow",
+    "soil": "dry",
+    "sunlight": 100,
+    "watering": 5,
+    "fertilization": "Organic",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec condimentum velit vel augue rutrum, in mattis nibh ornare."
+  },
+  {
+    "id": 3,
+    "name": "Kaktus",
+    "growth": "slow",
+    "soil": "dry",
+    "sunlight": 100,
+    "watering": 5,
+    "fertilization": "Organic",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec condimentum velit vel augue rutrum, in mattis nibh ornare."
   }
 ]
 
