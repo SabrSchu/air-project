@@ -13,4 +13,5 @@ yarn-error.log*
 
 .idea/
 .vscode/
+.vite/
 .DS_Store
