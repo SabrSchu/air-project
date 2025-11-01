@@ -1,0 +1,593 @@
+plant name,growth,soil,sunlight,watering,fertilization type,image_url
+aloe vera,slow,sandy,indirect sunlight,water weekly,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Aloe_vera_flower_inset.png/500px-Aloe_vera_flower_inset.png
+basil,fast,well-drained,full sunlight,keep soil evenly moist,organic,https://bs.plantnet.org/image/o/eaf722de31333a8724b4bb72c8d51959530fae56
+snake plant,slow,well-drained,indirect sunlight,water when soil is dry,no,
+lavender,moderate,sandy,full sunlight,let soil dry between watering,no,https://bs.plantnet.org/image/o/010ffc8860641c73888c8664743f1527d284f258
+cactus,slow,sandy,full sunlight,let soil dry between watering,low-nitrogen,https://bs.plantnet.org/image/o/47d4f01e2bc2c2db602fce38f864a40309f5f293
+rosemary,moderate,well-drained,full sunlight,let soil dry between watering,no,https://bs.plantnet.org/image/o/45c47e31c6a0c5378581f0bc89c0b44405868dd1
+mint,fast,well-drained,partial sunlight,keep soil consistently moist,balanced,
+thyme,moderate,sandy,full sunlight,let soil dry between watering,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Thyme-Bundle.jpg/500px-Thyme-Bundle.jpg
+peace lily,moderate,well-drained,indirect sunlight,water when soil feels dry,balanced,https://bs.plantnet.org/image/o/75a1c264295a0f3ec1f613f397c249ecc4840d38
+spider plant,moderate,loamy,indirect sunlight,keep soil slightly moist,balanced,https://upload.wikimedia.org/wikipedia/commons/3/3a/Spiderplant1.jpg
+parsley,moderate,well-drained,partial sunlight,keep soil consistently moist,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Petroselinum.jpg/500px-Petroselinum.jpg
+fern (boston),moderate,well-drained,indirect sunlight,water when topsoil is dry,organic,
+bamboo palm,slow,well-drained,indirect sunlight,water weekly,balanced,https://bs.plantnet.org/image/o/c1727abff447db3c5db9857f343f61272880c0a1
+money plant,moderate,well-drained,indirect sunlight,water when topsoil is dry,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Epipremnum_aureum_31082012.jpg/500px-Epipremnum_aureum_31082012.jpg
+jade plant,slow,sandy,indirect sunlight,water when soil is dry,low-nitrogen,
+orchids,moderate,well-drained,indirect sunlight,water weekly,balanced,
+cilantro,fast,well-drained,full sunlight,keep soil moist,balanced,
+dill,moderate,sandy,full sunlight,keep soil evenly moist,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Illustration_Anethum_graveolens_clean.jpg/500px-Illustration_Anethum_graveolens_clean.jpg
+chives,fast,well-drained,full sunlight,keep soil moist,balanced,https://bs.plantnet.org/image/o/5e033417dbfff7e86535bd7f431bb4162804a0c9
+oregano,moderate,sandy,full sunlight,water when topsoil is dry,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Origanum_vulgare_-_harilik_pune.jpg/500px-Origanum_vulgare_-_harilik_pune.jpg
+pothos,fast,well-drained,indirect sunlight,water when soil is dry,balanced,
+rubber plant,moderate,well-drained,indirect sunlight,water when soil feels dry,balanced,
+bougainvillea,fast,well-drained,full sunlight,water when soil is dry,low-nitrogen,https://bs.plantnet.org/image/o/1fa4dec70b727efbb1ea39a10ba07d5191fd299c
+fiddle leaf fig,slow,well-drained,indirect sunlight,water when topsoil is dry,balanced,
+sage,moderate,well-drained,full sunlight,let soil dry between watering,organic,https://bs.plantnet.org/image/o/ba565945528a0f63276ac76495e7e1cd3d47e127
+cosmos,fast,sandy,full sunlight,water when soil feels dry,organic,https://bs.plantnet.org/image/o/fc0185dbcca0268d312c135072bd92c22546f18c
+geranium,moderate,well-drained,full sunlight,water when soil is dry,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Geranium_February_2008-1.jpg/500px-Geranium_February_2008-1.jpg
+marigold,fast,well-drained,full sunlight,water when soil is dry,balanced,
+zinnia,fast,well-drained,full sunlight,water weekly,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Zinnia_single_layer_and_12_Petals_2.jpg/500px-Zinnia_single_layer_and_12_Petals_2.jpg
+hibiscus,moderate,well-drained,full sunlight,water when topsoil is dry,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Hibiscus_flower_TZ.jpg/500px-Hibiscus_flower_TZ.jpg
+begonia,moderate,well-drained,indirect sunlight,keep soil moist,organic,https://bs.plantnet.org/image/o/23fc827e48f1b8d27ba238d91eea4d31233ba9f0
+chrysanthemum,fast,well-drained,full sunlight,water when soil feels dry,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Chrysanthemum_nangkingense.jpg/500px-Chrysanthemum_nangkingense.jpg
+daffodil,slow,well-drained,full sunlight,water weekly,balanced,
+sunflower,fast,well-drained,full sunlight,water weekly,balanced,https://bs.plantnet.org/image/o/e92bdbc5adc4e91cc0c5aa8e9f102833a28bc6e3
+tulip,slow,sandy,full sunlight,water when soil is dry,low-nitrogen,https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/%D7%A6%D7%91%D7%A2%D7%95%D7%A0%D7%99%D7%9D.JPG/500px-%D7%A6%D7%91%D7%A2%D7%95%D7%A0%D7%99%D7%9D.JPG
+peony,slow,well-drained,full sunlight,water weekly,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/PaeoniaSuffruticosa7.jpg/500px-PaeoniaSuffruticosa7.jpg
+jasmine,moderate,loamy,full sunlight,water weekly,organic,https://bs.plantnet.org/image/o/799816cf93b96cb5b89aae91b012150459cfb84a
+ivy,moderate,well-drained,indirect sunlight,keep soil slightly moist,balanced,https://storage.googleapis.com/powop-assets/kew_profiles/Hedera-helix_fullsize.jpg
+nasturtium,fast,well-drained,full sunlight,water weekly,organic,
+petunia,fast,well-drained,full sunlight,water weekly,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Petunia_exserta_by_Scott_Zona_-_004_%281%29.jpg/500px-Petunia_exserta_by_Scott_Zona_-_004_%281%29.jpg
+carnation,moderate,well-drained,full sunlight,water when soil is dry,low-nitrogen,
+snapdragon,fast,well-drained,full sunlight,water weekly,balanced,https://bs.plantnet.org/image/o/c5c8dac3844100da8f8b77b58274c421914febc6
+pansy,moderate,well-drained,partial sunlight,keep soil evenly moist,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/PansyScan_%28cropped%29.jpg/500px-PansyScan_%28cropped%29.jpg
+sweet pea,fast,loamy,full sunlight,water weekly,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Sweet_Pea-7.jpg/500px-Sweet_Pea-7.jpg
+morning glory,fast,well-drained,full sunlight,water weekly,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Ipomoea_tricolor_%27Heavenly_Blue%27.jpg/500px-Ipomoea_tricolor_%27Heavenly_Blue%27.jpg
+verbena,moderate,sandy,full sunlight,water weekly,low-nitrogen,https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Eisenkraut%2C_Passau.JPG/500px-Eisenkraut%2C_Passau.JPG
+gerbera daisy,moderate,well-drained,full sunlight,water weekly,balanced,
+anemone,moderate,well-drained,partial sunlight,keep soil evenly moist,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Anemones5.jpg/500px-Anemones5.jpg
+hyacinth,moderate,loamy,full sunlight,water weekly,low-nitrogen,https://bs.plantnet.org/image/o/5854119576866163bdb4d5c86cc3e3caf89287a3
+crocus,slow,well-drained,full sunlight,water weekly,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/860808-Saffronfarm-01-IMG_7707-2.jpg/500px-860808-Saffronfarm-01-IMG_7707-2.jpg
+dandelion,fast,well-drained,full sunlight,water weekly,organic,
+foxglove,moderate,well-drained,partial sunlight,water weekly,balanced,https://bs.plantnet.org/image/o/5b87208f7ae140dad0f09facc46b511839273c0b
+bluebell,moderate,well-drained,partial sunlight,keep soil slightly moist,organic,
+camellia,slow,acidic,partial sunlight,water weekly,acidic,https://bs.plantnet.org/image/o/9d779bbb1fe7a0c0744d60b2cd18131fb7750bfc
+poppy,moderate,well-drained,full sunlight,water when soil is dry,low-nitrogen,https://bs.plantnet.org/image/o/6057fb60a84bf6f683a5c5560846d8bb0f5c1f6d
+magnolia,slow,acidic,full sunlight,water when soil is dry,acidic,https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Magnolia_sieboldii_flower_1.jpg/500px-Magnolia_sieboldii_flower_1.jpg
+bougainvillea,moderate,acidic,full sunlight,let soil dry between watering,low-nitrogen,https://bs.plantnet.org/image/o/1fa4dec70b727efbb1ea39a10ba07d5191fd299c
+holly,slow,acidic,partial sunlight,water weekly,acidic,https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Ilex-aquifolium_%28Europaeische_Stechpalme-1%29.jpg/500px-Ilex-aquifolium_%28Europaeische_Stechpalme-1%29.jpg
+gardenia,slow,acidic,indirect sunlight,water weekly,acidic,https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Gardeniaflower.jpg/500px-Gardeniaflower.jpg
+azalea,moderate,acidic,partial sunlight,keep soil moist,acidic,
+clivia,moderate,well-drained,indirect sunlight,water weekly,balanced,https://upload.wikimedia.org/wikipedia/commons/a/ac/Cliviaminiata2.jpg
+tulsi (holy basil),fast,well-drained,full sunlight,keep soil moist,balanced,
+chrysanthemum,moderate,well-drained,full sunlight,water when soil feels dry,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Chrysanthemum_nangkingense.jpg/500px-Chrysanthemum_nangkingense.jpg
+canna lily,fast,well-drained,full sunlight,water weekly,balanced,
+dahlia,moderate,well-drained,full sunlight,water weekly,balanced,https://bs.plantnet.org/image/o/c2eca2a169fd0398f1163404804ede794cf11027
+daisy,moderate,sandy,full sunlight,water weekly,low-nitrogen,https://bs.plantnet.org/image/o/43061c6c2cb49908503eac2eaec0ddab69958e17
+eucalyptus,slow,sandy,full sunlight,water when soil feels dry,low-nitrogen,https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Eucalyptus_tereticornis_flowers%2C_capsules%2C_buds_and_foliage.jpeg/500px-Eucalyptus_tereticornis_flowers%2C_capsules%2C_buds_and_foliage.jpeg
+lotus,moderate,loamy,full sunlight,keep soil consistently moist,balanced,https://bs.plantnet.org/image/o/4823e692a96bddde7865d48654891c193625482f
+bamboo,moderate,acidic,partial sunlight,keep soil moist,acidic,https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Bamboo_forest.jpg/500px-Bamboo_forest.jpg
+orchid cactus,slow,sandy,indirect sunlight,water weekly,low-nitrogen,
+bromeliad,moderate,well-drained,indirect sunlight,water weekly,balanced,https://bs.plantnet.org/image/o/0b85640d858a14f20a93d7a6796b3ab59fac9d91
+succulent,slow,sandy,full sunlight,water when soil is dry,low-nitrogen,
+iris,moderate,well-drained,full sunlight,water weekly,balanced,
+lotus bamboo,slow,well-drained,indirect sunlight,water weekly,organic,
+hosta,moderate,well-drained,partial sunlight,water weekly,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Hosta_Bressingham_Blue.JPG/500px-Hosta_Bressingham_Blue.JPG
+echeveria,slow,sandy,indirect sunlight,water when soil is dry,low-nitrogen,https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Echeveria_elegans_-_1.jpg/500px-Echeveria_elegans_-_1.jpg
+catmint,moderate,well-drained,full sunlight,water weekly,balanced,https://bs.plantnet.org/image/o/1cf932657bc80b42c8c9a8f5fbdafcee4ef8605d
+coneflower,moderate,sandy,full sunlight,water weekly,balanced,
+lamb's ear,moderate,sandy,full sunlight,water weekly,balanced,
+petunia,fast,well-drained,full sunlight,water when soil feels dry,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Petunia_exserta_by_Scott_Zona_-_004_%281%29.jpg/500px-Petunia_exserta_by_Scott_Zona_-_004_%281%29.jpg
+snapdragon,moderate,sandy,full sunlight,water weekly,balanced,https://bs.plantnet.org/image/o/c5c8dac3844100da8f8b77b58274c421914febc6
+alyssum,fast,sandy,full sunlight,water weekly,organic,https://bs.plantnet.org/image/o/6cf01b02c5792d54d84d068ac2de515bfa543450
+pansy,moderate,well-drained,partial sunlight,keep soil moist,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/PansyScan_%28cropped%29.jpg/500px-PansyScan_%28cropped%29.jpg
+fuchsia,slow,well-drained,indirect sunlight,water weekly,organic,https://bs.plantnet.org/image/o/1b5333130f60456428da7aa2e55aa037d2fa87df
+impatiens,moderate,well-drained,indirect sunlight,keep soil moist,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Impatiens_scapiflora.jpg/500px-Impatiens_scapiflora.jpg
+nasturtium,fast,sandy,full sunlight,water weekly,organic,
+begonia,moderate,well-drained,indirect sunlight,keep soil evenly moist,balanced,https://bs.plantnet.org/image/o/23fc827e48f1b8d27ba238d91eea4d31233ba9f0
+dianthus,moderate,sandy,full sunlight,water weekly,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Dianthus_caryophyllus_L_%28Clove_pink%29.JPG/500px-Dianthus_caryophyllus_L_%28Clove_pink%29.JPG
+verbena,fast,well-drained,full sunlight,water weekly,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Eisenkraut%2C_Passau.JPG/500px-Eisenkraut%2C_Passau.JPG
+phlox,moderate,well-drained,full sunlight,water when soil is dry,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Phlox_Paniculata.jpg/500px-Phlox_Paniculata.jpg
+lobelia,fast,well-drained,indirect sunlight,water weekly,low-nitrogen,https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Lobelia_%28aka%29.jpg/500px-Lobelia_%28aka%29.jpg
+geranium,moderate,sandy,full sunlight,water when soil is dry,low-nitrogen,https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Geranium_February_2008-1.jpg/500px-Geranium_February_2008-1.jpg
+salvia,moderate,sandy,full sunlight,water weekly,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Salvia_officinalis0.jpg/500px-Salvia_officinalis0.jpg
+zinnia,fast,sandy,full sunlight,water weekly,low-nitrogen,https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Zinnia_single_layer_and_12_Petals_2.jpg/500px-Zinnia_single_layer_and_12_Petals_2.jpg
+morning glory,fast,sandy,full sunlight,water when soil is dry,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Ipomoea_tricolor_%27Heavenly_Blue%27.jpg/500px-Ipomoea_tricolor_%27Heavenly_Blue%27.jpg
+hollyhock,moderate,well-drained,full sunlight,water weekly,balanced,https://bs.plantnet.org/image/o/2e24f65dc007e4bdd8025fb5084082fbe12b94f0
+aster,moderate,well-drained,full sunlight,water weekly,low-nitrogen,
+sunflower,fast,sandy,full sunlight,water when soil is dry,low-nitrogen,https://bs.plantnet.org/image/o/e92bdbc5adc4e91cc0c5aa8e9f102833a28bc6e3
+black-eyed susan,moderate,sandy,full sunlight,water weekly,balanced,
+dahlia,moderate,well-drained,full sunlight,water weekly,low-nitrogen,https://bs.plantnet.org/image/o/c2eca2a169fd0398f1163404804ede794cf11027
+marigold,fast,sandy,full sunlight,water when soil is dry,low-nitrogen,
+sweet pea,moderate,well-drained,full sunlight,water weekly,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Sweet_Pea-7.jpg/500px-Sweet_Pea-7.jpg
+calendula,moderate,sandy,full sunlight,water weekly,low-nitrogen,https://bs.plantnet.org/image/o/b3eb301c46e71b508cf06ce459fd83c487859907
+candytuft,moderate,sandy,full sunlight,water weekly,low-nitrogen,https://bs.plantnet.org/image/o/3de7b3356d6550480b09c8dfae061aa29f8b3274
+larkspur,moderate,well-drained,partial sunlight,water weekly,balanced,
+shasta daisy,moderate,sandy,full sunlight,water weekly,low-nitrogen,
+periwinkle,moderate,sandy,full sunlight,water weekly,low-nitrogen,
+coral bells,moderate,well-drained,partial sunlight,water weekly,low-nitrogen,
+bleeding heart,slow,well-drained,partial sunlight,keep soil moist,organic,
+sweet alyssum,fast,sandy,full sunlight,water weekly,low-nitrogen,
+balloon flower,moderate,sandy,full sunlight,water weekly,low-nitrogen,
+japanese anemone,moderate,well-drained,partial sunlight,water weekly,balanced,
+veronica,moderate,sandy,full sunlight,water weekly,low-nitrogen,
+sedum,slow,sandy,full sunlight,water when soil is dry,low-nitrogen,https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Sedum_acre_single_-_Niitv%C3%A4lja.jpg/500px-Sedum_acre_single_-_Niitv%C3%A4lja.jpg
+helenium,moderate,sandy,full sunlight,water weekly,low-nitrogen,https://upload.wikimedia.org/wikipedia/commons/1/1f/Helenium_autumnale1.jpg
+astilbe,moderate,well-drained,partial sunlight,keep soil moist,organic,https://upload.wikimedia.org/wikipedia/commons/e/e8/Astilbe_arendsii1.jpg
+coreopsis,fast,sandy,full sunlight,water when soil is dry,low-nitrogen,https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Coreopsisgigantea.jpg/500px-Coreopsisgigantea.jpg
+columbine,moderate,well-drained,partial sunlight,water weekly,balanced,
+globe thistle,moderate,sandy,full sunlight,water when soil is dry,low-nitrogen,https://bs.plantnet.org/image/o/31e096c0ef69029f2ee224758c202a47dce7630c
+lupine,moderate,sandy,full sunlight,water weekly,balanced,https://bs.plantnet.org/image/o/ece96cfac3d1ab5ea3007a46810b50370a260f48
+blanket flower,fast,sandy,full sunlight,water when soil is dry,low-nitrogen,
+toad lily,slow,well-drained,partial sunlight,keep soil moist,organic,
+russian sage,slow,sandy,full sunlight,water when soil is dry,low-nitrogen,
+bee balm,moderate,well-drained,partial sunlight,keep soil moist,organic,
+speedwell,moderate,sandy,full sunlight,water weekly,low-nitrogen,https://bs.plantnet.org/image/o/4272996963a1f8aee895317d376edacb2a4111bb
+catnip,fast,sandy,full sunlight,water when topsoil is dry,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Catnip_flowers.jpg/500px-Catnip_flowers.jpg
+lavender,slow,sandy,full sunlight,water when soil is dry,organic,https://bs.plantnet.org/image/o/010ffc8860641c73888c8664743f1527d284f258
+rosemary,slow,sandy,full sunlight,water when soil is dry,organic,https://bs.plantnet.org/image/o/45c47e31c6a0c5378581f0bc89c0b44405868dd1
+thyme,slow,sandy,full sunlight,water when soil is dry,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Thyme-Bundle.jpg/500px-Thyme-Bundle.jpg
+sage,slow,sandy,full sunlight,water weekly,organic,https://bs.plantnet.org/image/o/ba565945528a0f63276ac76495e7e1cd3d47e127
+parsley,moderate,well-drained,partial sunlight,keep soil evenly moist,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Petroselinum.jpg/500px-Petroselinum.jpg
+cilantro,fast,well-drained,full sunlight,keep soil moist,organic,
+dill,moderate,sandy,full sunlight,water weekly,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Illustration_Anethum_graveolens_clean.jpg/500px-Illustration_Anethum_graveolens_clean.jpg
+chives,fast,well-drained,full sunlight,keep soil evenly moist,organic,https://bs.plantnet.org/image/o/5e033417dbfff7e86535bd7f431bb4162804a0c9
+oregano,slow,sandy,full sunlight,water when soil is dry,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Origanum_vulgare_-_harilik_pune.jpg/500px-Origanum_vulgare_-_harilik_pune.jpg
+tarragon,slow,sandy,full sunlight,water weekly,organic,https://upload.wikimedia.org/wikipedia/commons/6/6c/Estragon_1511.jpg
+bay laurel,slow,sandy,partial sunlight,water weekly,organic,
+lemon balm,moderate,well-drained,partial sunlight,water weekly,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Lemon_balm_plant.jpg/500px-Lemon_balm_plant.jpg
+fennel,moderate,sandy,full sunlight,water weekly,organic,https://bs.plantnet.org/image/o/201ab26c5329eb6583e52176b48c2bfe0cb3e13e
+chamomile,moderate,sandy,full sunlight,water weekly,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Kamomillasaunio_%28Matricaria_recutita%29.JPG/500px-Kamomillasaunio_%28Matricaria_recutita%29.JPG
+tarragon,moderate,sandy,full sunlight,water weekly,organic,https://upload.wikimedia.org/wikipedia/commons/6/6c/Estragon_1511.jpg
+lemongrass,fast,well-drained,full sunlight,water weekly,organic,https://bs.plantnet.org/image/o/5fe1b21e3f9ff0169dcc52e0629adb14a983ea3e
+stevia,slow,well-drained,partial sunlight,water weekly,organic,https://bs.plantnet.org/image/o/4f42b1092f405ed577c94baa1e7938afad636127
+marjoram,moderate,sandy,full sunlight,water when soil is dry,no,https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Origanum_majorana_002.JPG/500px-Origanum_majorana_002.JPG
+spider plant,fast,well-drained,indirect sunlight,water weekly,no,https://upload.wikimedia.org/wikipedia/commons/3/3a/Spiderplant1.jpg
+peace lily,moderate,well-drained,indirect sunlight,keep soil moist,no,https://bs.plantnet.org/image/o/75a1c264295a0f3ec1f613f397c249ecc4840d38
+rubber plant,slow,sandy,indirect sunlight,water weekly,no,
+zz plant,slow,sandy,indirect sunlight,let soil dry between watering,no,https://bs.plantnet.org/image/o/2f788bd359d4ec54db7480f40e7a7e03861f8a05
+pothos,fast,well-drained,indirect sunlight,water weekly,no,
+philodendron,moderate,well-drained,indirect sunlight,water weekly,no,https://bs.plantnet.org/image/o/60d99e35df590d498fef4d291490b01f1577ca81
+monstera,moderate,well-drained,indirect sunlight,water weekly,no,https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Starr_080731-9572_Monstera_deliciosa.jpg/500px-Starr_080731-9572_Monstera_deliciosa.jpg
+calathea,moderate,well-drained,indirect sunlight,keep soil moist,no,https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Starr_080716-9470_Calathea_crotalifera.jpg/500px-Starr_080716-9470_Calathea_crotalifera.jpg
+fern (boston fern),moderate,well-drained,indirect sunlight,keep soil moist,no,
+croton,slow,well-drained,indirect sunlight,water weekly,no,
+dieffenbachia,slow,well-drained,indirect sunlight,water weekly,no,https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Dieffenbachia_oerstedii_kz2.jpg/500px-Dieffenbachia_oerstedii_kz2.jpg
+dracaena,slow,sandy,indirect sunlight,let soil dry between watering,no,
+bamboo palm,moderate,well-drained,indirect sunlight,water weekly,no,https://bs.plantnet.org/image/o/c1727abff447db3c5db9857f343f61272880c0a1
+areca palm,slow,well-drained,indirect sunlight,water weekly,no,
+majesty palm,slow,well-drained,indirect sunlight,water weekly,no,
+bird of paradise,moderate,well-drained,indirect sunlight,water weekly,no,https://bs.plantnet.org/image/o/e4f2713e640f0a4d549e9517b5c3f0f12b531188
+orchids,moderate,well-drained,indirect sunlight,water weekly,no,
+anthurium,moderate,well-drained,indirect sunlight,keep soil moist,no,https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Anthurium3.JPG/500px-Anthurium3.JPG
+jade plant,slow,sandy,indirect sunlight,let soil dry between watering,no,
+chinese evergreen,slow,well-drained,indirect sunlight,water weekly,organic,https://bs.plantnet.org/image/o/fe940fcd790c883e1b8d9e96548a490e7294ccaa
+peperomia,slow,well-drained,indirect sunlight,water weekly,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Peperomia_trifolia_2011-01-17.jpg/500px-Peperomia_trifolia_2011-01-17.jpg
+ficus tree,slow,well-drained,indirect sunlight,water weekly,low-nitrogen,
+succulents (general),slow,sandy,full sunlight,water when soil is dry,low-nitrogen,
+echeveria,slow,sandy,full sunlight,water when soil is dry,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Echeveria_elegans_-_1.jpg/500px-Echeveria_elegans_-_1.jpg
+haworthia,slow,sandy,indirect sunlight,water when topsoil is dry,low-nitrogen,https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Haworthia_cymbiformis_1.jpg/500px-Haworthia_cymbiformis_1.jpg
+string of pearls,slow,sandy,indirect sunlight,water when soil is dry,low-nitrogen,
+jade pothos,moderate,well-drained,indirect sunlight,keep soil moist,organic,
+swedish ivy,fast,well-drained,indirect sunlight,water weekly,balanced,
+wandering jew,fast,well-drained,indirect sunlight,water weekly,balanced,https://bs.plantnet.org/image/o/fc4d2b75435e5f4e52949347750fe2683835affa
+hoya (wax plant),slow,sandy,indirect sunlight,water when topsoil is dry,balanced,
+african violet,moderate,well-drained,indirect sunlight,keep soil moist,organic,
+begonia,moderate,well-drained,indirect sunlight,water weekly,balanced,https://bs.plantnet.org/image/o/23fc827e48f1b8d27ba238d91eea4d31233ba9f0
+impatiens,fast,well-drained,indirect sunlight,keep soil moist,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Impatiens_scapiflora.jpg/500px-Impatiens_scapiflora.jpg
+petunia,fast,sandy,full sunlight,regular watering,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Petunia_exserta_by_Scott_Zona_-_004_%281%29.jpg/500px-Petunia_exserta_by_Scott_Zona_-_004_%281%29.jpg
+marigold,moderate,sandy,full sunlight,water weekly,organic,
+lobelia,moderate,sandy,full sunlight,keep soil moist,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Lobelia_%28aka%29.jpg/500px-Lobelia_%28aka%29.jpg
+snapdragon,moderate,sandy,full sunlight,water weekly,organic,https://bs.plantnet.org/image/o/c5c8dac3844100da8f8b77b58274c421914febc6
+zinnia,fast,sandy,full sunlight,regular watering,low-nitrogen,https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Zinnia_single_layer_and_12_Petals_2.jpg/500px-Zinnia_single_layer_and_12_Petals_2.jpg
+nasturtium,moderate,sandy,full sunlight,water weekly,balanced,
+sunflower,fast,sandy,full sunlight,regular watering,balanced,https://bs.plantnet.org/image/o/e92bdbc5adc4e91cc0c5aa8e9f102833a28bc6e3
+dahlia,moderate,sandy,full sunlight,keep soil moist,organic,https://bs.plantnet.org/image/o/c2eca2a169fd0398f1163404804ede794cf11027
+begonia (outdoor),moderate,well-drained,full sunlight,water weekly,organic,
+calendula,fast,sandy,full sunlight,water weekly,balanced,https://bs.plantnet.org/image/o/b3eb301c46e71b508cf06ce459fd83c487859907
+petunia (trailing),fast,sandy,full sunlight,regular watering,organic,
+pansy,moderate,well-drained,full sunlight,keep soil moist,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/PansyScan_%28cropped%29.jpg/500px-PansyScan_%28cropped%29.jpg
+fuchsia,moderate,well-drained,partial sunlight,regular watering,balanced,https://bs.plantnet.org/image/o/1b5333130f60456428da7aa2e55aa037d2fa87df
+sweet pea,fast,sandy,full sunlight,regular watering,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Sweet_Pea-7.jpg/500px-Sweet_Pea-7.jpg
+begonia (indoor),moderate,well-drained,indirect sunlight,water weekly,balanced,
+lobelia,fast,sandy,full sunlight,keep soil moist,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Lobelia_%28aka%29.jpg/500px-Lobelia_%28aka%29.jpg
+chrysanthemum,moderate,well-drained,full sunlight,regular watering,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Chrysanthemum_nangkingense.jpg/500px-Chrysanthemum_nangkingense.jpg
+clematis,slow,sandy,full sunlight,regular watering,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Clematis_%27Nelly_Moser%27.JPG/500px-Clematis_%27Nelly_Moser%27.JPG
+dianthus,moderate,sandy,full sunlight,water when soil is dry,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Dianthus_caryophyllus_L_%28Clove_pink%29.JPG/500px-Dianthus_caryophyllus_L_%28Clove_pink%29.JPG
+bluebell,slow,well-drained,full sunlight,regular watering,balanced,
+ageratum,fast,well-drained,full sunlight,regular watering,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Ageratum_corymbosum_%28Asteraceae%29_-_Cielitos.jpg/500px-Ageratum_corymbosum_%28Asteraceae%29_-_Cielitos.jpg
+calla lily,moderate,sandy,partial sunlight,keep soil moist,organic,
+cineraria,moderate,well-drained,indirect sunlight,keep soil moist,organic,https://bs.plantnet.org/image/o/386a10e745378b80075ba718c9b5f6fdb6c7a975
+heliotrope,moderate,well-drained,full sunlight,regular watering,organic,
+tuberose,slow,sandy,full sunlight,regular watering,organic,
+gazania,fast,sandy,full sunlight,water when soil is dry,organic,https://bs.plantnet.org/image/o/b7a3f83c9de851b7a4a7ecfdb352ba5926853900
+portulaca,fast,sandy,full sunlight,water when soil is dry,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Pink_Portulaca_Flower.jpg/500px-Pink_Portulaca_Flower.jpg
+coleus,moderate,well-drained,indirect sunlight,regular watering,low-nitrogen,https://bs.plantnet.org/image/o/074429d98f5ad8e4d792cd856900d26e485798a8
+dusty miller,moderate,sandy,full sunlight,water when soil is dry,low-nitrogen,
+dianella,slow,sandy,full sunlight,water weekly,organic,
+lantana,fast,sandy,full sunlight,water when soil is dry,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/LantanaFlowerLeaves.jpg/500px-LantanaFlowerLeaves.jpg
+salvia,moderate,sandy,full sunlight,regular watering,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Salvia_officinalis0.jpg/500px-Salvia_officinalis0.jpg
+phlox,moderate,well-drained,full sunlight,regular watering,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Phlox_Paniculata.jpg/500px-Phlox_Paniculata.jpg
+poppy,fast,sandy,full sunlight,water when soil is dry,organic,https://bs.plantnet.org/image/o/6057fb60a84bf6f683a5c5560846d8bb0f5c1f6d
+amaryllis,moderate,sandy,full sunlight,keep soil moist,low-nitrogen,https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/March_lilly_grave_1.JPG/500px-March_lilly_grave_1.JPG
+morning glory,fast,sandy,full sunlight,water when soil is dry,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Ipomoea_tricolor_%27Heavenly_Blue%27.jpg/500px-Ipomoea_tricolor_%27Heavenly_Blue%27.jpg
+yucca,slow,sandy,full sunlight,water when topsoil is dry,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Yucca_elata_-_tmcelrath_01.jpg/500px-Yucca_elata_-_tmcelrath_01.jpg
+acalypha,moderate,sandy,full sunlight,regular watering,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Acalypha_Hispida_DS.jpg/500px-Acalypha_Hispida_DS.jpg
+viola,moderate,well-drained,full sunlight,keep soil moist,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Bratsche.jpg/500px-Bratsche.jpg
+jasmine (outdoor),moderate,well-drained,full sunlight,regular watering,balanced,
+sweet william,fast,sandy,full sunlight,water when soil is dry,organic,
+foxglove,slow,sandy,partial sunlight,keep soil moist,organic,https://bs.plantnet.org/image/o/5b87208f7ae140dad0f09facc46b511839273c0b
+snapdragon,moderate,well-drained,full sunlight,regular watering,organic,https://bs.plantnet.org/image/o/c5c8dac3844100da8f8b77b58274c421914febc6
+hollyhock,moderate,sandy,full sunlight,regular watering,organic,https://bs.plantnet.org/image/o/2e24f65dc007e4bdd8025fb5084082fbe12b94f0
+campanula,moderate,sandy,partial sunlight,keep soil moist,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Campanula_persicifolia_Tehumardi_Saaremaa.jpg/500px-Campanula_persicifolia_Tehumardi_Saaremaa.jpg
+cosmos,fast,sandy,full sunlight,water weekly,balanced,https://bs.plantnet.org/image/o/fc0185dbcca0268d312c135072bd92c22546f18c
+coreopsis,fast,sandy,full sunlight,water when soil is dry,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Coreopsisgigantea.jpg/500px-Coreopsisgigantea.jpg
+black-eyed susan,moderate,sandy,full sunlight,water weekly,organic,
+bachelor’s button,fast,sandy,full sunlight,water when soil is dry,balanced,
+balloon flower,moderate,sandy,partial sunlight,regular watering,balanced,
+columbine,moderate,sandy,partial sunlight,water weekly,organic,
+sea holly,slow,sandy,full sunlight,water when soil is dry,balanced,
+bellflower,moderate,sandy,partial sunlight,keep soil moist,organic,
+daylily,fast,sandy,full sunlight,regular watering,low-nitrogen,https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Hemerocallis_lilioasphodelus.jpg/500px-Hemerocallis_lilioasphodelus.jpg
+yarrow,moderate,sandy,full sunlight,water when soil is dry,balanced,https://bs.plantnet.org/image/o/55b8179c4760b7205d944383d50d24a4c2addf10
+aster,moderate,well-drained,full sunlight,regular watering,organic,
+feverfew,moderate,sandy,full sunlight,water weekly,balanced,https://bs.plantnet.org/image/o/9ef8b3eef511e45ddfbf135270bce46e27c9fd10
+rudbeckia,moderate,sandy,full sunlight,water weekly,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Rudbeckia_hirta_flower_closeup.jpg/500px-Rudbeckia_hirta_flower_closeup.jpg
+shasta daisy,moderate,sandy,full sunlight,regular watering,organic,
+echinacea,slow,sandy,full sunlight,water weekly,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/EchinaceaPurpureaMaxima1a.UME.JPG/500px-EchinaceaPurpureaMaxima1a.UME.JPG
+periwinkle,fast,well-drained,partial sunlight,regular watering,organic,
+calendula,fast,well-drained,full sunlight,water weekly,balanced,https://bs.plantnet.org/image/o/b3eb301c46e71b508cf06ce459fd83c487859907
+marigold,fast,sandy,full sunlight,water when soil is dry,organic,
+candytuft,moderate,sandy,full sunlight,regular watering,low-nitrogen,https://bs.plantnet.org/image/o/3de7b3356d6550480b09c8dfae061aa29f8b3274
+blanket flower,moderate,sandy,full sunlight,water when soil is dry,organic,
+alyssum,fast,well-drained,full sunlight,water weekly,organic,https://bs.plantnet.org/image/o/6cf01b02c5792d54d84d068ac2de515bfa543450
+sweet alyssum,moderate,sandy,full sunlight,keep soil moist,balanced,
+hosta,slow,well-drained,partial sunlight,keep soil moist,low-nitrogen,https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Hosta_Bressingham_Blue.JPG/500px-Hosta_Bressingham_Blue.JPG
+ice plant,fast,sandy,full sunlight,water when soil is dry,low-nitrogen,
+sedum,slow,sandy,full sunlight,water when soil is dry,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Sedum_acre_single_-_Niitv%C3%A4lja.jpg/500px-Sedum_acre_single_-_Niitv%C3%A4lja.jpg
+neem tree,fast,sandy,full sunlight,let soil dry between watering,organic,
+peepal tree (bodhi tree),moderate,loamy,partial sunlight,"regular, well-drained soil",organic,
+banyan tree (bargad),slow,well-drained,full sunlight,"regular, well-drained soil",low-nitrogen,
+kikar tree (acacia),moderate,sandy,full sunlight,let soil dry between watering,organic,
+sheesham tree,fast,loamy,full sunlight,let soil dry between watering,organic,
+gul mohar (flame tree),moderate,sandy,full sunlight,"regular, moist soil",organic,
+amaltas (golden shower),moderate,sandy,full sunlight,water when soil is dry,low-nitrogen,
+date palm (khajoor),moderate,sandy,full sunlight,water when soil is dry,organic,
+eucalyptus,fast,sandy,full sunlight,water when soil feels dry,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Eucalyptus_tereticornis_flowers%2C_capsules%2C_buds_and_foliage.jpeg/500px-Eucalyptus_tereticornis_flowers%2C_capsules%2C_buds_and_foliage.jpeg
+ber tree (indian jujube),moderate,sandy,full sunlight,water when soil feels dry,organic,
+ageratum,fast,loamy,partial sunlight,"regular, moist soil",balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Ageratum_corymbosum_%28Asteraceae%29_-_Cielitos.jpg/500px-Ageratum_corymbosum_%28Asteraceae%29_-_Cielitos.jpg
+beggonia (outdoor),moderate,well-drained,full sunlight,"regular, moist soil",organic,
+cineraria,moderate,well-drained,partial sunlight,"regular, moist soil",balanced,https://bs.plantnet.org/image/o/386a10e745378b80075ba718c9b5f6fdb6c7a975
+gazania,fast,sandy,full sunlight,water when soil feels dry,balanced,https://bs.plantnet.org/image/o/b7a3f83c9de851b7a4a7ecfdb352ba5926853900
+heliotrope,moderate,loamy,partial sunlight,let soil dry between watering,balanced,
+poppy,moderate,sandy,full sunlight,"regular, well-drained soil",low-nitrogen,https://bs.plantnet.org/image/o/6057fb60a84bf6f683a5c5560846d8bb0f5c1f6d
+tuberose,moderate,well-drained,full sunlight,"regular, moist soil",organic,
+viola,moderate,well-drained,partial sunlight,"regular, moist soil",balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Bratsche.jpg/500px-Bratsche.jpg
+amaryllis,fast,loamy,full sunlight,water when soil is dry,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/March_lilly_grave_1.JPG/500px-March_lilly_grave_1.JPG
+salvia,fast,sandy,full sunlight,"regular, well-drained soil",organic,https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Salvia_officinalis0.jpg/500px-Salvia_officinalis0.jpg
+camellia,moderate,acidic,full sunlight,"regular, moist soil",balanced,https://bs.plantnet.org/image/o/9d779bbb1fe7a0c0744d60b2cd18131fb7750bfc
+bromeliad,moderate,well-drained,indirect sunlight,water when soil is dry,organic,https://bs.plantnet.org/image/o/0b85640d858a14f20a93d7a6796b3ab59fac9d91
+chrysanthemum (outdoor),fast,loamy,full sunlight,"regular, moist soil",balanced,
+coleus,moderate,acidic,full sunlight,"regular, moist soil",organic,https://bs.plantnet.org/image/o/074429d98f5ad8e4d792cd856900d26e485798a8
+tarragon,moderate,sandy,full sunlight,water when topsoil is dry,balanced,https://upload.wikimedia.org/wikipedia/commons/6/6c/Estragon_1511.jpg
+fuchsia,moderate,acidic,partial sunlight,"regular, moist soil",organic,https://bs.plantnet.org/image/o/1b5333130f60456428da7aa2e55aa037d2fa87df
+japanese maple,slow,acidic,partial sunlight,keep soil consistently moist,balanced,https://bs.plantnet.org/image/o/607dc707c1858fb676308978386ea9a3a7952f2a
+echinacea,fast,loamy,full sunlight,keep soil consistently moist,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/EchinaceaPurpureaMaxima1a.UME.JPG/500px-EchinaceaPurpureaMaxima1a.UME.JPG
+euphorbia,fast,sandy,full sunlight,water when soil is dry,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Euphorbia_February_2008-2.jpg/500px-Euphorbia_February_2008-2.jpg
+phlox,moderate,well-drained,full sunlight,"regular, well-drained soil",balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Phlox_Paniculata.jpg/500px-Phlox_Paniculata.jpg
+zinnia,fast,acidic,full sunlight,"regular, well-drained soil",organic,https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Zinnia_single_layer_and_12_Petals_2.jpg/500px-Zinnia_single_layer_and_12_Petals_2.jpg
+alyssum,moderate,well-drained,partial sunlight,"regular, moist soil",organic,https://bs.plantnet.org/image/o/6cf01b02c5792d54d84d068ac2de515bfa543450
+hibiscus,fast,loamy,full sunlight,"regular, well-drained soil",balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Hibiscus_flower_TZ.jpg/500px-Hibiscus_flower_TZ.jpg
+clematis,moderate,well-drained,partial sunlight,"regular, well-drained soil",balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Clematis_%27Nelly_Moser%27.JPG/500px-Clematis_%27Nelly_Moser%27.JPG
+pansy,moderate,well-drained,full sunlight,"regular, moist soil",balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/PansyScan_%28cropped%29.jpg/500px-PansyScan_%28cropped%29.jpg
+pineapple sage,fast,loamy,full sunlight,"regular, moist soil",balanced,https://bs.plantnet.org/image/o/2cbadeaa5b6f65e51fadd91da05fe6e7f484e6ee
+cucumbers,fast,well-drained,full sunlight,"regular, moist soil",organic,
+maranta (prayer plant),moderate,loamy,partial sunlight,"regular, moist soil",balanced,
+african violet,moderate,acidic,indirect sunlight,water when soil is dry,balanced,
+kalanchoe,moderate,sandy,full sunlight,let soil dry between watering,balanced,https://bs.plantnet.org/image/o/45bd6f6ae8a9371019506b05ee1d8cf86a63a0ec
+pilea,moderate,loamy,indirect sunlight,water when topsoil is dry,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Pilea_and_Achudemia.jpg/500px-Pilea_and_Achudemia.jpg
+lobelia,fast,well-drained,partial sunlight,"regular, moist soil",organic,https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Lobelia_%28aka%29.jpg/500px-Lobelia_%28aka%29.jpg
+hosta,moderate,well-drained,indirect sunlight,"regular, moist soil",balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Hosta_Bressingham_Blue.JPG/500px-Hosta_Bressingham_Blue.JPG
+pothos (golden pathos),fast,loamy,indirect sunlight,water when topsoil is dry,balanced,
+dracaena,moderate,acidic,partial sunlight,let soil dry between watering,balanced,
+areca palm,slow,loamy,indirect sunlight,"regular, moist soil",organic,
+calla lily,moderate,well-drained,full sunlight,"regular, moist soil",organic,
+basil,fast,loamy,full sunlight,"regular, moist soil",balanced,https://bs.plantnet.org/image/o/eaf722de31333a8724b4bb72c8d51959530fae56
+ficus benjamina,moderate,well-drained,indirect sunlight,water when soil is dry,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Starr-080608-7576-Ficus_benjamina-habit_with_Laysan_albatross-Gym_Sand_Island-Midway_Atoll_%2824823189861%29.jpg/500px-Starr-080608-7576-Ficus_benjamina-habit_with_Laysan_albatross-Gym_Sand_Island-Midway_Atoll_%2824823189861%29.jpg
+dahlia,fast,loamy,full sunlight,"regular, well-drained soil",organic,https://bs.plantnet.org/image/o/c2eca2a169fd0398f1163404804ede794cf11027
+mimosa,fast,loamy,full sunlight,"regular, moist soil",no,https://bs.plantnet.org/image/o/a2b911fc3378735b04a5079d4ee111101eee0ed9
+lavender (english),moderate,sandy,full sunlight,let soil dry between watering,balanced,
+petunia,fast,well-drained,full sunlight,"regular, moist soil",balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Petunia_exserta_by_Scott_Zona_-_004_%281%29.jpg/500px-Petunia_exserta_by_Scott_Zona_-_004_%281%29.jpg
+zucchini,fast,well-drained,full sunlight,"regular, moist soil",balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/CSA-Striped-Zucchini.jpg/500px-CSA-Striped-Zucchini.jpg
+chili pepper,fast,loamy,full sunlight,"regular, moist soil",organic,https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Madame_Jeanette_and_other_chillies.jpg/500px-Madame_Jeanette_and_other_chillies.jpg
+radish,fast,well-drained,full sunlight,"regular, moist soil",organic,https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Radish_3371103037_4ab07db0bf_o.jpg/500px-Radish_3371103037_4ab07db0bf_o.jpg
+sunflower,fast,well-drained,full sunlight,regular watering,balanced,https://bs.plantnet.org/image/o/e92bdbc5adc4e91cc0c5aa8e9f102833a28bc6e3
+grape vine,moderate,acidic,full sunlight,"regular, well-drained soil",balanced,
+cherry blossom,slow,well-drained,full sunlight,"regular, moist soil",organic,https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Sakura_and_Moss_Pink_-_%E6%A1%9C%28%E3%81%95%E3%81%8F%E3%82%89%29%E3%81%A8%E8%8A%9D%E6%A1%9C%28%E3%81%97%E3%81%B0%E3%81%96%E3%81%8F%E3%82%89%29.jpg/500px-Sakura_and_Moss_Pink_-_%E6%A1%9C%28%E3%81%95%E3%81%8F%E3%82%89%29%E3%81%A8%E8%8A%9D%E6%A1%9C%28%E3%81%97%E3%81%B0%E3%81%96%E3%81%8F%E3%82%89%29.jpg
+begonia,moderate,well-drained,indirect sunlight,"regular, moist soil",organic,https://bs.plantnet.org/image/o/23fc827e48f1b8d27ba238d91eea4d31233ba9f0
+peony,moderate,loamy,full sunlight,"regular, well-drained soil",balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/PaeoniaSuffruticosa7.jpg/500px-PaeoniaSuffruticosa7.jpg
+marigold,fast,sandy,full sunlight,"regular, well-drained soil",balanced,
+coleus,moderate,loamy,partial sunlight,"regular, moist soil",organic,https://bs.plantnet.org/image/o/074429d98f5ad8e4d792cd856900d26e485798a8
+jasmine,moderate,loamy,full sunlight,"regular, moist soil",organic,https://bs.plantnet.org/image/o/799816cf93b96cb5b89aae91b012150459cfb84a
+gardenia,moderate,acidic,indirect sunlight,"regular, moist soil",no,https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Gardeniaflower.jpg/500px-Gardeniaflower.jpg
+pine,slow,sandy,full sunlight,water when soil feels dry,balanced,https://bs.plantnet.org/image/o/55565bba8d5b8656b46cd8d7c82a2c24fc706d9f
+lily of the valley,slow,acidic,partial sunlight,"regular, moist soil",low-nitrogen,https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Convallaria_majalis_inflorescence_-_Keila.jpg/500px-Convallaria_majalis_inflorescence_-_Keila.jpg
+hops,fast,well-drained,full sunlight,"regular, moist soil",balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Humulus_Lupulus_Hopfendolde-mit-hopfengarten.jpg/500px-Humulus_Lupulus_Hopfendolde-mit-hopfengarten.jpg
+cabbage,fast,well-drained,full sunlight,"regular, moist soil",balanced,https://bs.plantnet.org/image/o/8078949488c936fb807a242f530d344489a3127e
+tomato,fast,well-drained,full sunlight,regular watering,organic,https://bs.plantnet.org/image/o/400851a79391dbe6f667c66e4bf70299e9921853
+bergamot,moderate,loamy,partial sunlight,"regular, moist soil",balanced,
+crocus,slow,sandy,full sunlight,"regular, moist soil",balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/860808-Saffronfarm-01-IMG_7707-2.jpg/500px-860808-Saffronfarm-01-IMG_7707-2.jpg
+wisteria,slow,well-drained,full sunlight,"regular, moist soil",balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Chinese_Wisteria_Bl%C3%BCtentrauben.JPG/500px-Chinese_Wisteria_Bl%C3%BCtentrauben.JPG
+cilantro,fast,loamy,full sunlight,"regular, moist soil",balanced,
+strawberry,moderate,sandy,full sunlight,"regular, well-drained soil",organic,https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Garden_strawberry_%28Fragaria_%C3%97_ananassa%29_single2.jpg/500px-Garden_strawberry_%28Fragaria_%C3%97_ananassa%29_single2.jpg
+sage,fast,sandy,full sunlight,"regular, moist soil",balanced,https://bs.plantnet.org/image/o/ba565945528a0f63276ac76495e7e1cd3d47e127
+dandelion,fast,well-drained,full sunlight,"regular, moist soil",balanced,
+lobelia,fast,well-drained,partial sunlight,"regular, moist soil",balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Lobelia_%28aka%29.jpg/500px-Lobelia_%28aka%29.jpg
+chrysanthemum,fast,well-drained,full sunlight,"regular, well-drained soil",organic,https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Chrysanthemum_nangkingense.jpg/500px-Chrysanthemum_nangkingense.jpg
+poppy,moderate,sandy,full sunlight,"regular, well-drained soil",balanced,https://bs.plantnet.org/image/o/6057fb60a84bf6f683a5c5560846d8bb0f5c1f6d
+snapdragon,fast,well-drained,full sunlight,"regular, well-drained soil",organic,https://bs.plantnet.org/image/o/c5c8dac3844100da8f8b77b58274c421914febc6
+borage,fast,well-drained,full sunlight,"regular, moist soil",organic,https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Borago_officinalis_%282025%29.jpg/500px-Borago_officinalis_%282025%29.jpg
+lemon balm,moderate,loamy,full sunlight,"regular, well-drained soil",organic,https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Lemon_balm_plant.jpg/500px-Lemon_balm_plant.jpg
+sweet pea,moderate,well-drained,full sunlight,"regular, well-drained soil",organic,https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Sweet_Pea-7.jpg/500px-Sweet_Pea-7.jpg
+raspberry,moderate,acidic,full sunlight,"regular, well-drained soil",organic,https://bs.plantnet.org/image/o/3b3a54636d4be030d9ac190474415f3a2f3d7e6b
+hibiscus,fast,loamy,full sunlight,"regular, moist soil",organic,https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Hibiscus_flower_TZ.jpg/500px-Hibiscus_flower_TZ.jpg
+fennel,fast,well-drained,full sunlight,"regular, moist soil",balanced,https://bs.plantnet.org/image/o/201ab26c5329eb6583e52176b48c2bfe0cb3e13e
+cornflower,moderate,well-drained,full sunlight,"regular, moist soil",balanced,
+pineapple,slow,sandy,full sunlight,water weekly,organic,https://bs.plantnet.org/image/o/863fd4215e55ca1067808f44115724a20cf8a72a
+lavender (french),moderate,sandy,full sunlight,let soil dry between watering,balanced,
+acorn squash,moderate,loamy,full sunlight,regular watering,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Starr_070730-7820_Cucurbita_pepo.jpg/500px-Starr_070730-7820_Cucurbita_pepo.jpg
+apple tree,slow,sandy,full sunlight,water weekly,balanced,
+bamboo orchid,moderate,well-drained,indirect sunlight,keep soil moist,organic,https://bs.plantnet.org/image/o/98abaedd2f0a48f27bcc9f38ce609e84f4fce334
+balsam,fast,moist,full sunlight,regular watering,organic,https://bs.plantnet.org/image/o/6a37f2f284b24e5c1e0f10ede739dcae53933e62
+banana plant,fast,moist,full sunlight,water weekly,balanced,
+beetroot,moderate,sandy,full sunlight,regular watering,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Detroitdarkredbeets.png/500px-Detroitdarkredbeets.png
+bellflower,moderate,well-drained,full sunlight,regular watering,balanced,
+blackcurrant,moderate,acidic,full sunlight,keep soil moist,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Ribes_nigrum_a1.JPG/500px-Ribes_nigrum_a1.JPG
+bok choy,fast,loamy,full sunlight,regular watering,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Bok_Choy_%2849553125456%29.jpg/500px-Bok_Choy_%2849553125456%29.jpg
+brassica,moderate,moist,full sunlight,regular watering,low-nitrogen,https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Brassica_rapa_plant.jpg/500px-Brassica_rapa_plant.jpg
+butternut squash,moderate,sandy,full sunlight,regular watering,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Cucurbita_moschata_Butternut_2012_G2.jpg/500px-Cucurbita_moschata_Butternut_2012_G2.jpg
+cabbage,moderate,moist,full sunlight,regular watering,balanced,https://bs.plantnet.org/image/o/8078949488c936fb807a242f530d344489a3127e
+calendula,fast,well-drained,full sunlight,water when topsoil is dry,organic,https://bs.plantnet.org/image/o/b3eb301c46e71b508cf06ce459fd83c487859907
+camellia,slow,acidic,partial sunlight,keep soil moist,organic,https://bs.plantnet.org/image/o/9d779bbb1fe7a0c0744d60b2cd18131fb7750bfc
+carrot,moderate,sandy,full sunlight,regular watering,organic,https://bs.plantnet.org/image/o/051631f859a3a433e2954747fa1bdb6bc09a0e66
+catmint,moderate,well-drained,full sunlight,regular watering,balanced,https://bs.plantnet.org/image/o/1cf932657bc80b42c8c9a8f5fbdafcee4ef8605d
+chayote,fast,well-drained,full sunlight,regular watering,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Chayote_BNC.jpg/500px-Chayote_BNC.jpg
+cherry blossom,slow,well-drained,full sunlight,keep soil moist,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Sakura_and_Moss_Pink_-_%E6%A1%9C%28%E3%81%95%E3%81%8F%E3%82%89%29%E3%81%A8%E8%8A%9D%E6%A1%9C%28%E3%81%97%E3%81%B0%E3%81%96%E3%81%8F%E3%82%89%29.jpg/500px-Sakura_and_Moss_Pink_-_%E6%A1%9C%28%E3%81%95%E3%81%8F%E3%82%89%29%E3%81%A8%E8%8A%9D%E6%A1%9C%28%E3%81%97%E3%81%B0%E3%81%96%E3%81%8F%E3%82%89%29.jpg
+chestnut,slow,well-drained,full sunlight,regular watering,organic,https://bs.plantnet.org/image/o/8afca894bf65eb85fff3d8251d0c4ba1d638149f
+clementine,moderate,loamy,full sunlight,regular watering,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Clementines_whole%2C_peeled%2C_half_and_sectioned.jpg/500px-Clementines_whole%2C_peeled%2C_half_and_sectioned.jpg
+clove,slow,sandy,full sunlight,keep soil consistently moist,organic,https://bs.plantnet.org/image/o/e6e3e00f3f5922f142ccdf2043b6b6e5b009cdc1
+cocoa tree,moderate,moist,full sunlight,regular watering,low-nitrogen,
+corn,fast,loamy,full sunlight,regular watering,balanced,
+cucumber,fast,sandy,full sunlight,keep soil consistently moist,organic,https://bs.plantnet.org/image/o/6d90d18a0ca76aa1ff0653e5b29b7b0381006e58
+currant,moderate,acidic,full sunlight,keep soil consistently moist,organic,https://bs.plantnet.org/image/o/ed6fc4996fdc8db944c6f86891ce894b1ed69d95
+dandelion,fast,loamy,full sunlight,regular watering,low-nitrogen,
+date palm,slow,sandy,full sunlight,water when soil is dry,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Dates005.jpg/500px-Dates005.jpg
+dragon fruit,fast,sandy,full sunlight,regular watering,balanced,
+eggplant,moderate,loamy,full sunlight,regular watering,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Solanum_melongena_24_08_2012_%281%29.JPG/500px-Solanum_melongena_24_08_2012_%281%29.JPG
+elderberry,fast,moist,full sunlight,regular watering,organic,
+fennel,fast,loamy,full sunlight,regular watering,low-nitrogen,https://bs.plantnet.org/image/o/201ab26c5329eb6583e52176b48c2bfe0cb3e13e
+fig tree,moderate,sandy,full sunlight,regular watering,balanced,
+grape vine,moderate,loamy,full sunlight,regular watering,balanced,
+green bean,fast,well-drained,full sunlight,regular watering,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Heaps_of_beans.jpg/500px-Heaps_of_beans.jpg
+hops,fast,loamy,full sunlight,keep soil moist,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Humulus_Lupulus_Hopfendolde-mit-hopfengarten.jpg/500px-Humulus_Lupulus_Hopfendolde-mit-hopfengarten.jpg
+jackfruit,moderate,well-drained,full sunlight,regular watering,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Jackfruit_hanging.JPG/500px-Jackfruit_hanging.JPG
+jasmine (indoor),moderate,well-drained,indirect sunlight,keep soil moist,low-nitrogen,
+jatropha,moderate,sandy,full sunlight,regular watering,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Redflowers8.jpg/500px-Redflowers8.jpg
+kiwi,fast,loamy,full sunlight,keep soil moist,organic,
+lady's mantle,moderate,loamy,partial sunlight,keep soil moist,organic,
+lemon tree,slow,sandy,full sunlight,regular watering,organic,
+litchi,moderate,well-drained,full sunlight,regular watering,organic,
+lychee,moderate,well-drained,full sunlight,regular watering,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Litchi_chinensis_fruits.JPG/500px-Litchi_chinensis_fruits.JPG
+mallow,fast,loamy,full sunlight,regular watering,organic,
+mango,moderate,sandy,full sunlight,regular watering,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Mangos_-_single_and_halved.jpg/500px-Mangos_-_single_and_halved.jpg
+moringa,fast,sandy,full sunlight,regular watering,organic,
+mulberry,moderate,well-drained,full sunlight,regular watering,organic,
+mustard,fast,loamy,full sunlight,regular watering,balanced,https://bs.plantnet.org/image/o/fae60e3afe0acd686e3faea77c6dbb7521935afc
+nectarine,slow,loamy,full sunlight,regular watering,organic,https://bs.plantnet.org/image/o/00cd0bde54fab8516159612bdb865626ad9100b8
+olive tree,moderate,sandy,full sunlight,water when soil is dry,balanced,
+acacia,fast,sandy,full sunlight,let soil dry between watering,organic,https://bs.plantnet.org/image/o/656dde71846bf3c7d5ff6ae81162364f4776ab1e
+acanthus,moderate,loamy,partial sunlight,"regular, moist soil",organic,
+alstroemeria,slow,loamy,partial sunlight,water when topsoil is dry,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Alstroemeria_aurantiaca.jpg/500px-Alstroemeria_aurantiaca.jpg
+amaranth,fast,loamy,full sunlight,"regular, moist soil",organic,https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Amaranthus_tricolor0.jpg/500px-Amaranthus_tricolor0.jpg
+anigozanthos (kangaroo paw),moderate,sandy,full sunlight,let soil dry between watering,balanced,
+anthurium,slow,moist,indirect sunlight,"regular, moist soil",organic,https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Anthurium3.JPG/500px-Anthurium3.JPG
+aquilegia (columbine),moderate,loamy,partial sunlight,let soil dry between watering,organic,
+arum lily,moderate,moist,partial sunlight,"regular, moist soil",balanced,
+aztec lily,slow,sandy,partial sunlight,let soil dry between watering,organic,
+balsam,fast,loamy,partial sunlight,"regular, moist soil",low-nitrogen,https://bs.plantnet.org/image/o/6a37f2f284b24e5c1e0f10ede739dcae53933e62
+barberry,moderate,sandy,full sunlight,"regular, well-drained soil",balanced,https://bs.plantnet.org/image/o/4d668b45deca9a522dbfa34b223a30217b7a2d7d
+bellflower,moderate,loamy,partial sunlight,"regular, moist soil",low-nitrogen,
+bougainvillea,fast,sandy,full sunlight,let soil dry between watering,organic,https://bs.plantnet.org/image/o/1fa4dec70b727efbb1ea39a10ba07d5191fd299c
+brachychiton (bottle tree),slow,well-drained,full sunlight,"regular, moist soil",balanced,
+brassica,fast,loamy,full sunlight,"regular, moist soil",balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Brassica_rapa_plant.jpg/500px-Brassica_rapa_plant.jpg
+calla lily,moderate,moist,partial sunlight,"regular, moist soil",organic,
+camellia,slow,acidic,partial sunlight,"regular, moist soil",organic,https://bs.plantnet.org/image/o/9d779bbb1fe7a0c0744d60b2cd18131fb7750bfc
+cananga (ylang-ylang),moderate,loamy,full sunlight,"regular, well-drained soil",organic,
+carrot plant,moderate,sandy,full sunlight,"regular, well-drained soil",balanced,
+cestrum,moderate,loamy,partial sunlight,"regular, moist soil",organic,https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Ruhr-Uni-Bochum-0024.JPG/500px-Ruhr-Uni-Bochum-0024.JPG
+chayote,fast,well-drained,full sunlight,"regular, moist soil",no,https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Chayote_BNC.jpg/500px-Chayote_BNC.jpg
+chestnut,moderate,well-drained,full sunlight,"regular, well-drained soil",balanced,https://bs.plantnet.org/image/o/8afca894bf65eb85fff3d8251d0c4ba1d638149f
+cineraria,moderate,moist,partial sunlight,"regular, moist soil",balanced,https://bs.plantnet.org/image/o/386a10e745378b80075ba718c9b5f6fdb6c7a975
+cockscomb (celosia),moderate,well-drained,full sunlight,water when topsoil is dry,organic,
+coneflower,moderate,well-drained,full sunlight,"regular, well-drained soil",balanced,
+coreopsis,fast,well-drained,full sunlight,"regular, well-drained soil",organic,https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Coreopsisgigantea.jpg/500px-Coreopsisgigantea.jpg
+cress,fast,moist,full sunlight,"regular, moist soil",balanced,
+croton,moderate,well-drained,full sunlight,"regular, moist soil",balanced,
+cyclamen,moderate,moist,indirect sunlight,"regular, moist soil",balanced,https://bs.plantnet.org/image/o/21dabd7eef67c8a017a782373ba74ca357656320
+daffodil,moderate,well-drained,full sunlight,"regular, moist soil",organic,
+dahlia,fast,well-drained,full sunlight,"regular, well-drained soil",low-nitrogen,https://bs.plantnet.org/image/o/c2eca2a169fd0398f1163404804ede794cf11027
+date palm,slow,well-drained,full sunlight,"regular, well-drained soil",balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Dates005.jpg/500px-Dates005.jpg
+devil�s ivy,moderate,well-drained,indirect sunlight,"regular, moist soil",organic,
+dianthus,moderate,well-drained,full sunlight,"regular, moist soil",organic,https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Dianthus_caryophyllus_L_%28Clove_pink%29.JPG/500px-Dianthus_caryophyllus_L_%28Clove_pink%29.JPG
+echinacea,moderate,well-drained,full sunlight,"regular, well-drained soil",organic,https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/EchinaceaPurpureaMaxima1a.UME.JPG/500px-EchinaceaPurpureaMaxima1a.UME.JPG
+elderberry,fast,well-drained,full sunlight,"regular, well-drained soil",organic,
+fennel,fast,well-drained,full sunlight,"regular, well-drained soil",balanced,https://bs.plantnet.org/image/o/201ab26c5329eb6583e52176b48c2bfe0cb3e13e
+ficus microcarpa,moderate,well-drained,partial sunlight,"regular, well-drained soil",organic,https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Ficus_microcarpa_-_La_Gomera_01.jpg/500px-Ficus_microcarpa_-_La_Gomera_01.jpg
+foxglove,moderate,well-drained,partial sunlight,"regular, moist soil",balanced,https://bs.plantnet.org/image/o/5b87208f7ae140dad0f09facc46b511839273c0b
+gardenia,slow,well-drained,full sunlight,"regular, well-drained soil",balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Gardeniaflower.jpg/500px-Gardeniaflower.jpg
+grape vine,fast,well-drained,full sunlight,"regular, well-drained soil",organic,
+guava,moderate,well-drained,full sunlight,"regular, well-drained soil",balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Guava_pink_fruit.jpg/500px-Guava_pink_fruit.jpg
+heliotrope,moderate,well-drained,full sunlight,"regular, well-drained soil",low-nitrogen,
+hops,fast,well-drained,full sunlight,"regular, well-drained soil",balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Humulus_Lupulus_Hopfendolde-mit-hopfengarten.jpg/500px-Humulus_Lupulus_Hopfendolde-mit-hopfengarten.jpg
+ixia,moderate,well-drained,full sunlight,"regular, well-drained soil",low-nitrogen,https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Ixia_African_Corn_Lilies.jpg/500px-Ixia_African_Corn_Lilies.jpg
+jacaranda,moderate,well-drained,full sunlight,"regular, well-drained soil",balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Jacaranda_cuspidifolia_flower.jpg/500px-Jacaranda_cuspidifolia_flower.jpg
+jatropha,fast,well-drained,full sunlight,"regular, well-drained soil",balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Redflowers8.jpg/500px-Redflowers8.jpg
+jasmine (indoor),moderate,moist,indirect sunlight,"regular, moist soil",low-nitrogen,
+kalanchoe,moderate,well-drained,full sunlight,"regular, well-drained soil",balanced,https://bs.plantnet.org/image/o/45bd6f6ae8a9371019506b05ee1d8cf86a63a0ec
+kiwi vine,fast,well-drained,full sunlight,"regular, well-drained soil",organic,
+knautia,moderate,well-drained,full sunlight,"regular, well-drained soil",no,https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Acker-Witwenblume_Knautia_arvensis.jpg/500px-Acker-Witwenblume_Knautia_arvensis.jpg
+lavender (french),slow,well-drained,full sunlight,"regular, well-drained soil",organic,
+lemon balm,moderate,well-drained,full sunlight,"regular, well-drained soil",organic,https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Lemon_balm_plant.jpg/500px-Lemon_balm_plant.jpg
+lemon tree,moderate,well-drained,full sunlight,"regular, moist soil",balanced,
+liatris,moderate,well-drained,full sunlight,"regular, well-drained soil",low-nitrogen,https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Liatris_spicata_Purple.jpg/500px-Liatris_spicata_Purple.jpg
+lilac,moderate,well-drained,full sunlight,"regular, well-drained soil",balanced,
+lobelia,moderate,moist,partial sunlight,"regular, moist soil",organic,https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Lobelia_%28aka%29.jpg/500px-Lobelia_%28aka%29.jpg
+luffa,fast,well-drained,full sunlight,"regular, well-drained soil",balanced,https://bs.plantnet.org/image/o/d8441a0b2ebeae62cba0cdc6d171e0ba1780c428
+magnolia,slow,well-drained,full sunlight,"regular, moist soil",organic,https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Magnolia_sieboldii_flower_1.jpg/500px-Magnolia_sieboldii_flower_1.jpg
+malva (mallow),moderate,well-drained,full sunlight,"regular, well-drained soil",organic,
+mango,slow,well-drained,full sunlight,"regular, well-drained soil",organic,https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Mangos_-_single_and_halved.jpg/500px-Mangos_-_single_and_halved.jpg
+maranta (prayer plant),moderate,moist,indirect sunlight,"regular, moist soil",balanced,
+mimosa,moderate,well-drained,full sunlight,"regular, well-drained soil",organic,https://bs.plantnet.org/image/o/a2b911fc3378735b04a5079d4ee111101eee0ed9
+morning glory,fast,well-drained,full sunlight,"regular, well-drained soil",organic,https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Ipomoea_tricolor_%27Heavenly_Blue%27.jpg/500px-Ipomoea_tricolor_%27Heavenly_Blue%27.jpg
+moringa,fast,well-drained,full sunlight,"regular, well-drained soil",organic,
+nasturtium,moderate,well-drained,full sunlight,"regular, well-drained soil",balanced,
+neoregalia (bromeliad),moderate,moist,indirect sunlight,"regular, moist soil",balanced,
+nettle,fast,well-drained,full sunlight,"regular, well-drained soil",organic,
+olive tree,slow,well-drained,full sunlight,"regular, well-drained soil",balanced,
+oregano,moderate,well-drained,full sunlight,"regular, well-drained soil",balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Origanum_vulgare_-_harilik_pune.jpg/500px-Origanum_vulgare_-_harilik_pune.jpg
+passionflower,fast,well-drained,full sunlight,"regular, well-drained soil",organic,
+peony,slow,well-drained,full sunlight,"regular, well-drained soil",balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/PaeoniaSuffruticosa7.jpg/500px-PaeoniaSuffruticosa7.jpg
+pepper plant,moderate,well-drained,full sunlight,"regular, well-drained soil",balanced,
+periwinkle,moderate,well-drained,full sunlight,"regular, well-drained soil",balanced,
+phlox,moderate,well-drained,full sunlight,"regular, well-drained soil",organic,https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Phlox_Paniculata.jpg/500px-Phlox_Paniculata.jpg
+pomegranate,moderate,well-drained,full sunlight,"regular, well-drained soil",balanced,https://bs.plantnet.org/image/o/67563697e6f51079fd804833ac0ec22b58f35992
+potato vine,fast,well-drained,full sunlight,"regular, well-drained soil",balanced,
+pothos (golden pathos),moderate,well-drained,indirect sunlight,"regular, moist soil",balanced,
+protea,slow,well-drained,full sunlight,"regular, well-drained soil",organic,https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Protea_repens_bush.jpg/500px-Protea_repens_bush.jpg
+purslane,fast,well-drained,full sunlight,"regular, well-drained soil",balanced,
+quince,moderate,well-drained,full sunlight,"regular, well-drained soil",balanced,https://bs.plantnet.org/image/o/09d1080ca5b6971b6bc14c9339c87f4d392c4938
+red hot poker (kniphofia),moderate,well-drained,full sunlight,"regular, well-drained soil",organic,
+red-leafed maple,slow,well-drained,partial sunlight,"regular, well-drained soil",balanced,
+rhododendron,slow,acidic,partial sunlight,"regular, well-drained soil",organic,https://bs.plantnet.org/image/o/e63ee94a3a061b67d4ce2aa0c914c5f78f43810e
+rudbeckia,moderate,well-drained,full sunlight,"regular, well-drained soil",organic,https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Rudbeckia_hirta_flower_closeup.jpg/500px-Rudbeckia_hirta_flower_closeup.jpg
+sage,moderate,well-drained,full sunlight,"regular, well-drained soil",organic,https://bs.plantnet.org/image/o/ba565945528a0f63276ac76495e7e1cd3d47e127
+salvia,moderate,well-drained,full sunlight,"regular, well-drained soil",balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Salvia_officinalis0.jpg/500px-Salvia_officinalis0.jpg
+snowdrop,slow,well-drained,full sunlight,"regular, moist soil",balanced,https://bs.plantnet.org/image/o/44bc564b4eadfd023e666e06f3ccfb4dc328bfc3
+spider flower,moderate,well-drained,full sunlight,"regular, well-drained soil",organic,https://bs.plantnet.org/image/o/da28ecf11ad47a8aad5cf545e8e0acc7e2261eaf
+star jasmine,moderate,well-drained,full sunlight,"regular, well-drained soil",organic,https://bs.plantnet.org/image/o/01f4b73d948e3be845757582985f2130c6c24efd
+strawberry plant,moderate,well-drained,full sunlight,"regular, well-drained soil",organic,
+sweet basil,moderate,well-drained,full sunlight,"regular, well-drained soil",balanced,
+sweet potato vine,fast,well-drained,full sunlight,"regular, well-drained soil",organic,
+taro,moderate,moist,full sunlight,"regular, moist soil",organic,https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Songe-R%C3%A9union.JPG/500px-Songe-R%C3%A9union.JPG
+thyme,slow,well-drained,full sunlight,"regular, well-drained soil",balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Thyme-Bundle.jpg/500px-Thyme-Bundle.jpg
+tiger lily,moderate,well-drained,full sunlight,"regular, well-drained soil",organic,
+tuberose,moderate,well-drained,full sunlight,"regular, well-drained soil",balanced,
+verbena,moderate,well-drained,full sunlight,"regular, well-drained soil",organic,https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Eisenkraut%2C_Passau.JPG/500px-Eisenkraut%2C_Passau.JPG
+violet,moderate,moist,indirect sunlight,"regular, moist soil",organic,https://bs.plantnet.org/image/o/57921622521891238430108caf451e7284d5786b
+wisteria,fast,well-drained,full sunlight,"regular, well-drained soil",low-nitrogen,https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Chinese_Wisteria_Bl%C3%BCtentrauben.JPG/500px-Chinese_Wisteria_Bl%C3%BCtentrauben.JPG
+yucca,slow,loamy,full sunlight,"regular, moist soil",balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Yucca_elata_-_tmcelrath_01.jpg/500px-Yucca_elata_-_tmcelrath_01.jpg
+zebra plant,moderate,moist,partial sunlight,"regular, moist soil",organic,https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/AphelandraSquarrosa.jpg/500px-AphelandraSquarrosa.jpg
+zephyranthes (rain lily),fast,acidic,full sunlight,"regular, moist soil",balanced,
+bamboo orchid,moderate,loamy,indirect sunlight,"regular, well-drained soil",organic,https://bs.plantnet.org/image/o/98abaedd2f0a48f27bcc9f38ce609e84f4fce334
+buckwheat,fast,sandy,full sunlight,"regular, moist soil",low-nitrogen,https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Japanese_Buckwheat_Flower.JPG/500px-Japanese_Buckwheat_Flower.JPG
+cabbage palm,moderate,sandy,full sunlight,water when topsoil is dry,organic,https://bs.plantnet.org/image/o/6d97349183c7e10c01df84ddd2c641fa63eee5e3
+camelina,fast,loamy,full sunlight,"regular, moist soil",no,https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Camelina_sativa_eF.jpg/500px-Camelina_sativa_eF.jpg
+dandelion,fast,well-drained,full sunlight,"regular, moist soil",organic,
+elderflower,moderate,well-drained,full sunlight,"regular, moist soil",no,
+epazote,fast,moist,full sunlight,"regular, well-drained soil",organic,
+fern (maidenhair),slow,moist,indirect sunlight,"regular, well-drained soil",organic,
+galangal,moderate,well-drained,partial sunlight,"regular, moist soil",balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Galangal.web.jpg/500px-Galangal.web.jpg
+globe thistle,slow,moist,full sunlight,"regular, moist soil",organic,https://bs.plantnet.org/image/o/31e096c0ef69029f2ee224758c202a47dce7630c
+hummingbird sage,moderate,well-drained,full sunlight,"regular, well-drained soil",organic,https://bs.plantnet.org/image/o/82fca384e2e0d1e8ebaf7714caf6c072e2b8ce00
+indian cress,moderate,moist,full sunlight,"regular, moist soil",low-nitrogen,
+japanese maple,slow,well-drained,partial sunlight,"regular, moist soil",organic,https://bs.plantnet.org/image/o/607dc707c1858fb676308978386ea9a3a7952f2a
+lacandonian,moderate,loamy,partial sunlight,"regular, moist soil",no,
+lamb's ear,moderate,moist,full sunlight,"regular, moist soil",balanced,
+lemon grass,fast,well-drained,full sunlight,"regular, moist soil",organic,
+lilac bush,moderate,well-drained,full sunlight,"regular, moist soil",balanced,
+mandevilla,fast,loamy,full sunlight,"regular, well-drained soil",balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Mandevilla_sanderi_red_1.jpg/500px-Mandevilla_sanderi_red_1.jpg
+marigold (african),fast,loamy,full sunlight,"regular, moist soil",organic,
+mayapple,slow,well-drained,partial sunlight,"regular, moist soil",low-nitrogen,https://bs.plantnet.org/image/o/1669bef8ac2a8aee04435802b7347447e8f6575d
+nandina (heavenly bamboo),moderate,well-drained,partial sunlight,"regular, well-drained soil",organic,
+nutmeg,moderate,loamy,full sunlight,"regular, moist soil",organic,https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Biji_Pala_Bubuk.jpg/500px-Biji_Pala_Bubuk.jpg
+orchid (vanilla),slow,well-drained,indirect sunlight,"regular, well-drained soil",no,
+peepal tree,slow,well-drained,full sunlight,"regular, moist soil",organic,
+plumeria,moderate,loamy,full sunlight,"regular, well-drained soil",low-nitrogen,https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Plumeria_rubra-4.JPG/500px-Plumeria_rubra-4.JPG
+quaking aspen,moderate,well-drained,full sunlight,"regular, moist soil",organic,
+quinoa,fast,loamy,full sunlight,"regular, well-drained soil",no,https://bs.plantnet.org/image/o/66b115ab5b821a9887d915d9483bd54376143faa
+red maple,slow,well-drained,full sunlight,"regular, moist soil",balanced,https://bs.plantnet.org/image/o/c1023eba3ca60bfc8efadb3710586b9f8109d435
+redwood,slow,moist,full sunlight,"regular, moist soil",low-nitrogen,https://bs.plantnet.org/image/o/ab78bfa38a7e6c52c4e52d365aeb74b9ae199702
+river birch,moderate,well-drained,full sunlight,"regular, moist soil",balanced,
+rose of sharon,moderate,moist,full sunlight,"regular, moist soil",balanced,
+rosemary mint,moderate,well-drained,partial sunlight,"regular, well-drained soil",no,
+sago palm,slow,well-drained,full sunlight,"regular, well-drained soil",organic,https://bs.plantnet.org/image/o/e85a7396c534bf10e97f2b18c1107f92cf66a5ad
+scabiosa (pincushion flower),moderate,loamy,full sunlight,"regular, moist soil",organic,
+scilla,moderate,moist,full sunlight,"regular, moist soil",low-nitrogen,https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Scille_%C3%A0_deux_feuilles_%28massif_des_Vosges%29.JPG/500px-Scille_%C3%A0_deux_feuilles_%28massif_des_Vosges%29.JPG
+sedge,slow,well-drained,partial sunlight,"regular, well-drained soil",organic,
+silene (catchfly),moderate,loamy,full sunlight,"regular, well-drained soil",no,
+silverbell tree,moderate,moist,full sunlight,"regular, well-drained soil",organic,
+soursop,fast,well-drained,full sunlight,"regular, moist soil",no,https://bs.plantnet.org/image/o/f6ef1c049e22764f3ee4906ec0ff472a1f4b43e6
+stevia,fast,well-drained,full sunlight,"regular, moist soil",organic,https://bs.plantnet.org/image/o/4f42b1092f405ed577c94baa1e7938afad636127
+sugarcane,fast,well-drained,full sunlight,"regular, well-drained soil",organic,https://bs.plantnet.org/image/o/1855281deafe89c21d5bed7dd54138919f8c9518
+tansy,slow,loamy,full sunlight,"regular, moist soil",no,https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Tanacetum_vulgare_-_harilik_soolikarohi_Keilas2.jpg/500px-Tanacetum_vulgare_-_harilik_soolikarohi_Keilas2.jpg
+teak,slow,well-drained,full sunlight,"regular, well-drained soil",low-nitrogen,https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Starr_010304-0485_Tectona_grandis.jpg/500px-Starr_010304-0485_Tectona_grandis.jpg
+themeda (kangaroo grass),fast,sandy,full sunlight,"regular, moist soil",organic,
+tobacco plant,fast,loamy,full sunlight,"regular, well-drained soil",balanced,
+tuberose (polianthes),moderate,well-drained,full sunlight,"regular, moist soil",organic,
+water lily,slow,loamy,full sunlight,"regular, moist soil",no,
+wattle,moderate,sandy,full sunlight,water when soil feels dry,no,
+yew,slow,loamy,partial sunlight,water when topsoil is dry,balanced,https://bs.plantnet.org/image/o/1730a4cd97caf15de8527a196c4991813e0141a3
+zea mays (corn),fast,loamy,full sunlight,keep soil consistently moist,low-nitrogen,
+zebra grass,moderate,well-drained,partial sunlight,keep soil consistently moist,low-nitrogen,
+zoysia grass,slow,sandy,full sunlight,water weekly,organic,
+achillea (yarrow),moderate,well-drained,full sunlight,let soil dry between watering,balanced,
+ageratum,fast,loamy,partial sunlight,keep soil slightly moist,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Ageratum_corymbosum_%28Asteraceae%29_-_Cielitos.jpg/500px-Ageratum_corymbosum_%28Asteraceae%29_-_Cielitos.jpg
+angelonia,moderate,well-drained,full sunlight,keep soil consistently moist,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Maypurpleflower.jpg/500px-Maypurpleflower.jpg
+armeria (thrift),slow,sandy,full sunlight,water when soil is dry,low-nitrogen,
+bearded iris,slow,sandy,partial sunlight,keep soil evenly moist,balanced,
+bergamot,moderate,loamy,partial sunlight,water when soil is dry,balanced,
+bigleaf hydrangea,moderate,acidic,full sunlight,keep soil consistently moist,organic,
+black currant,moderate,loamy,partial sunlight,water when soil feels dry,organic,https://bs.plantnet.org/image/o/2f9222009f115ed0da7f8f597de09f77a3eee996
+black-eyed susan,fast,loamy,full sunlight,water when topsoil is dry,low-nitrogen,
+blazing star,moderate,loamy,full sunlight,water when soil is dry,organic,
+bloodroot,slow,moist,partial sunlight,keep soil slightly moist,organic,
+bluebell,slow,moist,partial sunlight,water when soil feels dry,organic,
+borage,fast,loamy,full sunlight,keep soil consistently moist,no,https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Borago_officinalis_%282025%29.jpg/500px-Borago_officinalis_%282025%29.jpg
+calendula,fast,loamy,full sunlight,water weekly,organic,https://bs.plantnet.org/image/o/b3eb301c46e71b508cf06ce459fd83c487859907
+california poppy,fast,sandy,full sunlight,water when soil is dry,organic,
+carob tree,slow,well-drained,full sunlight,water when soil is dry,balanced,
+catmint,moderate,well-drained,full sunlight,keep soil consistently moist,balanced,https://bs.plantnet.org/image/o/1cf932657bc80b42c8c9a8f5fbdafcee4ef8605d
+chives,fast,loamy,full sunlight,keep soil evenly moist,low-nitrogen,https://bs.plantnet.org/image/o/5e033417dbfff7e86535bd7f431bb4162804a0c9
+chinese lantern plant,moderate,loamy,partial sunlight,water when soil feels dry,balanced,
+clematis,moderate,well-drained,partial sunlight,keep soil consistently moist,organic,https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Clematis_%27Nelly_Moser%27.JPG/500px-Clematis_%27Nelly_Moser%27.JPG
+clover,fast,loamy,full sunlight,water when topsoil is dry,no,https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/79_Trifolium_repens_L.jpg/500px-79_Trifolium_repens_L.jpg
+coltsfoot,slow,moist,partial sunlight,water when soil is dry,low-nitrogen,https://bs.plantnet.org/image/o/da90d727cf75a6d32a222cc589162d81392517d4
+daffodils,slow,loamy,full sunlight,keep soil consistently moist,organic,
+daisy fleabane,moderate,loamy,partial sunlight,water weekly,low-nitrogen,https://bs.plantnet.org/image/o/6ca945386171048df4d6c6686ddb8cd021350758
+dogwood tree,slow,loamy,partial sunlight,keep soil consistently moist,low-nitrogen,
+dragonfruit cactus,moderate,well-drained,full sunlight,let soil dry between watering,no,
+engelmann spruce,slow,well-drained,full sunlight,water when soil feels dry,balanced,
+fairy lantern,moderate,loamy,partial sunlight,keep soil slightly moist,balanced,
+fritillaria,slow,well-drained,partial sunlight,water when soil is dry,no,https://upload.wikimedia.org/wikipedia/commons/6/68/Fritillaria_meleagris0.jpg
+galax,moderate,moist,partial sunlight,keep soil evenly moist,no,https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Galax_urceolata.jpg/500px-Galax_urceolata.jpg
+ginkgo,slow,loamy,full sunlight,water when topsoil is dry,balanced,https://bs.plantnet.org/image/o/4861a76aa6e4d31127986aee10f29450f72d981f
+grape hyacinth,fast,loamy,full sunlight,keep soil consistently moist,organic,
+guar,fast,sandy,full sunlight,water when soil is dry,no,https://upload.wikimedia.org/wikipedia/commons/9/9b/Cluster_bean-guar-Cyamopsis_psoralioides-Cyamopsis_tetragonolobus-TAMIL_NADU73.jpg
+gumwood tree,moderate,loamy,partial sunlight,water when soil is dry,organic,
+goldenrods,moderate,loamy,full sunlight,keep soil moist,organic,
+goldenseal,slow,moist,partial sunlight,keep soil moist,balanced,https://bs.plantnet.org/image/o/5797c1af7e21acd12514f68460b9cae818299104
+heliopsis,moderate,loamy,full sunlight,keep soil moist,no,https://upload.wikimedia.org/wikipedia/commons/e/e4/Heliopsis_helianthoides.jpg
+henbane,moderate,loamy,full sunlight,water when soil feels dry,organic,https://bs.plantnet.org/image/o/fef309112ec06db461c84abaae7166d64ef11a23
+heracleum (cow parsnip),fast,loamy,partial sunlight,keep soil moist,balanced,
+hops vine,fast,well-drained,full sunlight,keep soil moist,low-nitrogen,
+indian grass,moderate,loamy,full sunlight,water when soil is dry,low-nitrogen,
+islander (agave),slow,well-drained,full sunlight,let soil dry between watering,no,
+ironwood,slow,loamy,full sunlight,water when soil is dry,organic,https://bs.plantnet.org/image/o/8a1b6dc4f662ddfa04164fa9e1f56dd1bdcf7c94
+jerusalem artichoke,fast,loamy,full sunlight,water when soil is dry,balanced,https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Sunroot_top.jpg/500px-Sunroot_top.jpg
+larkspur,moderate,loamy,partial sunlight,keep soil moist,balanced,
+laelia orchid,slow,well-drained,indirect sunlight,keep soil consistently moist,no,
+lamb's ear,moderate,sandy,partial sunlight,keep soil slightly moist,no,
+lavender (english),moderate,well-drained,full sunlight,let soil dry between watering,balanced,
+ligustrum,fast,loamy,partial sunlight,water when topsoil is dry,low-nitrogen,
+lilac tree,slow,loamy,partial sunlight,water weekly,balanced,
