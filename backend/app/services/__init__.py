@@ -1,1 +1,1 @@
-from .plant_service import get_dataset
+from .database_service import store_csv_entries_to_db

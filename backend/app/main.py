@@ -1,21 +1,28 @@
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
-from sqlalchemy import inspect
 from starlette.middleware.cors import CORSMiddleware
-from .database import Base
-from .database.database import engine
+from .database.database import SessionLocal, engine, Base
 from .routers import plants_router
-from .models import Plant
+from .services import store_csv_entries_to_db
 
-# Use when you add new tables
-# Base.metadata.create_all(bind=engine)
-
+# For loading the csv to the database once upon startup
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    db = SessionLocal()
+    try:
+        store_csv_entries_to_db(db)
+    finally:
+        db.close()
+    yield
 
 app = FastAPI(title="Air Project API",
               description="Welcome to our Plant API",
               version="1.0.0",
               openapi_url="/openapi.json",
               docs_url="/docs",
-              redoc_url="/redoc",)
+              redoc_url="/redoc",
+              lifespan=lifespan
+              )
 
 app.add_middleware(
     CORSMiddleware,
@@ -25,7 +32,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+Base.metadata.create_all(bind=engine)
 
-# inspector = inspect(engine)
-# print("Tables:", inspector.get_table_names())
 app.include_router(plants_router)

@@ -8,7 +8,6 @@ from pandas import DataFrame
 DATASET_PATH_RAW = Path(__file__).parent.parent / "dataset/raw/plants_raw.csv"
 DATASET_PATH_CLEAN = Path(__file__).parent.parent / "dataset/raw/plants_clean.csv"
 DATASET_PATH_ENRICHED = Path(__file__).parent.parent / "dataset/plants_enriched.csv"
-DATASET_PATH_FINAL = Path(__file__).parent.parent / "dataset/plants.csv"
 
 PLANT_API_BASE_URL_TREFLE = "https://trefle.io/api/v1/plants"
 WIKIPEDIA_BASE_URL = "https://en.wikipedia.org/w/api.php"
@@ -25,7 +24,6 @@ def preprocess_dataset():
         lines_raw = file.readlines()
 
     for line_raw in lines_raw:
-
         line_clean = line_raw.replace('"""', '"')
         line_clean = line_clean.rstrip()
         line_clean = line_clean.lower()
@@ -43,15 +41,6 @@ def get_rid_of_duplicates():
     df = pd.read_csv(DATASET_PATH_CLEAN)
     df = df.drop_duplicates()
     df.to_csv(DATASET_PATH_CLEAN, index=False)
-
-
-""" -----------------------------------------------------------------------------------------------
- Small helper for getting an overview over the data
------------------------------------------------------------------------------------------------ """
-def print_infos():
-    df = pd.read_csv(DATASET_PATH_CLEAN)
-    df.info()
-    df.describe()
 
 
 """ -----------------------------------------------------------------------------------------------
@@ -164,12 +153,10 @@ def enrich_dataset():
     call_wikipedia_api()
 
 
-
 def main():
     preprocess_dataset()
     get_rid_of_duplicates()
     enrich_dataset()
-    print_infos()
 
 
 if __name__ == "__main__":
