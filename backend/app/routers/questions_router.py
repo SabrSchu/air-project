@@ -1,9 +1,11 @@
-from fastapi import APIRouter, Query, Depends
+from fastapi import APIRouter, Query, Depends, HTTPException
 from sqlalchemy.orm import Session
 from starlette import status
+from starlette.status import HTTP_400_BAD_REQUEST
 from ..database.database import get_db
 from ..schemas import Question, PlantRecommendation, UserAnswer
 from ..services import question_service
+from ..recommender import recommender_placeholder
 
 
 question_router = APIRouter(prefix="/questions", tags=["Questions"])
@@ -48,10 +50,21 @@ def post_questions_receive_recommendation(
     for perfect fits, good fits or mismatches!
     """
 
-    perfect_fit = question_service.get_perfect_recommendations(num=num_perfect_fits, user_answers=questionnaire, db=db)
+    # First step input validation, all 5 questions must be answered
+    try:
+        question_service.validate_questionnaire(user_answers=questionnaire)
 
-    good_fit = question_service.get_good_recommendations(num=num_good_fits, user_answers=questionnaire, db=db)
+    except ValueError as e:
+        raise HTTPException(status_code=HTTP_400_BAD_REQUEST, detail=str(e))
 
-    mismatch = question_service.get_mismatches(num=num_bad_fits, user_answers=questionnaire, db=db)
+    # Then storing the answers to database, for further use later (e.g. evaluations)
+    question_service.store_user_answers(user_answers=questionnaire, db=db)
 
-    return "todo"
+
+    # Calling the recommender, fixme for now only placeholder until we have a final model
+
+    perfect_fit = recommender_placeholder.get_perfect_recommendations(num=num_perfect_fits, user_answers=questionnaire, db=db)
+    good_fit = recommender_placeholder.get_good_recommendations(num=num_good_fits, user_answers=questionnaire, db=db)
+    mismatch = recommender_placeholder.get_mismatches(num=num_bad_fits, user_answers=questionnaire, db=db)
+
+    return [perfect_fit, good_fit, mismatch]

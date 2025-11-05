@@ -12,6 +12,9 @@ class Answer(BaseModel):
         from_attributes = True
 
 
+""" -----------------------------------------------------------------------------------------------
+ Schema for user answers of the questionnaire, each question has one answer (right now)
+----------------------------------------------------------------------------------------------- """
 class UserAnswer(BaseModel):
     question_id: int
     answer_id: int
