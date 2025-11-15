@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from ..schemas import UserAnswer, PlantRecommendation
+from ..schemas import UserAnswerSubmission, PlantRecommendation
 from ..services import recommender_placeholder_service
 
 
@@ -9,7 +9,7 @@ from ..services import recommender_placeholder_service
 ----------------------------------------------------------------------------------------------- """
 
 
-def get_perfect_recommendations(num: int, user_answers: list[UserAnswer], db: Session):
+def get_perfect_recommendations(num: int, user_answers: UserAnswerSubmission, db: Session):
     plant_list = recommender_placeholder_service.fetch_plant_recommendations_randomly(num_plants=num, db=db)
 
     return PlantRecommendation (
@@ -18,7 +18,7 @@ def get_perfect_recommendations(num: int, user_answers: list[UserAnswer], db: Se
     )
 
 
-def get_good_recommendations(num: int, user_answers: list[UserAnswer], db:Session):
+def get_good_recommendations(num: int, user_answers: UserAnswerSubmission, db:Session):
     good_plant_list = recommender_placeholder_service.fetch_plant_recommendations_randomly(num_plants=num, db=db)
 
     return PlantRecommendation (
@@ -27,7 +27,7 @@ def get_good_recommendations(num: int, user_answers: list[UserAnswer], db:Sessio
     )
 
 
-def get_mismatches(num: int, user_answers: list[UserAnswer], db: Session):
+def get_mismatches(num: int, user_answers: UserAnswerSubmission, db: Session):
     mismatch_list = recommender_placeholder_service.fetch_plant_recommendations_randomly(num_plants=num, db=db)
 
     return PlantRecommendation (

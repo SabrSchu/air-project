@@ -12,4 +12,4 @@ class UserAnswer(Base):
     id = Column(Integer, primary_key=True, index=True)
     question_id = Column(Integer, ForeignKey("question.id"))
     answer_id = Column(Integer, ForeignKey("answer.id"))
-    created_at = Column(DateTime)
+    submission_id = Column(Integer, ForeignKey("user_submission.id"))

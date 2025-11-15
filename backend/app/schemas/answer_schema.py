@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from datetime import datetime
 
 """ -----------------------------------------------------------------------------------------------
@@ -18,4 +18,11 @@ class Answer(BaseModel):
 class UserAnswer(BaseModel):
     question_id: int
     answer_id: int
+
+""" -----------------------------------------------------------------------------------------------
+ Schema for one submission that holds a list of user answers plus the free text field
+----------------------------------------------------------------------------------------------- """
+class UserAnswerSubmission(BaseModel):
+    answers: list[UserAnswer]
     created_at: datetime
+    free_text: str | None = Field(default=None, max_length=300)

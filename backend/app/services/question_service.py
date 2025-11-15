@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session, joinedload
 from app.models import Question
-from app.schemas import UserAnswer
-from app.models import UserAnswer as UserAnswerModel
+from app.schemas import UserAnswerSubmission
+from app.models import UserSubmission, UserAnswer as UserAnswerModel
 
 
 """ -----------------------------------------------------------------------------------------------
@@ -15,18 +15,27 @@ def fetch_all_questions(db: Session) -> list[type[Question]]:
 """ -----------------------------------------------------------------------------------------------
  Helper that stores the user answers to the database. Each questionnaire is unique by datetime.
 ----------------------------------------------------------------------------------------------- """
-def store_user_answers(user_answers: list[UserAnswer], db: Session):
+def store_user_answers(user_answers: UserAnswerSubmission, db: Session):
 
-    for user_answer in user_answers:
+    submission = UserSubmission(
+        free_text=user_answers.free_text,
+        created_at=user_answers.created_at
+    )
+
+    db.add(submission)
+    db.commit()
+    db.refresh(submission)
+
+    for user_answer in user_answers.answers:
         answer = {
             "question_id": user_answer.question_id,
             "answer_id": user_answer.answer_id,
-            "created_at": user_answer.created_at
+            "submission_id": submission.id
         }
 
         db.add(UserAnswerModel(question_id=answer["question_id"],
                                answer_id=answer["answer_id"],
-                               created_at=answer["created_at"]))
+                               submission_id=answer["submission_id"]))
 
     db.commit()
 
@@ -34,17 +43,18 @@ def store_user_answers(user_answers: list[UserAnswer], db: Session):
 """ -----------------------------------------------------------------------------------------------
  Helper makes sure that all questions are correctly sent from the frontend.
 ----------------------------------------------------------------------------------------------- """
-def validate_questionnaire(user_answers: list[UserAnswer]):
+
+def validate_questionnaire(user_answers: UserAnswerSubmission):
 
     # Checking validity of questions
-    if len(user_answers) < 5:
+    if len(user_answers.answers) < 5:
         raise ValueError(f"Error! You must send all 5 answers!")
 
-    if len(user_answers) > 5:
+    if len(user_answers.answers) > 5:
         raise ValueError(f"Error! Too many answers!")
 
     required_question_ids = {1, 2, 3, 4, 5}
-    actual_present_ids = [element.question_id for element in user_answers]
+    actual_present_ids = [element.question_id for element in user_answers.answers]
 
     if not required_question_ids.issubset(actual_present_ids):
         raise ValueError(f"Error! Not all questions are answered!")
@@ -58,9 +68,11 @@ def validate_questionnaire(user_answers: list[UserAnswer]):
         5: {17, 18, 19, 20}
     }
 
-    for answer in user_answers:
+    for answer in user_answers.answers:
         valid_ids = correct_answer_ids.get(answer.question_id)
 
         if valid_ids is None or answer.answer_id not in valid_ids:
             raise ValueError(f"Error! Invalid answer_id for question: {answer.question_id}. "
                              f"Call the endpoint GET /questions/all to check which answer_ids are valid!")
+
+

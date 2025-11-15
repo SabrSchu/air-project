@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from starlette import status
 from starlette.status import HTTP_400_BAD_REQUEST
 from ..database.database import get_db
-from ..schemas import Question, PlantRecommendation, UserAnswer
+from ..schemas import Question, PlantRecommendation, UserAnswerSubmission
 from ..services import question_service
 from ..recommender import recommender_placeholder
 
@@ -33,13 +33,14 @@ def get_all_questions(db: Session = Depends(get_db)):
  Endpoint that takes the user answers, stores it in the database, activates the recommender 
  algorithm, and returns a list of recommendations.
 ----------------------------------------------------------------------------------------------- """
+
 @question_router.post("/",
                       summary="Post questionnaire, receive variable number of recommendations",
                       response_model=list[PlantRecommendation],
                       status_code=status.HTTP_201_CREATED)
 
 def post_questions_receive_recommendation(
-        questionnaire: list[UserAnswer],
+        questionnaire: UserAnswerSubmission,
         num_perfect_fits: int = Query(default=3, ge=0, le=10, description="Number perfect fits to receive"),
         num_good_fits: int = Query(default=3, ge=0, le=10, description="Number of good fits to receive"),
         num_bad_fits: int = Query(default=3, ge=0, le=10, description="Number of mismatches to receive"),

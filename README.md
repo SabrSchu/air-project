@@ -208,36 +208,36 @@ To make the project run, follow these main steps. For further project configurat
 - Request body:
   - Take care that you send an answer for each question id 1 - 5! 
   - Take care that you send the correct answer ids (Else check Endpoint Nr. 3 for reference)!
+  - 🚨 Note: Updated request body! Now you also send the (optional) free text
   - Here you have to send a request body in the format of:
 
 ```json
-[
-  {
-    "question_id": 1,
-    "answer_id": 1,
-    "created_at": "2025-11-05T15:57:17.267Z"
-  },
-  {
-    "question_id": 2,
-    "answer_id": 7,
-    "created_at": "2025-11-05T15:57:17.267Z"
-  },
-  {
-    "question_id": 3,
-    "answer_id": 11,
-    "created_at": "2025-11-05T15:57:17.267Z"
-  },
-  {
-    "question_id": 4,
-    "answer_id": 15,
-    "created_at": "2025-11-05T15:57:17.267Z"
-  },
-  {
-    "question_id": 5,
-    "answer_id": 20,
-    "created_at": "2025-11-05T15:57:17.267Z"
-  }
-]
+{
+  "answers": [
+    {
+      "question_id": 1,
+      "answer_id": 1
+    },
+    {
+      "question_id": 2,
+      "answer_id": 5
+    },
+    {
+      "question_id": 3,
+      "answer_id": 9
+    },
+    {
+      "question_id": 4,
+      "answer_id": 14
+    },
+    {
+      "question_id": 5,
+      "answer_id": 20
+    }
+  ],
+  "created_at": "2025-11-15T16:13:04.550Z",
+  "free_text": "Sunny cozy balcony. My cat is healthy, and my dog likes to eat spaghetti."
+}
 ```
 - Response body:
   - Returns a list of three different recommendation types. 
