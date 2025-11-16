@@ -1,6 +1,7 @@
+import re
 from sqlalchemy.orm import Session, joinedload
 from app.models import Question
-from app.schemas import UserAnswerSubmission
+from app.schemas import UserAnswerSubmission, UserFreeTextSubmission
 from app.models import UserSubmission, UserAnswer as UserAnswerModel
 
 
@@ -14,11 +15,12 @@ def fetch_all_questions(db: Session) -> list[type[Question]]:
 
 """ -----------------------------------------------------------------------------------------------
  Helper that stores the user answers to the database. Each questionnaire is unique by datetime.
+ Free text is sanitized before being stored to db
 ----------------------------------------------------------------------------------------------- """
 def store_user_answers(user_answers: UserAnswerSubmission, db: Session):
 
     submission = UserSubmission(
-        free_text=user_answers.free_text,
+        free_text=sanitize_free_text(user_answers.free_text),
         created_at=user_answers.created_at
     )
 
@@ -38,6 +40,21 @@ def store_user_answers(user_answers: UserAnswerSubmission, db: Session):
                                submission_id=answer["submission_id"]))
 
     db.commit()
+
+
+""" -----------------------------------------------------------------------------------------------
+ Helper that stores the user's free text to the database. Each questionnaire is unique by datetime.
+ Free text is being sanitized before storing to db
+----------------------------------------------------------------------------------------------- """
+def store_user_submission(user_submission: UserFreeTextSubmission, db: Session):
+    submission = UserSubmission(
+        free_text=sanitize_free_text(user_submission.free_text),
+        created_at=user_submission.created_at
+    )
+
+    db.add(submission)
+    db.commit()
+    db.refresh(submission)
 
 
 """ -----------------------------------------------------------------------------------------------
@@ -76,3 +93,10 @@ def validate_questionnaire(user_answers: UserAnswerSubmission):
                              f"Call the endpoint GET /questions/all to check which answer_ids are valid!")
 
 
+""" -----------------------------------------------------------------------------------------------
+ Helper that strips special characters that might have malicious intent
+----------------------------------------------------------------------------------------------- """
+def sanitize_free_text(text: str):
+    allowed_pattern = r"[^a-zA-Z0-9\s\.?!,'\"]"
+    cleaned_text = re.sub(allowed_pattern, " ", text)
+    return cleaned_text.strip()

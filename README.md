@@ -322,3 +322,25 @@ To make the project run, follow these main steps. For further project configurat
   }
 ]
 ```
+
+#### 5) POST `http://127.0.0.1:8000/questions/free_text`
+##### Endpoint to send a user's free text, and receive a list of recommendations
+
+- Query parameters:
+  - **num_perfect_fits**: int, numbers of perfect fits you want to receive (0 - 10)
+  - **num_good_fits**: int, numbers of good fits you want to receive (0 - 10)
+  - **num_bad_fits**: int, number of mismatches you want to receive (0 - 10)
+- Request body:
+  - Here you have to send a request body in the format of:
+
+```json
+{
+  "created_at": "2025-11-15T16:13:04.550Z",
+  "free_text": "Sunny cozy balcony. My cat is healthy, and my dog likes to eat spaghetti."
+}
+```
+
+- Response body:
+  - Returns a list of three different recommendation types. 
+  - The number of each recommendation type (perfect, good, mismatch) you have chosen in your query params.
+  - Same as the previous endpoint
