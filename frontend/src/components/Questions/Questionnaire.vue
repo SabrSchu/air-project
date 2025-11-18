@@ -2,9 +2,10 @@
 import { ref, computed, onMounted } from 'vue'
 import { Motion } from 'motion-v'
 import Question from './Question.vue'
+import FreeTextQuestion from "./FreeTextQuestion.vue";
 import EndOfQuestions from "./EndOfQuestions.vue";
 
-import {accessQuestionsEndpoint} from "@/services/questionsEnpointService.ts";
+import {accessQuestionsEndpoint, postQuestionnaire} from "@/services/questionsEnpointService.ts";
 
 const isLoading = ref(true)
 const questions = ref([])
@@ -13,12 +14,25 @@ const quizFinished = ref(false)
 const currentStep = ref(0)
 const answers = ref([])
 
+const freeText = ref('')
+
+const finalResults = ref(null)
+const recommendations = ref([])
+
 /**
  * Function that calls the services which call our Backend endpoints
  */
 async function fetchData() {
   try {
-    questions.value = await accessQuestionsEndpoint()
+    const fetchedQuestions = await accessQuestionsEndpoint()
+
+    fetchedQuestions.push({
+      id: 'free_text_question',
+      question: 'Is there anything else you would like to add?',
+      type: 'free_text'
+    });
+    questions.value = fetchedQuestions
+
   } catch (err) {
     console.error("Error:", err)
     questions.value = []
@@ -33,29 +47,47 @@ onMounted(() => {
 
 const currentQuestionData = computed(() => questions.value[currentStep.value])
 
+const currentComponent = computed(() => {
+  if (currentQuestionData.value?.type === 'free_text') {
+    return FreeTextQuestion
+  }
+  return Question
+})
+
 const startQuestionnaire = () => {
   quizStarted.value = true
 }
 
-const handleNext = (payload: { question_id: number, answer_id: number }) => {
-  const existingAnswerIndex = answers.value.findIndex(
-      (ans) => {
-        return ans.question_id === payload.question_id;
-      }
-  );
+const handleNext = (payload: any) => {
+  const currentQuestion = currentQuestionData.value;
 
-  if (existingAnswerIndex !== -1) {
-    answers.value[existingAnswerIndex] = payload;
+  if (currentQuestion.type === 'free_text') {
+    freeText.value = payload;
   }
   else {
-    answers.value.push(payload);
+
+    const existingAnswerIndex = answers.value.findIndex(
+        (ans) => ans.question_id === payload.question_id
+    );
+    if (existingAnswerIndex !== -1) {
+      answers.value[existingAnswerIndex] = payload;
+    }
+    else {
+      answers.value.push(payload);
+    }
   }
 
   if (currentStep.value < questions.value.length - 1) {
     currentStep.value++
   } else {
     quizFinished.value = true
+    finalResults.value = {
+      answers: answers.value,
+      created_at: new Date().toISOString(),
+      free_text: freeText.value
+    }
     console.log('Final Answers:', JSON.stringify(answers.value, null, 2))
+    sendResults();
   }
 }
 
@@ -65,8 +97,21 @@ const handlePrevious = () => {
   }
 }
 
-const sendResults = () => {
-  console.log("Sending questionnaire...")
+const sendResults = async () => {
+  if (!finalResults.value) return;
+
+  console.log("Sending questionnaire...", finalResults.value);
+  try {
+    const result = await postQuestionnaire(finalResults.value, {
+      num_perfect_fits: 3,
+      num_good_fits: 2,
+      num_bad_fits: 1
+    });
+    recommendations.value = result;
+    console.log("Received recommendations:", JSON.stringify(recommendations.value, null, 2));
+  } catch (error) {
+    console.error("Failed to send results or get recommendations:", error);
+  }
 }
 </script>
 
@@ -105,7 +150,8 @@ const sendResults = () => {
             :exit="{ opacity: 0, x: -50 }"
             :transition="{ duration: 0.3 }"
         >
-          <Question
+          <component
+              :is="currentComponent"
               :question-data="currentQuestionData"
               @next="handleNext"/>
         </Motion>
@@ -121,9 +167,9 @@ const sendResults = () => {
         </div>
       </template>
 
-      <!-- Endscreen (muss noch eingefügt werden)-->
+      <!-- Endscreen -->
       <template v-else>
-        <EndOfQuestions :answers="answers" />
+        <EndOfQuestions :results="finalResults" :recommendations="recommendations" />
       </template>
     </Motion>
 </div>
