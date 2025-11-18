@@ -1,8 +1,8 @@
 <template>
   <NavBar/>
   <Header/>
-  <QuestionCards/>
-  <PlantOverview/>
+  <Questionnaire/>
+  <!--<PlantOverview/>-->
 </template>
 
 <style>
@@ -27,6 +27,6 @@ body{
 <script setup lang="ts">
 import NavBar from "@/components/NavBar.vue";
 import Header from "@/components/Header.vue";
-import QuestionCards from "@/components/QuestionCards.vue";
+import Questionnaire from "@/components/Questions/Questionnaire.vue";
 import PlantOverview from "@/components/PlantOverview.vue";
 </script>
