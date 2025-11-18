@@ -37,14 +37,25 @@ const startQuestionnaire = () => {
   quizStarted.value = true
 }
 
-const handleNext = (answer: string) => {
-  answers.value[currentQuestionData.value.id] = answer
+const handleNext = (payload: { question_id: number, answer_id: number }) => {
+  const existingAnswerIndex = answers.value.findIndex(
+      (ans) => {
+        return ans.question_id === payload.question_id;
+      }
+  );
+
+  if (existingAnswerIndex !== -1) {
+    answers.value[existingAnswerIndex] = payload;
+  }
+  else {
+    answers.value.push(payload);
+  }
 
   if (currentStep.value < questions.value.length - 1) {
     currentStep.value++
   } else {
     quizFinished.value = true
-    console.log('Final Answers:', answers.value)
+    console.log('Final Answers:', JSON.stringify(answers.value, null, 2))
   }
 }
 

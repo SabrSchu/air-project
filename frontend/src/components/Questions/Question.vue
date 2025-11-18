@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps({
+const props = defineProps({
   questionData: {
     type: Object,
     required: true
@@ -8,8 +8,11 @@ defineProps({
 
 const emit = defineEmits(['next'])
 
-const selectAnswer = (option: string) => {
-  emit('next', option)
+const selectAnswer = (option: { id: number, answer: string }) => {
+  emit('next', {
+    question_id: props.questionData.id,
+    answer_id: option.id
+  })
 }
 </script>
 
