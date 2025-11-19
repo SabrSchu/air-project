@@ -2,7 +2,7 @@
   <NavBar/>
   <Header/>
   <Questionnaire/>
-  <!--<PlantOverview/>-->
+  <PlantOverview/>
 </template>
 
 <style>
