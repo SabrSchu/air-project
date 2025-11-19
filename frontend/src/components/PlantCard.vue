@@ -17,12 +17,17 @@ const props = defineProps({
     default: "No description available"
   },
   waterAmount: {
-    type: Number,
+    type: String,
     required: true
   },
   sunlightAmount: {
-    type: Number,
+    type: String,
     required: true
+  },
+  image_url: {
+    type: String,
+    required: false,
+    default: DemoPlant
   }
 });
 
@@ -42,27 +47,37 @@ function toggleLike() {
   }
 }
 
+
 function filledCircles(type: string) {
-  switch (type) {
-    case 'water':
-      if (props.waterAmount <= 25) return 1;
-      if (props.waterAmount <= 50) return 2;
-      if (props.waterAmount <= 75) return 3;
-      return 4;
-    case 'sunlight':
-      if (props.sunlightAmount <= 25) return 1;
-      if (props.sunlightAmount <= 50) return 2;
-      if (props.sunlightAmount <= 75) return 3;
-      return 4;
-    default:
-      return 0;
+  if (type === 'sunlight') {
+    switch (props.sunlightAmount.toLowerCase()) {
+      case 'full sunlight': return 4
+      case 'indirect sunlight': return 2;
+      case 'partial sunlight': return 1;
+      default: return 0;
+    }
   }
+  if (type === 'water') {
+    switch (props.waterAmount.toLowerCase()) {
+      case 'water when dry': return 1;
+      case 'moist': return 1;
+      case 'slightly moist': return 1;
+      case 'evenly_moist': return 2;
+      case 'regular moist': return 2;
+      case 'consistently moist': return 3;
+      case 'weekly': return 3;
+      case 'regular': return 4;
+      case 'regular well drained': return 4;
+      default: return 0;
+    }
+  }
+  return 0;
 }
 </script>
 
 <template>
   <div class="plant-card">
-    <img class="plant-image" :src="DemoPlant" alt="Demo Plant" />
+    <img class="plant-image" :src="image_url && image_url !== '' ? image_url : DemoPlant" alt="Demo Plant" />
 
     <div class="text-box">
       <h1>{{ name }}</h1>
