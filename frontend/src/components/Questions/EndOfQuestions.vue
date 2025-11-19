@@ -12,11 +12,15 @@
 
 <style scoped>
 .question-container {
-  width: 80%;
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
+}
+
+.question-container h3{
+  padding: 0.5rem;
 }
 </style>

@@ -21,6 +21,10 @@ const freeText = ref('')
 const finalResults = ref(null)
 const recommendations = ref([])
 
+const animationKey = computed(() => {
+  return quizFinished.value ? 'end-screen' : currentStep.value;
+});
+
 /**
  * Function that calls the services which call our Backend endpoints
  */
@@ -50,11 +54,21 @@ onMounted(() => {
 const currentQuestionData = computed(() => questions.value[currentStep.value])
 
 const currentComponent = computed(() => {
-  if (currentQuestionData.value?.type === 'free_text') {
-    return FreeTextQuestion
+  if (quizFinished.value) {
+    return EndOfQuestions;
   }
-  return Question
-})
+  if (currentQuestionData.value?.type === 'free_text') {
+    return FreeTextQuestion;
+  }
+  return Question;
+});
+
+const currentProps = computed(() => {
+  if (quizFinished.value) {
+    return { results: finalResults.value };
+  }
+  return { questionData: currentQuestionData.value };
+});
 
 const startQuestionnaire = () => {
   quizStarted.value = true
@@ -142,23 +156,23 @@ const sendResults = async () => {
         </Motion>
       </template>
 
-      <!-- Questions -->
-      <template v-else-if="!quizFinished">
+      <!-- Questions & Endscreen -->
+      <template v-else>
         <Motion
-            class="questionnaire-each-question"
-            :key="currentStep"
-            :initial="{ opacity: 0, x: 50 }"
-            :animate="{ opacity: 1, x: 0 }"
-            :exit="{ opacity: 0, x: -50 }"
-            :transition="{ duration: 0.3 }"
-        >
-          <component
-              :is="currentComponent"
-              :question-data="currentQuestionData"
-              @next="handleNext"/>
+          class="questionnaire-each-question"
+          :key="animationKey"
+          :initial="{ opacity: 0, x: 50 }"
+          :animate="{ opacity: 1, x: 0 }"
+          :exit="{ opacity: 0, x: -50 }"
+          :transition="{ duration: 0.3 }"
+          >
+            <component
+                :is="currentComponent"
+            v-bind="currentProps"
+            @next="handleNext"/>
         </Motion>
 
-        <div class="questionnaire-navigation" v-if="!isLoading && questions.length > 0">
+        <div class="questionnaire-navigation" v-if="!quizFinished && !isLoading && questions.length > 0">
           <ArrowLeft
               class="arrow-left-button"
               v-if="currentStep > 0"
@@ -167,10 +181,7 @@ const sendResults = async () => {
         </div>
       </template>
 
-      <!-- Endscreen -->
-      <template v-else>
-        <EndOfQuestions :results="finalResults"/>
-      </template>
+
     </Motion>
 
     <div v-if="quizFinished && recommendations.length > 0" class="recommendations-container">
@@ -201,7 +212,7 @@ const sendResults = async () => {
 .questionnaire-main-container {
   position: relative;
   width: 60%;
-  max-width: 60rem;
+  max-width: 50rem;
   height: 30rem;
   display: flex;
   flex-direction: column;
@@ -223,6 +234,9 @@ const sendResults = async () => {
 
 .questionnaire-each-question {
   width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
 }
 
 .questionnaire-start-button {
