@@ -2,8 +2,10 @@
 import { ref, computed, onMounted } from 'vue'
 import { Motion } from 'motion-v'
 import Question from './Question.vue'
+import PlantCard from "@/components/PlantCard.vue";
 import FreeTextQuestion from "./FreeTextQuestion.vue";
 import EndOfQuestions from "./EndOfQuestions.vue";
+import ArrowLeft from 'vue-material-design-icons/ArrowLeft.vue'
 
 import {accessQuestionsEndpoint, postQuestionnaire} from "@/services/questionsEnpointService.ts";
 
@@ -86,7 +88,7 @@ const handleNext = (payload: any) => {
       created_at: new Date().toISOString(),
       free_text: freeText.value
     }
-    console.log('Final Answers:', JSON.stringify(answers.value, null, 2))
+    console.log('Final Answers:', JSON.stringify(finalResults.value, null, 2))
     sendResults();
   }
 }
@@ -100,7 +102,7 @@ const handlePrevious = () => {
 const sendResults = async () => {
   if (!finalResults.value) return;
 
-  console.log("Sending questionnaire...", finalResults.value);
+  console.log("Sending questionnaire...");
   try {
     const result = await postQuestionnaire(finalResults.value, {
       num_perfect_fits: 3,
@@ -157,22 +159,36 @@ const sendResults = async () => {
         </Motion>
 
         <div class="questionnaire-navigation" v-if="!isLoading && questions.length > 0">
-          <button
+          <ArrowLeft
+              class="arrow-left-button"
               v-if="currentStep > 0"
-              @click="handlePrevious"
-          >
-            Back
-          </button>
+              @click="handlePrevious"/>
           <span>Question {{ currentStep + 1 }} of {{ questions.length }}</span>
         </div>
       </template>
 
       <!-- Endscreen -->
       <template v-else>
-        <EndOfQuestions :results="finalResults" :recommendations="recommendations" />
+        <EndOfQuestions :results="finalResults"/>
       </template>
     </Motion>
-</div>
+
+    <div v-if="quizFinished && recommendations.length > 0" class="recommendations-container">
+      <h1>Your Plant Recommendations</h1>
+
+      <template class="recommender-group-container" v-for="group in recommendations.values()">
+        <h2>{{ group.label }}</h2>
+        <PlantCard
+            v-for="plant in group.recommendation"
+            :name="plant.name"
+            :description="plant.description"
+            :waterAmount="plant.watering"
+            :sunlightAmount="plant.sunlight"
+            :image_url="plant.image_url"/>
+      </template>
+    </div>
+  </div>
+  <hr class="separator"/>
 </template>
 
 <style scoped>
@@ -185,7 +201,8 @@ const sendResults = async () => {
 .questionnaire-main-container {
   position: relative;
   width: 60%;
-  height: 25rem;
+  max-width: 60rem;
+  height: 30rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -196,10 +213,12 @@ const sendResults = async () => {
 .questionnaire-main-container h2 {
   width: 100%;
   text-align: center;
+  font-size: 1.75rem;
   background-color: #b7d5ac;
 }
 .questionnaire-main-container p {
   width: 80%;
+  font-size: 1.5rem;
 }
 
 .questionnaire-each-question {
@@ -214,6 +233,7 @@ const sendResults = async () => {
   cursor: pointer;
   align-content: center;
   text-align: center;
+  font-size: 1.2rem;
   background-color: #b7d5ac;
   border-radius: 1rem;
   border: none;
@@ -225,6 +245,48 @@ const sendResults = async () => {
   bottom: 2rem;
   display: flex;
   gap: 1rem;
+  flex-direction: row;
+}
+
+.arrow-left-button {
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  transition: transform 0.2s ease;
+}
+
+.arrow-left-button:hover {
+  transform: scale(1.2);
+}
+
+.recommendations-container {
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  gap: 0.5rem;
+}
+
+.recommendations-container h1 {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.recommendations-container h2 {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.recommender-group-container {
+  border: solid 1rem black;
+   border-radius: 0.5rem;
+}
+
+.separator {
+  width: 100%;
+  border: none;
+  border-top: 0.1rem solid #000000;
+  margin: 2rem 0;
 }
 </style>

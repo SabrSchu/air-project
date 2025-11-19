@@ -18,13 +18,13 @@ const submitText = () => {
 
 <template>
   <div class="free-text-container">
-    <h3>{{ questionData.question }}</h3>
+    <h3 style="font-size: 1.5rem">{{ questionData.question }}</h3>
     <textarea
         v-model="inputText"
         placeholder="Your thoughts..."
         rows="5"
     ></textarea>
-    <button @click="submitText">Finish Questionnaire</button>
+    <button style="font-size: 1.2rem" @click="submitText">Finish Questionnaire</button>
   </div>
 </template>
 
@@ -40,9 +40,11 @@ const submitText = () => {
 
 textarea {
   width: 80%;
+  height: 6rem;
   padding: 0.5rem;
   border-radius: 0.4rem;
   border: 1px solid #ccc;
+  font-size: 1.2rem;
 }
 
 button {

@@ -18,7 +18,7 @@ const selectAnswer = (option: { id: number, answer: string }) => {
 
 <template>
   <div class="question-main-container">
-    <h3>{{ questionData.question }}</h3>
+    <h3 style="font-size: 1.5">{{ questionData.question }}</h3>
     <div class="answers">
       <button
           v-for="option in questionData.answer_option"
@@ -52,6 +52,8 @@ const selectAnswer = (option: { id: number, answer: string }) => {
 
 button {
   background: white;
+  width: 10rem;
+  font-size: 1.1rem;
   padding: 0.5rem 2rem;
   cursor: pointer;
   border-radius: 0.4rem;
