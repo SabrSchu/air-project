@@ -6,7 +6,7 @@ from starlette.status import HTTP_400_BAD_REQUEST
 from ..database.database import get_db
 from ..schemas import Question, PlantRecommendation, UserAnswerSubmission, UserFreeTextSubmission
 from ..services import question_service
-from ..recommender import recommender_placeholder
+from ..recommender import recommender_placeholder, bm25_recommender
 
 
 question_router = APIRouter(prefix="/questions", tags=["Questions"])
@@ -65,11 +65,13 @@ def post_questions_receive_recommendation(
 
     # Calling the recommender, fixme for now only placeholder until we have a final model
 
-    perfect_fit = recommender_placeholder.get_perfect_recommendations(num=num_perfect_fits, user_answers=questionnaire, db=db)
-    good_fit = recommender_placeholder.get_good_recommendations(num=num_good_fits, user_answers=questionnaire, db=db)
-    mismatch = recommender_placeholder.get_mismatches(num=num_bad_fits, user_answers=questionnaire, db=db)
+    result = bm25_recommender.get_recommendations(num=num_perfect_fits, user_answers=questionnaire, db=db)
 
-    return [perfect_fit, good_fit, mismatch]
+    #perfect_fit = recommender_placeholder.get_perfect_recommendations(num=num_perfect_fits, user_answers=questionnaire, db=db)
+    #good_fit = recommender_placeholder.get_good_recommendations(num=num_good_fits, user_answers=questionnaire, db=db)
+    #mismatch = recommender_placeholder.get_mismatches(num=num_bad_fits, user_answers=questionnaire, db=db)
+
+    return [result, result, result]
 
 
 """ -----------------------------------------------------------------------------------------------

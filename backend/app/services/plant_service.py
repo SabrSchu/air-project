@@ -40,7 +40,8 @@ def filter_plants(db: Session,
         found_plants = found_plants.filter(Plant.sunlight == sun.map_db_value)
 
     if water:
-        found_plants = found_plants.filter(Plant.watering == water.map_db_value)
+        db_values = water.map_db_value
+        found_plants = found_plants.filter(Plant.watering.in_(db_values))
 
     if fertilization:
         found_plants = found_plants.filter(Plant.fertilization == fertilization.map_db_value)

@@ -16,16 +16,17 @@ class Watering(str, Enum):
 
     # Mapping to avoid whitespace in query
     @property
-    def map_db_value(self) -> str:
+    def map_db_value(self) -> list[str]:
         mapping = {
-            "consistently_moist": "keep soil consistently moist",
-            "evenly_moist": "keep soil evenly moist",
-            "moist": "keep soil moist",
-            "slightly_moist": "keep soil slightly moist",
-            "water_when_dry": "let soil dry between watering",
-            "regular": "regular watering",
-            "regular_moist": "regular, moist soil",
-            "regular_well_drained": "regular, well-drained soil",
-            "weekly": "water weekly"
+            "consistently_moist": ["keep soil consistently moist"],
+            "evenly_moist": ["keep soil evenly moist"],
+            "moist": ["keep soil moist"],
+            "slightly_moist": ["keep soil slightly moist"],
+            "water_when_dry": ["let soil dry between watering", "water when soil feels dry",
+                               "water when soil is dry", "water when topsoil is dry"],
+            "regular": ["regular watering"],
+            "regular_moist": ["regular, moist soil"],
+            "regular_well_drained": ["regular, well-drained soil"],
+            "weekly": ["water weekly"]
         }
         return mapping[self.value]
