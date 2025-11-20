@@ -68,8 +68,8 @@ class BM25Recommender:
 
         bad_results = bm25_service.get_plant_based_on_bm25_document(db=self.db, results=bad_fits, max_results=num_bad)
 
-        return [ PlantRecommendation(label="BM25_perfect_fits", recommendation=plants_results),
-                 PlantRecommendation(label="BM25_good_fits", recommendation=good_results),
-                 PlantRecommendation(label="BM25_mismatches", recommendation=bad_results)]
+        return [ PlantRecommendation(label="BM25_perfect", recommendation=plants_results),
+                 PlantRecommendation(label="BM25_good", recommendation=good_results),
+                 PlantRecommendation(label="BM25_mismatch", recommendation=bad_results)]
 
 
