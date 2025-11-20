@@ -1,13 +1,12 @@
 from fastapi import APIRouter, Query, Depends, HTTPException
 from sqlalchemy.orm import Session
-from sqlalchemy.orm.base import state_str
 from starlette import status
 from starlette.status import HTTP_400_BAD_REQUEST
 from ..database.database import get_db
 from ..schemas import Question, PlantRecommendation, UserAnswerSubmission, UserFreeTextSubmission
 from ..services import question_service
-from ..recommender import recommender_placeholder, bm25_recommender
-
+from ..recommender import recommender_placeholder
+from ..recommender.BM25 import BM25Recommender
 
 question_router = APIRouter(prefix="/questions", tags=["Questions"])
 
@@ -63,15 +62,15 @@ def post_questions_receive_recommendation(
     question_service.store_user_answers(user_answers=questionnaire, db=db)
 
 
-    # Calling the recommender, fixme for now only placeholder until we have a final model
+    # Initializing and calling recommender, Here BM25 is used
+    bm25_recommender = BM25Recommender(db=db)
 
-    result = bm25_recommender.get_recommendations(num=num_perfect_fits, user_answers=questionnaire, db=db)
+    # Doing the actual recommendation - yay
+    return bm25_recommender.recommend(user_answers=questionnaire,
+                                      num_perfect=num_perfect_fits,
+                                      num_good=num_good_fits,
+                                      num_bad=num_bad_fits)
 
-    #perfect_fit = recommender_placeholder.get_perfect_recommendations(num=num_perfect_fits, user_answers=questionnaire, db=db)
-    #good_fit = recommender_placeholder.get_good_recommendations(num=num_good_fits, user_answers=questionnaire, db=db)
-    #mismatch = recommender_placeholder.get_mismatches(num=num_bad_fits, user_answers=questionnaire, db=db)
-
-    return [result, result, result]
 
 
 """ -----------------------------------------------------------------------------------------------

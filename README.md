@@ -209,22 +209,22 @@ To make the project run, follow these main steps. For further project configurat
   - Take care that you send an answer for each question id 1 - 5! 
   - Take care that you send the correct answer ids (Else check Endpoint Nr. 3 for reference)!
   - 🚨 Note: Updated request body! Now you also send the (optional) free text
-  - Here you have to send a request body in the format of:
+  - Here you have to send a request body in the format of (example answers for shadowy, moist, slow growing plants as user answers):
 
 ```json
 {
   "answers": [
     {
       "question_id": 1,
-      "answer_id": 1
+      "answer_id": 3
     },
     {
       "question_id": 2,
-      "answer_id": 5
+      "answer_id": 7
     },
     {
       "question_id": 3,
-      "answer_id": 9
+      "answer_id": 10
     },
     {
       "question_id": 4,
@@ -232,21 +232,22 @@ To make the project run, follow these main steps. For further project configurat
     },
     {
       "question_id": 5,
-      "answer_id": 20
+      "answer_id": 17
     }
   ],
-  "created_at": "2025-11-15T16:13:04.550Z",
-  "free_text": "Sunny cozy balcony. My cat is healthy, and my dog likes to eat spaghetti."
+  "created_at": "2025-11-19T11:48:31.368Z",
+  "free_text": "This is an example for slow growing, moist, shadowy plants."
 }
 ```
 - Response body:
   - Returns a list of three different recommendation types. 
   - The number of each recommendation type (perfect, good, mismatch) you have chosen in your query params.
-  - The following is an example with 2 results each:
+  - The following is an example with 2 results each. 
+  - 🚨 Note: Updated response body! The "label" now returns the algorithm name too
 ```json
 [
   {
-    "label": "perfect",
+    "label": "BM25_perfect",
     "recommendation": [
       {
         "id": 162,
@@ -271,7 +272,7 @@ To make the project run, follow these main steps. For further project configurat
     ]
   },
   {
-    "label": "good",
+    "label": "BM25_good",
     "recommendation": [
       {
         "id": 143,
@@ -296,7 +297,7 @@ To make the project run, follow these main steps. For further project configurat
     ]
   },
   {
-    "label": "mismatch",
+    "label": "BM25_mismatch",
     "recommendation": [
       {
         "id": 115,
