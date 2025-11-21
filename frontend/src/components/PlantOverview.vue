@@ -32,18 +32,19 @@
 
     <div class="overview__elements" :class="{ 'grid-layout': isGridLarge }">
       <PlantCard
-          v-for="plant in testJson"
+          v-for="plant in response"
           :key="plant.id"
           :name="plant.name"
           :description="plant.description"
-          :water-amount="plant.watering"
-          :sunlight-amount="plant.sunlight"/>
+          :waterAmount="plant.watering"
+          :sunlightAmount="plant.sunlight"
+          :image_url="plant.image_url"/>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import TuneIcon from 'vue-material-design-icons/Tune.vue'
 import MagnifyIcon from 'vue-material-design-icons/Magnify.vue'
 import ChevronDownIcon from 'vue-material-design-icons/ChevronDown.vue'
@@ -51,16 +52,30 @@ import ClearIcon from 'vue-material-design-icons/CloseThick.vue'
 import GridIcon from 'vue-material-design-icons/Grid.vue'
 import GridLargeIcon from 'vue-material-design-icons/GridLarge.vue'
 
-import testJson from "@/assets/test-plants.json";
+import {accessPlantsEndpoint} from "@/services/plantEnpointService.ts";
 import PlantCard from "@/components/PlantCard.vue";
 
 let input = ref("");
+let response = ref([]);
 
 const isGridLarge = ref(true);
 
 function toggleGridView() {
   isGridLarge.value = !isGridLarge.value;
 }
+
+async function fetchPlants() {
+  try {
+    response.value = await accessPlantsEndpoint();
+  }
+  catch (error) {
+    console.error("Error while fetching plants: ", error);
+  }
+}
+
+onMounted(() => {
+  fetchPlants();
+});
 
 </script>
 
