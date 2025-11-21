@@ -180,8 +180,6 @@ const sendResults = async () => {
           <span>Question {{ currentStep + 1 }} of {{ questions.length }}</span>
         </div>
       </template>
-
-
     </Motion>
 
     <div v-if="quizFinished && recommendations.length > 0" class="recommendations-container">
