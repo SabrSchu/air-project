@@ -3,7 +3,6 @@ import { ref, computed, onMounted } from 'vue'
 import { Motion } from 'motion-v'
 import Question from './Question.vue'
 import PlantCard from "@/components/PlantCard.vue";
-import FreeTextQuestion from "./FreeTextQuestion.vue";
 import EndOfQuestions from "./EndOfQuestions.vue";
 import ArrowLeft from 'vue-material-design-icons/ArrowLeft.vue'
 
@@ -15,8 +14,6 @@ const quizStarted = ref(false)
 const quizFinished = ref(false)
 const currentStep = ref(0)
 const answers = ref([])
-
-const freeText = ref('')
 
 const finalResults = ref(null)
 const recommendations = ref([])
@@ -31,12 +28,6 @@ const animationKey = computed(() => {
 async function fetchData() {
   try {
     const fetchedQuestions = await accessQuestionsEndpoint()
-
-    fetchedQuestions.push({
-      id: 'free_text_question',
-      question: 'Is there anything else you would like to add?',
-      type: 'free_text'
-    });
     questions.value = fetchedQuestions
 
   } catch (err) {
@@ -57,9 +48,6 @@ const currentComponent = computed(() => {
   if (quizFinished.value) {
     return EndOfQuestions;
   }
-  if (currentQuestionData.value?.type === 'free_text') {
-    return FreeTextQuestion;
-  }
   return Question;
 });
 
@@ -75,22 +63,14 @@ const startQuestionnaire = () => {
 }
 
 const handleNext = (payload: any) => {
-  const currentQuestion = currentQuestionData.value;
-
-  if (currentQuestion.type === 'free_text') {
-    freeText.value = payload;
+  const existingAnswerIndex = answers.value.findIndex(
+      (ans) => ans.question_id === payload.question_id
+  );
+  if (existingAnswerIndex !== -1) {
+    answers.value[existingAnswerIndex] = payload;
   }
   else {
-
-    const existingAnswerIndex = answers.value.findIndex(
-        (ans) => ans.question_id === payload.question_id
-    );
-    if (existingAnswerIndex !== -1) {
-      answers.value[existingAnswerIndex] = payload;
-    }
-    else {
-      answers.value.push(payload);
-    }
+    answers.value.push(payload);
   }
 
   if (currentStep.value < questions.value.length - 1) {
@@ -100,7 +80,7 @@ const handleNext = (payload: any) => {
     finalResults.value = {
       answers: answers.value,
       created_at: new Date().toISOString(),
-      free_text: freeText.value
+      free_text: ""
     }
     console.log('Final Answers:', JSON.stringify(finalResults.value, null, 2))
     sendResults();
