@@ -3,11 +3,9 @@ from sqlalchemy.orm import Session
 from starlette import status
 from starlette.status import HTTP_400_BAD_REQUEST
 from ..database.database import get_db
-from ..recommender.SBERT import sbert_recommender
 from ..recommender.SBERT.sbert_recommender import SBertRecommender
 from ..schemas import Question, PlantRecommendation, UserAnswerSubmission, UserFreeTextSubmission
 from ..services import question_service
-from ..recommender import recommender_placeholder
 from ..recommender.BM25 import BM25Recommender
 
 question_router = APIRouter(prefix="/questions", tags=["Questions"])
@@ -108,8 +106,13 @@ def post_free_text_receive_recommendation(
                                             num_perfect=num_perfect_fits,
                                             num_good=num_good_fits,
                                             num_bad=num_bad_fits)
+
     except:
-        raise HTTPException(status_code=HTTP_400_BAD_REQUEST, detail="DB error!")
+        raise HTTPException(status_code=HTTP_400_BAD_REQUEST, detail="Unexpected Error!")
+
+
+
+
 
 
 
