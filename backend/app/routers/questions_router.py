@@ -3,6 +3,8 @@ from sqlalchemy.orm import Session
 from starlette import status
 from starlette.status import HTTP_400_BAD_REQUEST
 from ..database.database import get_db
+from ..recommender.SBERT import sbert_recommender
+from ..recommender.SBERT.sbert_recommender import SBertRecommender
 from ..schemas import Question, PlantRecommendation, UserAnswerSubmission, UserFreeTextSubmission
 from ..services import question_service
 from ..recommender import recommender_placeholder
@@ -51,25 +53,26 @@ def post_questions_receive_recommendation(
     for perfect fits, good fits or mismatches!
     """
 
-    # First step input validation, all 5 questions must be answered
     try:
+        # First step input validation, all 5 questions must be answered
         question_service.validate_questionnaire(user_answers=questionnaire)
+
+        # Then storing the answers to database, for further use later (e.g. evaluations)
+        question_service.store_user_answers(user_answers=questionnaire, db=db)
+
+        # Initializing and calling recommender, Here BM25 is used
+        bm25_recommender = BM25Recommender(db=db)
+
+        # Doing the actual recommendation - yay
+        return bm25_recommender.recommend(user_answers=questionnaire,
+                                          num_perfect=num_perfect_fits,
+                                          num_good=num_good_fits,
+                                          num_bad=num_bad_fits)
 
     except ValueError as e:
         raise HTTPException(status_code=HTTP_400_BAD_REQUEST, detail=str(e))
 
-    # Then storing the answers to database, for further use later (e.g. evaluations)
-    question_service.store_user_answers(user_answers=questionnaire, db=db)
 
-
-    # Initializing and calling recommender, Here BM25 is used
-    bm25_recommender = BM25Recommender(db=db)
-
-    # Doing the actual recommendation - yay
-    return bm25_recommender.recommend(user_answers=questionnaire,
-                                      num_perfect=num_perfect_fits,
-                                      num_good=num_good_fits,
-                                      num_bad=num_bad_fits)
 
 
 
@@ -97,13 +100,16 @@ def post_free_text_receive_recommendation(
     try:
         question_service.store_user_submission(user_submission=user_submission, db=db)
 
+        # Initializing the SBERT recommender class
+        s_bert_recommender = SBertRecommender(db=db)
+
+        # Do the actual recommendation
+        return s_bert_recommender.recommend(user_free_text=user_submission,
+                                            num_perfect=num_perfect_fits,
+                                            num_good=num_good_fits,
+                                            num_bad=num_bad_fits)
     except:
         raise HTTPException(status_code=HTTP_400_BAD_REQUEST, detail="DB error!")
 
-    # Calling the recommender, fixme for now only placeholder until we have a final model
 
-    perfect_fit = recommender_placeholder.get_perfect_recommendations_free_text(num=num_perfect_fits, user_submission=user_submission, db=db)
-    good_fit = recommender_placeholder.get_good_recommendations_free_text(num=num_good_fits, user_submission=user_submission, db=db)
-    mismatch = recommender_placeholder.get_mismatches_free_text(num=num_bad_fits, user_submission=user_submission, db=db)
 
-    return [perfect_fit, good_fit, mismatch]
