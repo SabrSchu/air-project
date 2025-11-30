@@ -1,12 +1,13 @@
 import random
+from typing import Any
+
 import numpy as np
 from sqlalchemy.orm import Session
-from app.models import Plant, Answer, Question
-from app.schemas import UserAnswerSubmission, Plant as PlantSchema
+from app.models import Plant, Answer, Question, Bm25Metadata, Recommendation
+from app.schemas import UserAnswerSubmission, Plant as PlantSchema, PlantMetadata, PlantRecommendation
 from .bm25_mappings import DB_ANSWER_MAPPING_GROWTH, DB_ANSWER_MAPPING_WATER, DB_ANSWER_MAPPING_SOIL, \
                       DB_ANSWER_MAPPING_SUN, DB_ANSWER_MAPPING_FERTILIZER
-
-
+from app.schemas import RecommendationMetadataBM25
 
 """ -----------------------------------------------------------------------------------------------
  Helper the creates a "corpus" for the BM25 model. This is a preprocessing step. It takes each
@@ -61,24 +62,56 @@ def create_query(db: Session, user_answers: UserAnswerSubmission) -> str:
 
 """ -----------------------------------------------------------------------------------------------
  The BM25 returns the documents that fit the best. This helper method extracts the plant id from
- the documents, and searches for the plants based on this id in the db. 
+ the documents, and searches for the plants based on this id in the db. It also calculates metadata
+ entries.
  Returns list of Plants, which are the base for a Plant recommendation. Plant entries with image
  url are preferred.
 ----------------------------------------------------------------------------------------------- """
-def get_plant_based_on_bm25_document(db: Session, results: list, max_results: int) -> list[Plant]:
-    plants: list = []
+def get_plant_based_on_bm25_document(db: Session,
+                                     results: list, max_results: int, all_scores: list,
+                                     tokenized_query: list, submission_id: int, label: str) -> list[PlantMetadata]:
     plants_with_img: list = []
     plants_without_img: list = []
 
-    for doc in results:
-        plant_id = doc.split(" ")[0]
-        plant = db.query(Plant).filter_by(id=plant_id).first()
-        plants.append(PlantSchema.model_validate(plant))
+    ranks = map_scores_to_rank(all_scores=all_scores)
 
+    for doc in results:
+        doc_text, score = doc[:2]
+        plant_id = doc_text.split(" ")[0]
+
+
+        # Get plant from db per id
+        plant = db.query(Plant).filter_by(id=plant_id).first()
+        plant_schema = PlantSchema.model_validate(plant)
+
+        # Calculate metadata
+        score_norm = calculate_min_max_normalization(all_scores=all_scores, score=score)
+        score_percentile = get_score_percentile(all_scores=all_scores, score=score)
+        plant_tokens = doc_text.split()[2:]
+        matched, unmatched = get_matched_and_unmatched_terms(query=tokenized_query, document=plant_tokens)
+
+        plant_metadata = RecommendationMetadataBM25(score_raw=score,
+                                                    score_normalized=score_norm,
+                                                    score_percentile=score_percentile,
+                                                    rank=ranks[score],
+                                                    matched_terms=matched,
+                                                    unmatched_terms=unmatched,
+                                                    max_matches=len(plant_tokens),
+                                                    match_count=len(matched),
+                                                    match_ratio=round(len(matched) / (len(plant_tokens)), 2)
+                                                    )
+
+        store_bm25_recommendation_in_db(db=db, sub_id=submission_id, plant_id=plant_id, label=label)
+        store_bm25_metadata_in_db(db=db, metadata=plant_metadata)
+
+        # Build the recommendation with the plant itself + metadata
+        plant_recommendation = PlantMetadata(**plant_schema.model_dump(), metadata=plant_metadata)
+
+        # Prioritizing plants with image url
         if plant and plant.image_url != "":
-            plants_with_img.append(PlantSchema.model_validate(plant))
+            plants_with_img.append(plant_recommendation)
         elif plant:
-            plants_without_img.append(PlantSchema.model_validate(plant))
+            plants_without_img.append(plant_recommendation)
 
         if len(plants_with_img) == max_results:
             break
@@ -94,7 +127,8 @@ def get_plant_based_on_bm25_document(db: Session, results: list, max_results: in
  corpus), and manually choose the percentile of the fit we want to get. Mismatches are in the lowest
  percentiles, moderate/good fits we search in the 70th-90th percentile.
 ----------------------------------------------------------------------------------------------- """
-def get_fits_in_percentile(scores: list, dataset_corpus: list, n: int, min_p: int, max_p: int) -> list:
+def get_fits_in_percentile(scores: list, dataset_corpus: list, n: int, min_p: int, max_p: int) -> list[
+    tuple[str, float]]:
     p1_threshold = np.percentile(scores, min_p)
     p2_threshold = np.percentile(scores, max_p)
 
@@ -110,11 +144,92 @@ def get_fits_in_percentile(scores: list, dataset_corpus: list, n: int, min_p: in
         random_n = candidates
 
     # basic search per index
-    good_fits: list = []
+    good_fits: list[tuple[str, float]] = []
     for element in random_n:
-        good_fits.append(dataset_corpus[element])
+        good_fits.append((dataset_corpus[element], scores[element]))
 
     return good_fits
 
 
+""" -----------------------------------------------------------------------------------------------
+ Normalizes the raw score for easier comparison. Method Min-Max normalization oriented on:
+ https://www.codecademy.com/article/min-max-zscore-normalization
+----------------------------------------------------------------------------------------------- """
+def calculate_min_max_normalization(all_scores: list, score: float) -> float:
+    minimum = min(all_scores)
+    maximum = max(all_scores)
 
+    normalized_score = (score - minimum) / (maximum - minimum)
+
+    return round(normalized_score, 2)
+
+
+""" -----------------------------------------------------------------------------------------------
+ Maps scores to ranks, returns a dictionary with key value pairs of {score: rank}
+----------------------------------------------------------------------------------------------- """
+def map_scores_to_rank(all_scores: list) -> dict[float, int]:
+    sorted_scores = sorted(all_scores, reverse=True)
+
+    score_and_rank = {}
+    rank = 1
+    for score in sorted_scores:
+        if score not in score_and_rank:
+            score_and_rank[score] = rank
+        rank += 1
+
+    return score_and_rank
+
+
+""" -----------------------------------------------------------------------------------------------
+ Calculates the percentile position of the score. Eg. if the percentile rank of the current score
+ is 0.6, this means that the current score is higher than 60% of all scores in the list
+----------------------------------------------------------------------------------------------- """
+def get_score_percentile(all_scores: list, score: float) -> float:
+
+    num_scores_below_target = sum(1 for s in all_scores if s < score)
+    percentile_rank = (num_scores_below_target / len(all_scores))
+
+    return round(percentile_rank, 3)
+
+
+""" -----------------------------------------------------------------------------------------------
+ Returns all terms that match and unmatch the document tokens based on the user query
+----------------------------------------------------------------------------------------------- """
+def get_matched_and_unmatched_terms(query: list, document: list) -> tuple[list, list]:
+
+    matched_terms: list = []
+    unmatched_terms: list = []
+
+    for term in document:
+        if term in query:
+            matched_terms.append(term)
+        else:
+            unmatched_terms.append(term)
+
+    return matched_terms, unmatched_terms
+
+def store_bm25_recommendation_in_db(db: Session, sub_id: int, label: str, plant_id: int):
+
+    db.add(Recommendation(label=label,
+                          algorithm="BM25",
+                          plant_id=plant_id,
+                          submission_id=sub_id
+    ))
+
+    db.commit()
+
+
+def store_bm25_metadata_in_db(db: Session, metadata: RecommendationMetadataBM25):
+
+    db.add(Bm25Metadata(score_raw=metadata.score_raw,
+                        score_norm=metadata.score_normalized,
+                        score_percentile=metadata.score_percentile,
+                        rank=metadata.rank,
+                        matched_terms=str(metadata.matched_terms),
+                        unmatched_terms=str(metadata.unmatched_terms),
+                        max_matches=metadata.max_matches,
+                        match_count=metadata.match_count,
+                        match_ratio=metadata.match_ratio
+    ))
+
+    db.commit()

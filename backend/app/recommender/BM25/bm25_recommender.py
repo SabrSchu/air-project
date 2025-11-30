@@ -1,3 +1,4 @@
+import numpy as np
 from sqlalchemy.orm import Session
 from app.schemas import UserAnswerSubmission, PlantRecommendation
 from app.recommender.BM25 import bm25_service
@@ -16,7 +17,8 @@ PADDING = 10
  For more information, see https://huggingface.co/blog/xhluca/bm25s.
 ----------------------------------------------------------------------------------------------- """
 class BM25Recommender:
-    def __init__(self, db: Session):
+    def __init__(self, db: Session, submission_id: int):
+        self.submission_id = submission_id
         self.db = db
         self.corpus = self._create_plant_corpus()
         self.tokenized_corpus = self._tokenize_corpus()
@@ -34,21 +36,31 @@ class BM25Recommender:
     def _create_bm25_instance(self):
         return BM25Okapi(self.tokenized_corpus)
 
+    # The recommendation function itself
     def recommend(self, user_answers: UserAnswerSubmission, num_perfect: int, num_good: int, num_bad: int):
 
         # creating user query based on user questionnaire
         user_query = bm25_service.create_query(db=self.db, user_answers=user_answers)
         tokenized_query = user_query.split(" ")
 
+
         # retrieving scores, each entry in the corpus corresponds to a score
         doc_scores = self.bm25.get_scores(tokenized_query)
 
-        # extract top n perfect fits (plus some extra values to be able to prioritize results with image url)
-        perfect_fits = self.bm25.get_top_n(tokenized_query, self.corpus, n=num_perfect + PADDING)
+        # retrieving the indices together with the corresponding score
+        scores_array = np.array(doc_scores)
+        top_indices = scores_array.argsort()[::-1][:num_perfect + PADDING]
+        perfect_fits = [(self.corpus[i], scores_array[i]) for i in top_indices]
 
+
+        # extract top n perfect fits (plus some extra values to be able to prioritize results with image url)
         plants_results = bm25_service.get_plant_based_on_bm25_document(db=self.db,
                                                                        results=perfect_fits,
-                                                                       max_results=num_perfect)
+                                                                       max_results=num_perfect,
+                                                                       all_scores=doc_scores,
+                                                                       tokenized_query=tokenized_query,
+                                                                       submission_id=self.submission_id,
+                                                                       label="perfect")
 
         # extract top n good fits (70-90 percentile)
         good_fits = bm25_service.get_fits_in_percentile(scores=doc_scores,
@@ -57,7 +69,13 @@ class BM25Recommender:
                                                         min_p=70,
                                                         max_p=90)
 
-        good_results = bm25_service.get_plant_based_on_bm25_document(db=self.db, results=good_fits, max_results=num_good)
+        good_results = bm25_service.get_plant_based_on_bm25_document(db=self.db,
+                                                                     results=good_fits,
+                                                                     max_results=num_good,
+                                                                     all_scores=doc_scores,
+                                                                     tokenized_query=tokenized_query,
+                                                                     submission_id=self.submission_id,
+                                                                     label="good")
 
         # extract top n bad fits (5-20 percentile)
         bad_fits = bm25_service.get_fits_in_percentile(scores=doc_scores,
@@ -66,10 +84,17 @@ class BM25Recommender:
                                                        min_p=5,
                                                        max_p=20)
 
-        bad_results = bm25_service.get_plant_based_on_bm25_document(db=self.db, results=bad_fits, max_results=num_bad)
 
-        return [ PlantRecommendation(label="BM25_perfect", recommendation=plants_results),
-                 PlantRecommendation(label="BM25_good", recommendation=good_results),
-                 PlantRecommendation(label="BM25_mismatch", recommendation=bad_results)]
+        bad_results = bm25_service.get_plant_based_on_bm25_document(db=self.db,
+                                                                    results=bad_fits,
+                                                                    max_results=num_bad,
+                                                                    all_scores=doc_scores,
+                                                                    tokenized_query=tokenized_query,
+                                                                    submission_id=self.submission_id,
+                                                                    label="mismatch")
+
+        return [ PlantRecommendation(label="perfect", submission_id=self.submission_id, recommendation=plants_results),
+                 PlantRecommendation(label="good", submission_id=self.submission_id, recommendation=good_results),
+                 PlantRecommendation(label="mismatch", submission_id=self.submission_id, recommendation=bad_results)]
 
 

@@ -56,10 +56,10 @@ def post_questions_receive_recommendation(
         question_service.validate_questionnaire(user_answers=questionnaire)
 
         # Then storing the answers to database, for further use later (e.g. evaluations)
-        question_service.store_user_answers(user_answers=questionnaire, db=db)
+        submission_id = question_service.store_user_answers(user_answers=questionnaire, db=db)
 
         # Initializing and calling recommender, Here BM25 is used
-        bm25_recommender = BM25Recommender(db=db)
+        bm25_recommender = BM25Recommender(db=db, submission_id=submission_id)
 
         # Doing the actual recommendation - yay
         return bm25_recommender.recommend(user_answers=questionnaire,

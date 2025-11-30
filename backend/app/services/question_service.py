@@ -17,7 +17,7 @@ def fetch_all_questions(db: Session) -> list[type[Question]]:
  Helper that stores the user answers to the database. Each questionnaire is unique by datetime.
  Free text is sanitized before being stored to db
 ----------------------------------------------------------------------------------------------- """
-def store_user_answers(user_answers: UserAnswerSubmission, db: Session):
+def store_user_answers(user_answers: UserAnswerSubmission, db: Session) -> int:
 
     submission = UserSubmission(
         free_text=sanitize_free_text(user_answers.free_text),
@@ -40,6 +40,8 @@ def store_user_answers(user_answers: UserAnswerSubmission, db: Session):
                                submission_id=answer["submission_id"]))
 
     db.commit()
+
+    return submission.id
 
 
 """ -----------------------------------------------------------------------------------------------

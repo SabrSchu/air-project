@@ -4,3 +4,4 @@ from .sunlight import SunLight
 from .watering import Watering
 from .fertilitation import Fertilization
 from .question_type import QuestionType
+from .recommendation import Label, Algorithm
