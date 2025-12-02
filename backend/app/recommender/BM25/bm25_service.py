@@ -1,10 +1,8 @@
 import random
-from typing import Any
-
 import numpy as np
 from sqlalchemy.orm import Session
 from app.models import Plant, Answer, Question, Bm25Metadata, Recommendation
-from app.schemas import UserAnswerSubmission, Plant as PlantSchema, PlantMetadata, PlantRecommendation
+from app.schemas import UserAnswerSubmission, Plant as PlantSchema, PlantMetadata
 from .bm25_mappings import DB_ANSWER_MAPPING_GROWTH, DB_ANSWER_MAPPING_WATER, DB_ANSWER_MAPPING_SOIL, \
                       DB_ANSWER_MAPPING_SUN, DB_ANSWER_MAPPING_FERTILIZER
 from app.schemas import RecommendationMetadataBM25
@@ -17,12 +15,13 @@ from app.schemas import RecommendationMetadataBM25
 ----------------------------------------------------------------------------------------------- """
 def create_plant_corpus(db: Session) -> list[str]:
     all_plants = db.query(Plant).all()
-
     plant_corpus: list = []
+
     for plant in all_plants:
+
         concat_line = " ".join([
             str(plant.id),
-            str(plant.name),
+            str(plant.name).replace(" ", "_"),
             "growth_" + DB_ANSWER_MAPPING_GROWTH[str(plant.growth)],
             "soil_" + DB_ANSWER_MAPPING_SOIL[str(plant.soil)],
             "water_" + DB_ANSWER_MAPPING_WATER[str(plant.watering)],
@@ -63,22 +62,21 @@ def create_query(db: Session, user_answers: UserAnswerSubmission) -> str:
 """ -----------------------------------------------------------------------------------------------
  The BM25 returns the documents that fit the best. This helper method extracts the plant id from
  the documents, and searches for the plants based on this id in the db. It also calculates metadata
- entries.
+ for each recommendation and stores it in the database.
  Returns list of Plants, which are the base for a Plant recommendation. Plant entries with image
  url are preferred.
 ----------------------------------------------------------------------------------------------- """
 def get_plant_based_on_bm25_document(db: Session,
                                      results: list, max_results: int, all_scores: list,
                                      tokenized_query: list, submission_id: int, label: str) -> list[PlantMetadata]:
-    plants_with_img: list = []
-    plants_without_img: list = []
+    all_recommendations: list = []
+    final_recommendations: list = []
 
     ranks = map_scores_to_rank(all_scores=all_scores)
 
     for doc in results:
         doc_text, score = doc[:2]
         plant_id = doc_text.split(" ")[0]
-
 
         # Get plant from db per id
         plant = db.query(Plant).filter_by(id=plant_id).first()
@@ -90,7 +88,7 @@ def get_plant_based_on_bm25_document(db: Session,
         plant_tokens = doc_text.split()[2:]
         matched, unmatched = get_matched_and_unmatched_terms(query=tokenized_query, document=plant_tokens)
 
-        plant_metadata = RecommendationMetadataBM25(score_raw=score,
+        plant_metadata = RecommendationMetadataBM25(score_raw=round(score, 4),
                                                     score_normalized=score_norm,
                                                     score_percentile=score_percentile,
                                                     rank=ranks[score],
@@ -98,27 +96,23 @@ def get_plant_based_on_bm25_document(db: Session,
                                                     unmatched_terms=unmatched,
                                                     max_matches=len(plant_tokens),
                                                     match_count=len(matched),
-                                                    match_ratio=round(len(matched) / (len(plant_tokens)), 2)
-                                                    )
+                                                    match_ratio=round(len(matched) / (len(plant_tokens)), 2))
 
-        store_bm25_recommendation_in_db(db=db, sub_id=submission_id, plant_id=plant_id, label=label)
-        store_bm25_metadata_in_db(db=db, metadata=plant_metadata)
-
-        # Build the recommendation with the plant itself + metadata
+        # Building the recommendation with the plant itself + metadata
         plant_recommendation = PlantMetadata(**plant_schema.model_dump(), metadata=plant_metadata)
 
-        # Prioritizing plants with image url
-        if plant and plant.image_url != "":
-            plants_with_img.append(plant_recommendation)
-        elif plant:
-            plants_without_img.append(plant_recommendation)
+        # Preferring those with image present, store metadata in db, return final recommendations
+        all_recommendations.append((plant_recommendation, bool(plant.image_url != "")))
+        all_recommendations.sort(key=lambda x: not x[1])
+        final_recommendations = [recom for (recom, img_url) in all_recommendations[:max_results]]
 
-        if len(plants_with_img) == max_results:
-            break
+    # Store in db for later use
+    store_recommendation_and_metadata_to_db(db=db,
+                                            sub_id=submission_id,
+                                            label=label,
+                                            recommendations=final_recommendations)
 
-    plants = plants_with_img + plants_without_img
-
-    return plants[:max_results]
+    return final_recommendations
 
 
 """ -----------------------------------------------------------------------------------------------
@@ -208,20 +202,30 @@ def get_matched_and_unmatched_terms(query: list, document: list) -> tuple[list, 
 
     return matched_terms, unmatched_terms
 
-def store_bm25_recommendation_in_db(db: Session, sub_id: int, label: str, plant_id: int):
 
-    db.add(Recommendation(label=label,
-                          algorithm="BM25",
+""" -----------------------------------------------------------------------------------------------
+ Helper for storing recommendation data in database. Returns recommendation id for metadata table.
+----------------------------------------------------------------------------------------------- """
+def store_bm25_recommendation_in_db(db: Session, sub_id: int, label: str, plant_id: int) -> int:
+
+    recommendation = Recommendation(label=label,
+                          algorithm="bm25",
                           plant_id=plant_id,
-                          submission_id=sub_id
-    ))
+                          submission_id=sub_id)
 
+    db.add(recommendation)
+    db.flush()
     db.commit()
 
+    return recommendation.id
 
-def store_bm25_metadata_in_db(db: Session, metadata: RecommendationMetadataBM25):
 
-    db.add(Bm25Metadata(score_raw=metadata.score_raw,
+""" -----------------------------------------------------------------------------------------------
+ Helper for storing metadata of each recommendation in database.
+----------------------------------------------------------------------------------------------- """
+def store_bm25_metadata_in_db(db: Session, metadata: RecommendationMetadataBM25, rec_id: int):
+
+    db.add(Bm25Metadata(score_raw=round(metadata.score_raw, 4),
                         score_norm=metadata.score_normalized,
                         score_percentile=metadata.score_percentile,
                         rank=metadata.rank,
@@ -229,7 +233,24 @@ def store_bm25_metadata_in_db(db: Session, metadata: RecommendationMetadataBM25)
                         unmatched_terms=str(metadata.unmatched_terms),
                         max_matches=metadata.max_matches,
                         match_count=metadata.match_count,
-                        match_ratio=metadata.match_ratio
-    ))
+                        match_ratio=metadata.match_ratio,
+                        recommendation_id=rec_id))
 
     db.commit()
+
+
+""" -----------------------------------------------------------------------------------------------
+ Helper for storing both, metadata and recommendation data in the db. Needed because each
+ metadata entry corresponds to a recommendation (FK)
+----------------------------------------------------------------------------------------------- """
+def store_recommendation_and_metadata_to_db(db: Session, sub_id: int, label: str, recommendations: list) -> None:
+
+    for plant in recommendations:
+        recommendation_id = store_bm25_recommendation_in_db(db=db,
+                                        sub_id=sub_id,
+                                        plant_id=plant.id,
+                                        label=label)
+
+        store_bm25_metadata_in_db(db=db,
+                                  metadata=plant.metadata,
+                                  rec_id=recommendation_id)

@@ -4,7 +4,7 @@ from app.schemas import UserAnswerSubmission, PlantRecommendation
 from app.recommender.BM25 import bm25_service
 from rank_bm25 import BM25Okapi
 
-PADDING = 10
+PADDING = 5
 
 """ -----------------------------------------------------------------------------------------------
  Class that represents the recommender algorithm BM25. The Implementation is based on the library
@@ -36,6 +36,7 @@ class BM25Recommender:
     def _create_bm25_instance(self):
         return BM25Okapi(self.tokenized_corpus)
 
+
     # The recommendation function itself
     def recommend(self, user_answers: UserAnswerSubmission, num_perfect: int, num_good: int, num_bad: int):
 
@@ -43,17 +44,16 @@ class BM25Recommender:
         user_query = bm25_service.create_query(db=self.db, user_answers=user_answers)
         tokenized_query = user_query.split(" ")
 
-
         # retrieving scores, each entry in the corpus corresponds to a score
         doc_scores = self.bm25.get_scores(tokenized_query)
 
         # retrieving the indices together with the corresponding score
         scores_array = np.array(doc_scores)
+
+        # extract top n perfect fits
         top_indices = scores_array.argsort()[::-1][:num_perfect + PADDING]
         perfect_fits = [(self.corpus[i], scores_array[i]) for i in top_indices]
 
-
-        # extract top n perfect fits (plus some extra values to be able to prioritize results with image url)
         plants_results = bm25_service.get_plant_based_on_bm25_document(db=self.db,
                                                                        results=perfect_fits,
                                                                        max_results=num_perfect,
@@ -83,7 +83,6 @@ class BM25Recommender:
                                                        n=num_bad + PADDING,
                                                        min_p=5,
                                                        max_p=20)
-
 
         bad_results = bm25_service.get_plant_based_on_bm25_document(db=self.db,
                                                                     results=bad_fits,
