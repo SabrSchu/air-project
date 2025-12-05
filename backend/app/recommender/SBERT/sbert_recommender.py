@@ -57,6 +57,7 @@ class SBertRecommender:
         # Fancy retrieve top n matches. Applied Padding to be able to prioritize plants with existing image url
         top_scores, top_indices = torch.topk(scores, k=num_perfect + PADDING)
 
+        # Getting the rank based on the scores and mapping them together
         scores_and_rank = sbert_service.map_scores_to_rank(all_scores=scores.tolist())
 
         # Retrieve plants from db, but also prioritize those with image url
@@ -64,7 +65,9 @@ class SBertRecommender:
                                                                          top_indices=top_indices.tolist(),
                                                                          top_scores=top_scores.tolist(),
                                                                          num=num_perfect,
-                                                                         scores_rank=scores_and_rank)
+                                                                         scores_rank=scores_and_rank,
+                                                                         submission_id=self.submission_id,
+                                                                         label="perfect")
 
         # Get percentiles to find good and bad matches too
         percentiles = torch.quantile(scores, torch.tensor([0.25, 0.75]))
@@ -80,8 +83,9 @@ class SBertRecommender:
                                                                       top_indices=good_matches_indices,
                                                                       top_scores=good_match_scores,
                                                                       num=num_good,
-                                                                      scores_rank=scores_and_rank)
-
+                                                                      scores_rank=scores_and_rank,
+                                                                      submission_id=self.submission_id,
+                                                                      label="good")
         # Get mismatches under 25th percentile
         bad_indices = torch.where(scores <= p25)[0]
         bad_indices = bad_indices[:num_bad + PADDING].tolist()
@@ -91,10 +95,12 @@ class SBertRecommender:
                                                                      top_indices=bad_indices,
                                                                      top_scores=bad_match_scores,
                                                                      num=num_bad,
-                                                                     scores_rank=scores_and_rank)
+                                                                     scores_rank=scores_and_rank,
+                                                                     submission_id = self.submission_id,
+                                                                     label = "mismatch")
 
-        return [PlantRecommendation(label="SBERT_perfect", submission_id=self.submission_id, recommendation=perfect_plants),
-                PlantRecommendation(label="SBERT_good", submission_id=self.submission_id, recommendation=good_plants),
-                PlantRecommendation(label="SBERT_mismatch", submission_id=self.submission_id, recommendation=bad_plants)]
+        return [PlantRecommendation(label="perfect", submission_id=self.submission_id, recommendation=perfect_plants),
+                PlantRecommendation(label="good", submission_id=self.submission_id, recommendation=good_plants),
+                PlantRecommendation(label="mismatch", submission_id=self.submission_id, recommendation=bad_plants)]
 
 

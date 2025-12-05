@@ -383,44 +383,46 @@
 ```json
 {
   "created_at": "2025-11-15T16:13:04.550Z",
-  "free_text": "A plant that grows slow, has sandy soil, needs full sunlight and needs organic fertilizer."
+  "free_text": "A plant that needs indirect sunlight, watering weekly and no fertilizer."
 }
 ```
 
 - Response body:
   - Returns a list of three different recommendation types. 
   - The number of each recommendation type (perfect, good, mismatch) you have chosen in your query params.
-  - The following is an example with 2 results each.
+  - The following is an example with 1 results each.
 
 ```json
 [
   {
-    "label": "SBERT_perfect",
+    "label": "perfect",
+    "submission_id": 25,
     "recommendation": [
       {
-        "id": 198,
-        "name": "ageratum",
+        "id": 145,
+        "name": "spider plant",
         "growth": "fast",
         "soil": "well-drained",
-        "sunlight": "full sunlight",
-        "watering": "regular watering",
-        "fertilization": "organic",
-        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Ageratum_corymbosum_%28Asteraceae%29_-_Cielitos.jpg/500px-Ageratum_corymbosum_%28Asteraceae%29_-_Cielitos.jpg"
-      },
-      {
-        "id": 231,
-        "name": "daylily",
-        "growth": "fast",
-        "soil": "sandy",
-        "sunlight": "full sunlight",
-        "watering": "regular watering",
-        "fertilization": "low-nitrogen",
-        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Hemerocallis_lilioasphodelus.jpg/500px-Hemerocallis_lilioasphodelus.jpg"
+        "sunlight": "indirect sunlight",
+        "watering": "water weekly",
+        "fertilization": "no",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Spiderplant1.jpg",
+        "metadata": {
+          "algorithm": "SBERT",
+          "model_name": "sentence-transformers/all-MiniLM-L6-v2",
+          "cosine_sim_raw": 0.7025,
+          "cosine_sim_normalized": 1,
+          "cosine_sim_percentile": 1,
+          "rank": 1,
+          "cosine_distance": 0.2975,
+          "gap_to_best": 0
+        }
       }
     ]
   },
   {
-    "label": "SBERT_good",
+    "label": "good",
+    "submission_id": 25,
     "recommendation": [
       {
         "id": 1,
@@ -430,22 +432,23 @@
         "sunlight": "indirect sunlight",
         "watering": "water weekly",
         "fertilization": "balanced",
-        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Aloe_vera_flower_inset.png/500px-Aloe_vera_flower_inset.png"
-      },
-      {
-        "id": 5,
-        "name": "cactus",
-        "growth": "slow",
-        "soil": "sandy",
-        "sunlight": "full sunlight",
-        "watering": "let soil dry between watering",
-        "fertilization": "low-nitrogen",
-        "image_url": "https://bs.plantnet.org/image/o/47d4f01e2bc2c2db602fce38f864a40309f5f293"
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Aloe_vera_flower_inset.png/500px-Aloe_vera_flower_inset.png",
+        "metadata": {
+          "algorithm": "SBERT",
+          "model_name": "sentence-transformers/all-MiniLM-L6-v2",
+          "cosine_sim_raw": 0.5762,
+          "cosine_sim_normalized": 0.67,
+          "cosine_sim_percentile": 0.83,
+          "rank": 98,
+          "cosine_distance": 0.4238,
+          "gap_to_best": 0.1263
+        }
       }
     ]
   },
   {
-    "label": "SBERT_mismatch",
+    "label": "mismatch",
+    "submission_id": 25,
     "recommendation": [
       {
         "id": 11,
@@ -455,17 +458,17 @@
         "sunlight": "partial sunlight",
         "watering": "keep soil consistently moist",
         "fertilization": "organic",
-        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Petroselinum.jpg/500px-Petroselinum.jpg"
-      },
-      {
-        "id": 19,
-        "name": "chives",
-        "growth": "fast",
-        "soil": "well-drained",
-        "sunlight": "full sunlight",
-        "watering": "keep soil moist",
-        "fertilization": "balanced",
-        "image_url": "https://bs.plantnet.org/image/o/5e033417dbfff7e86535bd7f431bb4162804a0c9"
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Petroselinum.jpg/500px-Petroselinum.jpg",
+        "metadata": {
+          "algorithm": "SBERT",
+          "model_name": "sentence-transformers/all-MiniLM-L6-v2",
+          "cosine_sim_raw": 0.4065,
+          "cosine_sim_normalized": 0.24,
+          "cosine_sim_percentile": 0.06,
+          "rank": 559,
+          "cosine_distance": 0.5935,
+          "gap_to_best": 0.296
+        }
       }
     ]
   }

@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from app.models import Plant
+from app.models import Plant, Recommendation, SbertMetadata
 from app.schemas import UserFreeTextSubmission, PlantMetadata, RecommendationMetadataSBERT, Plant as PlantSchema
 
 """ -----------------------------------------------------------------------------------------------
@@ -31,13 +31,15 @@ def create_text_representation_user_query(user_query: UserFreeTextSubmission) ->
 """ -----------------------------------------------------------------------------------------------
  Takes the indices of the relevant similarity scores, and searches the database for the 
  corresponding plants. A padding is added to get more results than requested, to be able to 
- prioritize plants that have a image url present.
+ prioritize plants that have a image url present. Additionally, metadata about the results are added.
 ----------------------------------------------------------------------------------------------- """
-def get_plant_data_from_score_indices(db: Session, top_indices: list, top_scores: list, num: int, scores_rank: dict) -> list[PlantMetadata]:
+def get_plant_data_from_score_indices(db: Session, top_indices: list, top_scores: list, num: int, scores_rank: dict,
+                                      submission_id: int, label: str) -> list[PlantMetadata]:
 
     all_recommendations: list = []
     final_recommendations: list = []
 
+    # Some preprocessing values for score calculations
     all_scores = list(scores_rank.keys())
     best_score = max(scores_rank.keys())
 
@@ -78,7 +80,11 @@ def get_plant_data_from_score_indices(db: Session, top_indices: list, top_scores
         all_recommendations.sort(key=lambda x: not x[1])
         final_recommendations = [recom for (recom, has_image) in all_recommendations[:num]]
 
-    #todo store to db
+    # Store in db for later use
+    store_recommendation_and_metadata_to_db(db=db,
+                                            sub_id=submission_id,
+                                            label=label,
+                                            recommendations=final_recommendations)
 
     return final_recommendations
 
@@ -96,6 +102,7 @@ def map_scores_to_rank(all_scores: list[float]) -> dict[float, int]:
 """ -----------------------------------------------------------------------------------------------
  Normalizes the raw score for easier comparison. Method Min-Max normalization oriented on:
  https://www.codecademy.com/article/min-max-zscore-normalization (same method as for BM25)
+ Code duplication, I know, bad practice, but this all is already an overkill.
 ----------------------------------------------------------------------------------------------- """
 def calculate_min_max_normalization(all_scores: list, score: float) -> float:
     minimum = min(all_scores)
@@ -109,7 +116,8 @@ def calculate_min_max_normalization(all_scores: list, score: float) -> float:
 """ -----------------------------------------------------------------------------------------------
  Calculates the percentile position of the score. Eg. if the percentile rank of the current score
  is 0.6, this means that the current score is higher than 60% of all scores in the list.
- (Same method as for BM25)
+ (Same method as for BM25). Code duplication, I know, bad practice, but this all is already an
+ overkill.
 ----------------------------------------------------------------------------------------------- """
 def get_score_percentile(all_scores: list, score: float) -> float:
 
@@ -117,4 +125,54 @@ def get_score_percentile(all_scores: list, score: float) -> float:
     percentile_rank = (num_scores_below_target / len(all_scores))
 
     return round(percentile_rank, 3)
+
+
+""" -----------------------------------------------------------------------------------------------
+ Helper for storing both, metadata and recommendation data in the db. Needed because each
+ metadata entry corresponds to a recommendation (FK)
+----------------------------------------------------------------------------------------------- """
+def store_recommendation_and_metadata_to_db(db: Session, sub_id: int, label: str, recommendations: list) -> None:
+
+    for plant in recommendations:
+        recommendation_id = store_sbert_recommendation_in_db(db=db,
+                                        sub_id=sub_id,
+                                        plant_id=plant.id,
+                                        label=label)
+
+        store_sbert_metadata_in_db(db=db,
+                                  metadata=plant.metadata,
+                                  rec_id=recommendation_id)
+
+
+""" -----------------------------------------------------------------------------------------------
+ Helper for storing metadata of each recommendation in database.
+----------------------------------------------------------------------------------------------- """
+def store_sbert_metadata_in_db(db: Session, metadata: RecommendationMetadataSBERT, rec_id: int):
+
+    db.add(SbertMetadata(cosine_similarity_raw=round(metadata.cosine_sim_raw, 4),
+                         cosine_similarity_norm=metadata.cosine_sim_normalized,
+                         cosine_similarity_percentile=metadata.cosine_sim_percentile,
+                         cosine_distance=metadata.cosine_distance,
+                         rank=metadata.rank,
+                         gap_to_best=metadata.gap_to_best,
+                         recommendation_id=rec_id))
+
+    db.commit()
+
+
+""" -----------------------------------------------------------------------------------------------
+ Helper for storing recommendation data in database. Returns recommendation id for metadata table.
+----------------------------------------------------------------------------------------------- """
+def store_sbert_recommendation_in_db(db: Session, sub_id: int, label: str, plant_id: int) -> int:
+
+    recommendation = Recommendation(label=label,
+                          algorithm="sbert",
+                          plant_id=plant_id,
+                          submission_id=sub_id)
+
+    db.add(recommendation)
+    db.flush()
+    db.commit()
+
+    return recommendation.id
 

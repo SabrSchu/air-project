@@ -8,18 +8,16 @@ from ..enums.recommendation import Label
 ----------------------------------------------------------------------------------------------- """
 
 
-class Recommendation(Base):
+class SbertMetadata(Base):
     __tablename__ = "sbert_metadata"
 
     id = Column(Integer, primary_key=True, index=True)
 
     cosine_similarity_raw = Column(Float)
     cosine_similarity_norm = Column(Float)
+    cosine_similarity_percentile = Column(Float)
     rank = Column(Integer)
-
-    euclidean_distance = Column(Float)
-    dot_product = Column(Float)
-    overlap = Column(Float)
-    percentile = Column(Float)
+    cosine_distance = Column(Float)
+    gap_to_best = Column(Float)
 
     recommendation_id = Column(Integer, ForeignKey("recommendation.id"))
