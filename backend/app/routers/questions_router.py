@@ -96,10 +96,10 @@ def post_free_text_receive_recommendation(
     """
 
     try:
-        question_service.store_user_submission(user_submission=user_submission, db=db)
+        submission_id = question_service.store_user_submission(user_submission=user_submission, db=db)
 
         # Initializing the SBERT recommender class
-        s_bert_recommender = SBertRecommender(db=db)
+        s_bert_recommender = SBertRecommender(db=db, submission_id=submission_id)
 
         # Do the actual recommendation
         return s_bert_recommender.recommend(user_free_text=user_submission,

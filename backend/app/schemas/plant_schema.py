@@ -5,6 +5,7 @@ from pydantic import BaseModel, ConfigDict
 ----------------------------------------------------------------------------------------------- """
 class RecommendationMetadataBM25(BaseModel):
     algorithm: str = "BM25"
+    model_name: str = "BM25Okapi"
     score_raw: float
     score_normalized: float
     score_percentile: float
@@ -20,7 +21,14 @@ class RecommendationMetadataBM25(BaseModel):
  Schema for returning metadata of a recommendation
 ----------------------------------------------------------------------------------------------- """
 class RecommendationMetadataSBERT(BaseModel):
+    algorithm: str = "SBERT"
+    model_name: str = "sentence-transformers/all-MiniLM-L6-v2"
     cosine_sim_raw: float
+    cosine_sim_normalized: float
+    cosine_sim_percentile: float
+    rank: int
+    cosine_distance: float
+    gap_to_best: float
 
 
 """ -----------------------------------------------------------------------------------------------

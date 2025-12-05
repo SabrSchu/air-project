@@ -48,7 +48,7 @@ def store_user_answers(user_answers: UserAnswerSubmission, db: Session) -> int:
  Helper that stores the user's free text to the database. Each questionnaire is unique by datetime.
  Free text is being sanitized before storing to db
 ----------------------------------------------------------------------------------------------- """
-def store_user_submission(user_submission: UserFreeTextSubmission, db: Session):
+def store_user_submission(user_submission: UserFreeTextSubmission, db: Session) -> int:
     submission = UserSubmission(
         free_text=sanitize_free_text(user_submission.free_text),
         created_at=user_submission.created_at
@@ -57,6 +57,8 @@ def store_user_submission(user_submission: UserFreeTextSubmission, db: Session):
     db.add(submission)
     db.commit()
     db.refresh(submission)
+
+    return submission.id
 
 
 """ -----------------------------------------------------------------------------------------------

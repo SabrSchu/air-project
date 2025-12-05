@@ -1,7 +1,6 @@
 from sqlalchemy.orm import Session
 from app.models import Plant
-from app.schemas import UserFreeTextSubmission
-
+from app.schemas import UserFreeTextSubmission, PlantMetadata, RecommendationMetadataSBERT, Plant as PlantSchema
 
 """ -----------------------------------------------------------------------------------------------
  Helper that creates a text representation similar to natural language, out of the existing
@@ -34,33 +33,88 @@ def create_text_representation_user_query(user_query: UserFreeTextSubmission) ->
  corresponding plants. A padding is added to get more results than requested, to be able to 
  prioritize plants that have a image url present.
 ----------------------------------------------------------------------------------------------- """
-def get_plant_data_from_score_indices(db: Session, indices: list, scores: list, num: int) -> list[Plant]:
-    #print("\n\n plant Indices in function: ", indices)
-    #print("Scores:                      ", scores)
+def get_plant_data_from_score_indices(db: Session, top_indices: list, top_scores: list, num: int, scores_rank: dict) -> list[PlantMetadata]:
 
-    plant_results: list = []
-    plants_with_image_url: list = []
-    plants_without_image_url: list = []
+    all_recommendations: list = []
+    final_recommendations: list = []
 
-    for plant_idx in indices:
-        plant = db.query(Plant).filter_by(id=plant_idx + 1).first()
+    all_scores = list(scores_rank.keys())
+    best_score = max(scores_rank.keys())
 
-        if plant and plant.image_url != "":
-            plants_with_image_url.append(plant)
-        elif plant:
-            plants_without_image_url.append(plant)
+    for plant_idx, score in zip(top_indices, top_scores):
+        plant_id = plant_idx + 1
 
-    plant_results = plants_with_image_url + plants_without_image_url
+        plant = db.query(Plant).filter_by(id=plant_id).first()
 
-    return plant_results[:num]
+        if plant is None:
+            continue
+
+        plant_schema = PlantSchema.model_validate(plant)
+
+        # Calculate the metadata stuff
+        plant_rank = scores_rank[score]
+        normalized_score = calculate_min_max_normalization(all_scores=all_scores, score=score)
+        percentile_score = get_score_percentile(all_scores=all_scores, score=score)
+
+        metadata = RecommendationMetadataSBERT(
+            algorithm="SBERT",
+            cosine_sim_raw=round(score, 4),
+            cosine_sim_normalized=normalized_score,
+            rank=plant_rank,
+            cosine_sim_percentile=round(percentile_score, 2),
+            cosine_distance=round(1 - score, 4),
+            gap_to_best=round(best_score - score, 4)
+        )
+
+        plant_with_metadata = PlantMetadata(
+            **plant_schema.model_dump(),
+            metadata=metadata
+        )
+
+        has_image = bool(plant.image_url) and plant.image_url != ""
+        all_recommendations.append((plant_with_metadata, has_image))
+
+        # Preferring those plants with image present
+        all_recommendations.sort(key=lambda x: not x[1])
+        final_recommendations = [recom for (recom, has_image) in all_recommendations[:num]]
+
+    #todo store to db
+
+    return final_recommendations
 
 
 """ -----------------------------------------------------------------------------------------------
- Helper printing results.
+ Helper that maps scores to rank positions.
 ----------------------------------------------------------------------------------------------- """
-def print_infos(plants: list[Plant], title: str):
+def map_scores_to_rank(all_scores: list[float]) -> dict[float, int]:
+    sorted_unique = sorted(set(all_scores), reverse=True)
+    rank_and_score = {score: rank for rank, score in enumerate(sorted_unique, start=1)}
 
-    print(f"----- {title} match -----")
-    for i, plant in enumerate(plants):
-        print(f"Plant ID: {plant.id}, name:{plant.name}")
+    return rank_and_score
+
+
+""" -----------------------------------------------------------------------------------------------
+ Normalizes the raw score for easier comparison. Method Min-Max normalization oriented on:
+ https://www.codecademy.com/article/min-max-zscore-normalization (same method as for BM25)
+----------------------------------------------------------------------------------------------- """
+def calculate_min_max_normalization(all_scores: list, score: float) -> float:
+    minimum = min(all_scores)
+    maximum = max(all_scores)
+
+    normalized_score = (score - minimum) / (maximum - minimum)
+
+    return round(normalized_score, 2)
+
+
+""" -----------------------------------------------------------------------------------------------
+ Calculates the percentile position of the score. Eg. if the percentile rank of the current score
+ is 0.6, this means that the current score is higher than 60% of all scores in the list.
+ (Same method as for BM25)
+----------------------------------------------------------------------------------------------- """
+def get_score_percentile(all_scores: list, score: float) -> float:
+
+    num_scores_below_target = sum(1 for s in all_scores if s < score)
+    percentile_rank = (num_scores_below_target / len(all_scores))
+
+    return round(percentile_rank, 3)
 
