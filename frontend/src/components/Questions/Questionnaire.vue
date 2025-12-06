@@ -4,9 +4,10 @@ import { Motion } from 'motion-v'
 import Question from './Question.vue'
 import PlantCard from "@/components/PlantCard.vue";
 import EndOfQuestions from "./EndOfQuestions.vue";
+import FreeTextQuestion from "@/components/Questions/FreeTextQuestion.vue";
 import ArrowLeft from 'vue-material-design-icons/ArrowLeft.vue'
 
-import {accessQuestionsEndpoint, postQuestionnaire} from "@/services/questionsEnpointService.ts";
+import {accessQuestionsEndpoint, postFreeText, postQuestionnaire} from "@/services/questionsEnpointService.ts";
 
 const isLoading = ref(true)
 const questions = ref([])
@@ -15,11 +16,15 @@ const quizFinished = ref(false)
 const currentStep = ref(0)
 const answers = ref([])
 
+const isFreeTextMode = ref(false)
+const userInput = ref("");
+
 const finalResults = ref(null)
 const recommendations = ref([])
 
 const animationKey = computed(() => {
-  return quizFinished.value ? 'end-screen' : currentStep.value;
+  if (quizFinished.value) return 'end-screen';
+  return isFreeTextMode.value ? 'submitFreeTextQuestion' : currentStep.value;
 });
 
 /**
@@ -47,6 +52,9 @@ const currentQuestionData = computed(() => questions.value[currentStep.value])
 const currentComponent = computed(() => {
   if (quizFinished.value) {
     return EndOfQuestions;
+  }
+  if (isFreeTextMode.value) {
+    return FreeTextQuestion;
   }
   return Question;
 });
@@ -109,6 +117,41 @@ const sendResults = async () => {
     console.error("Failed to send results or get recommendations:", error);
   }
 }
+
+const handleSendFreeText = async (payload: string) => {
+  userInput.value = payload;
+
+  if (!userInput.value.trim()) return;
+
+  quizFinished.value = true;
+
+  finalResults.value = {
+    created_at: new Date().toISOString(),
+    free_text: userInput.value,
+    answers: []
+  }
+
+  console.log("Send text:", JSON.stringify(finalResults.value, null, 2));
+  isLoading.value = true;
+
+  try {
+    const result = await postFreeText(finalResults.value, {
+      num_perfect_fits: 3,
+      num_good_fits: 3,
+      num_bad_fits: 3
+    });
+
+    recommendations.value = result;
+    console.log("Receive recommendations:", JSON.stringify(recommendations.value, null, 2));
+
+    userInput.value = "";
+
+  } catch (error) {
+    console.error("Error while sending:", error);
+  } finally {
+    isLoading.value = false;
+  }
+}
 </script>
 
 <template>
@@ -124,6 +167,20 @@ const sendResults = async () => {
       <template v-if="!quizStarted">
         <h2>Discover our plant recommender!</h2>
         <p>This tool is made for you. Feel free to use it, to find the perfect companion for you and your flat.</p>
+
+        <div class="mode-toggle-container">
+          <button
+              :class="['toggle-btn', { active: !isFreeTextMode }]"
+              @click="isFreeTextMode = false">
+            Guided Quiz
+          </button>
+          <button
+              :class="['toggle-btn', { active: isFreeTextMode }]"
+              @click="isFreeTextMode = true">
+            Free Text
+          </button>
+        </div>
+
         <Motion
             class="questionnaire-start-button"
             is="button"
@@ -132,27 +189,28 @@ const sendResults = async () => {
             :transition="{ duration: 0.2 }"
             @click="startQuestionnaire"
         >
-          Find your perfect plant
+          {{ isFreeTextMode ? 'Ask your question' : 'Find your perfect plant' }}
         </Motion>
       </template>
 
       <!-- Questions & Endscreen -->
       <template v-else>
         <Motion
-          class="questionnaire-each-question"
-          :key="animationKey"
-          :initial="{ opacity: 0, x: 50 }"
-          :animate="{ opacity: 1, x: 0 }"
-          :exit="{ opacity: 0, x: -50 }"
-          :transition="{ duration: 0.3 }"
-          >
-            <component
-                :is="currentComponent"
-            v-bind="currentProps"
-            @next="handleNext"/>
+            class="questionnaire-each-question"
+            :key="animationKey"
+            :initial="{ opacity: 0, x: 50 }"
+            :animate="{ opacity: 1, x: 0 }"
+            :exit="{ opacity: 0, x: -50 }"
+            :transition="{ duration: 0.3 }"
+        >
+          <component
+              :is="currentComponent"
+              v-bind="currentProps"
+              @next="isFreeTextMode ? handleSendFreeText($event) : handleNext($event)"
+          />
         </Motion>
 
-        <div class="questionnaire-navigation" v-if="!quizFinished && !isLoading && questions.length > 0">
+        <div class="questionnaire-navigation" v-if="!quizFinished && !isLoading && !isFreeTextMode && questions.length > 0">
           <ArrowLeft
               class="arrow-left-button"
               v-if="currentStep > 0"
@@ -220,8 +278,8 @@ const sendResults = async () => {
 .questionnaire-start-button {
   width: 40%;
   height: 3rem;
-  position: absolute;
-  bottom: 2rem;
+  position: relative;
+  margin-top: 3rem;
   cursor: pointer;
   align-content: center;
   text-align: center;
@@ -280,5 +338,32 @@ const sendResults = async () => {
   border: none;
   border-top: 0.1rem solid #000000;
   margin: 2rem 0;
+}
+
+.mode-toggle-container {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  background: #f0f0f0;
+  padding: 0.5rem;
+  border-radius: 2rem;
+}
+
+.toggle-btn {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 1.5rem;
+  cursor: pointer;
+  background: transparent;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  color: #666;
+}
+
+.toggle-btn.active {
+  background-color: #b7d5ac;
+  color: black;
+  font-weight: bold;
+  box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1);
 }
 </style>

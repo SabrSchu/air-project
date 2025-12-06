@@ -1,13 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-defineProps({
-  questionData: {
-    type: Object,
-    required: true
-  }
-})
-
 const emit = defineEmits(['next'])
 const inputText = ref('')
 
@@ -18,13 +11,13 @@ const submitText = () => {
 
 <template>
   <div class="free-text-container">
-    <h3 style="font-size: 1.5rem">{{ questionData.question }}</h3>
+    <h3 style="font-size: 1.5rem">Please describe what you are looking for</h3>
     <textarea
         v-model="inputText"
-        placeholder="Your thoughts..."
+        placeholder="Write something like: A plant that needs indirect sunlight, watering weekly and no fertilizer."
         rows="5"
     ></textarea>
-    <button style="font-size: 1.2rem" @click="submitText">Finish Questionnaire</button>
+    <button style="font-size: 1.2rem" @click="submitText">Submit your Text</button>
   </div>
 </template>
 
@@ -32,7 +25,7 @@ const submitText = () => {
 .free-text-container {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
   align-items: center;
   padding: 1rem;
   width: 100%;
@@ -40,7 +33,7 @@ const submitText = () => {
 
 textarea {
   width: 80%;
-  height: 6rem;
+  height: 10em;
   padding: 0.5rem;
   border-radius: 0.4rem;
   border: 1px solid #ccc;
