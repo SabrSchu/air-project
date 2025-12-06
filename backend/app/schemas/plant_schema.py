@@ -63,3 +63,18 @@ class PlantRecommendation(BaseModel):
     recommendation: list[PlantMetadata]
 
     model_config = ConfigDict(from_attributes=True)
+
+
+""" -----------------------------------------------------------------------------------------------
+ Schema for returning plant information about Likes
+----------------------------------------------------------------------------------------------- """
+class PlantLikeResponse(BaseModel):
+    id: int
+    name: str
+    growth: str
+    soil: str
+    sunlight: str
+    watering: str
+    fertilization: str
+    image_url: str | None
+    like_counter: int

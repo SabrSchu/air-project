@@ -1,7 +1,5 @@
-from sqlalchemy import Column, Integer, ForeignKey, Enum, Float
+from sqlalchemy import Column, Integer, ForeignKey, Float
 from ..database.database import Base
-from ..enums import Algorithm
-from ..enums.recommendation import Label
 
 """ -----------------------------------------------------------------------------------------------
  Database model for storing the corresponding metadata of a recommendation

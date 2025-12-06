@@ -13,3 +13,4 @@ class UserSubmission(Base):
     id = Column(Integer, primary_key=True, index=True)
     free_text = Column(String(300))
     created_at = Column(DateTime)
+    rating = Column(Integer)

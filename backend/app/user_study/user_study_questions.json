@@ -1,0 +1,116 @@
+
+{
+    "user_study_questions": [
+        {
+            "id": 1,
+            "title": "Overall User Interface Experience",
+            "sub_title": "How satisfied are you with the different parts of the user interface?",
+            "items": [
+                {
+                    "question": "Plant filtering",
+                    "type": "scale_1_5"
+                },
+                {
+                    "question": "User questionnaire",
+                    "type": "scale_1_5"
+                },
+                {
+                    "question": "Free-text submission process",
+                    "type": "scale_1_5"
+                },
+                {
+                    "question": "Displayed metadata information",
+                    "type": "scale_1_5"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "title": "Structured Questionnaire Recommendation",
+            "sub_title": "How satisfied are you with the recommendation generated from the structured questionnaire?",
+            "items": [
+                {
+                    "question": "Match with your growth preference",
+                    "type": "scale_1_5"
+                },
+                {
+                    "question": "Match with your soil preference",
+                    "type": "scale_1_5"
+                },
+                {
+                    "question": "Match with your sunlight preference",
+                    "type": "scale_1_5"
+                },
+                {
+                    "question": "Match with your watering preference",
+                    "type": "scale_1_5"
+                },
+                {
+                    "question": "Match with your fertilization preference",
+                    "type": "scale_1_5"
+                },
+                {
+                    "question": "Overall satisfaction with this recommendation",
+                    "type": "scale_1_5"
+                }
+            ]
+        },
+        {
+           "id": 3,
+            "title": "Free-Text Recommendation",
+            "sub_title": "How satisfied are you with the recommendation generated from your free-text submission?",
+            "items": [
+               {
+                    "question": "Match with your growth preference",
+                    "type": "scale_1_5"
+                },
+                {
+                    "question": "Match with your soil preference",
+                    "type": "scale_1_5"
+                },
+                {
+                    "question": "Match with your sunlight preference",
+                    "type": "scale_1_5"
+                },
+                {
+                    "question": "Match with your watering preference",
+                    "type": "scale_1_5"
+                },
+                {
+                    "question": "Match with your fertilization preference",
+                    "type": "scale_1_5"
+                },
+                {
+                    "question": "Overall satisfaction with this recommendation",
+                    "type": "scale_1_5"
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "title": "Feedback",
+            "sub_title": "",
+            "items": [
+                {
+                    "question": "What did you particularly like?",
+                    "type": "free_text"
+                },
+                {
+                    "question": "What could be improved?",
+                    "type": "free_text"
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "title": "Overall System Rating",
+            "sub_title": "",
+            "items": [
+                {
+                    "question": "How would you rate the overall recommender system?",
+                    "type": "scale_1_5"
+                }
+            ]
+        }
+    ]
+}

@@ -2,7 +2,9 @@ from .plant_model import Plant
 from .answer_model import Answer
 from .question_model import Question
 from .user_answer_model import UserAnswer
-from .user_submission import UserSubmission
-from .bm25_metadata import Bm25Metadata
+from .user_submission_model import UserSubmission
+from .bm25_metadata_model import Bm25Metadata
 from .recommendation_model import Recommendation
-from .sbert_metadata import SbertMetadata
+from .sbert_metadata_model import SbertMetadata
+from .user_plant_like_model import UserPlantLike
+from .user_study_report import UserStudyReport

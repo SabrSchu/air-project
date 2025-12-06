@@ -1,3 +1,4 @@
 from .database_service import store_csv_entries_to_db, store_questions_to_db, store_answer_options_to_db
 from .plant_service import fetch_plants, filter_plants
 from .question_service import fetch_all_questions
+from .recommendations_service import add_rating_to_recommendation

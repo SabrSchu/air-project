@@ -10,3 +10,7 @@ class QuestionType(str, Enum):
     fertilizer = "fertilizer"
     growth = "growth"
 
+
+class UserStudyAnswerType(str, Enum):
+    rating = "rating"
+    free_text = "free_text"

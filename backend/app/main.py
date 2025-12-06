@@ -2,7 +2,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 from .database.database import SessionLocal, engine, Base
-from .routers import plants_router, question_router
+from .routers import plants_router, question_router, recommendations_router, user_study_router
 from .services import store_csv_entries_to_db, store_questions_to_db, store_answer_options_to_db
 
 
@@ -40,3 +40,7 @@ Base.metadata.create_all(bind=engine)
 app.include_router(plants_router)
 
 app.include_router(question_router)
+
+app.include_router(recommendations_router)
+
+app.include_router(user_study_router)
