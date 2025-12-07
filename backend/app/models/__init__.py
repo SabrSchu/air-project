@@ -7,4 +7,3 @@ from .bm25_metadata_model import Bm25Metadata
 from .recommendation_model import Recommendation
 from .sbert_metadata_model import SbertMetadata
 from .user_plant_like_model import UserPlantLike
-from .user_study_report import UserStudyReport

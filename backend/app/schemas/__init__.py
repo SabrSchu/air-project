@@ -3,3 +3,4 @@ from .plant_schema import (Plant, PlantRecommendation, RecommendationMetadataBM2
 from .question_schema import Question
 from .answer_schema import Answer, UserAnswer, UserAnswerSubmission, UserFreeTextSubmission
 from .recommendations_schema import RecommendationRatingResponse, DeleteMetadataResponse
+from .user_study_schema import UserStudySubmission, UserStudyAnswerItem, UserStudySubmitted

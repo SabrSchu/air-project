@@ -1,28 +1,28 @@
 from pydantic import BaseModel
 from datetime import datetime
 
-from app.schemas import PlantRecommendation
 
 """ -----------------------------------------------------------------------------------------------
- Schema for response format of recommendation rating
+ Schema for single user study answer item
 ----------------------------------------------------------------------------------------------- """
-class RecommendationRatingResponse(BaseModel):
-    submission_id: int
+class UserStudyAnswerItem(BaseModel):
+    section_id: int
+    item_id: int
+    rating: int |  None = None
+    free_text: str | None = None
+
+
+""" -----------------------------------------------------------------------------------------------
+ Schema for request format of user study answers
+----------------------------------------------------------------------------------------------- """
+class UserStudySubmission(BaseModel):
+    user_name: str
     created_at: datetime
-    rating: int
-
-
-""" -----------------------------------------------------------------------------------------------
- Schema for response format of all ever returned recommendations
------------------------------------------------------------------------------------------------ """
-class AllRecommendations(BaseModel):
-    submission_id: int
-    rating: int | None
-    recommendations_per_submission: list[PlantRecommendation]
+    user_study_answers: list[UserStudyAnswerItem]
 
 
 """ -----------------------------------------------------------------------------------------------
  Schema for standard response message
 ----------------------------------------------------------------------------------------------- """
-class DeleteMetadataResponse(BaseModel):
+class UserStudySubmitted(BaseModel):
     detail: str
