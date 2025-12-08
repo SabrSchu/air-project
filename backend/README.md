@@ -1,7 +1,7 @@
 
 # Plants API Setup Guide
 
-## 🛠️ Getting Started
+## 🪴Getting Started
 
 ### 1) Prerequisites
 - Python version >= 3.12 installed
@@ -39,7 +39,7 @@
 4. Now you can interact with the API endpoints manually
 
   
-## ▶️ Run the API for being Used by the Frontend
+## 🌿 Run the API for being Used by the Frontend
 
 - By running clicking the green Run Button ▶️, the server will start at `http://127.0.0.1:8000`
 - Now, the Frontend should be able to access the endpoints at their specified urls.
@@ -47,7 +47,7 @@
 <br>
 <br>
 
-# 🔗 Available Endpoints
+# 🌾 Available Endpoints
 #### 1) GET `http://127.0.0.1:8000/plants/all`
 ##### Endpoint to fetch all plants
 
@@ -71,6 +71,7 @@
 ]
 ```
 ---
+<br>
 
 #### 2) GET `http://127.0.0.1:8000/plants/filter`
 ##### Endpoint for Filtering Plants
@@ -85,10 +86,68 @@
   - **fertilization**: enum, filter by fertilization types (`acidic, low_nitrogen, balanced, no, organic`)
 - No request body, no authentication, returns a list of plants json response like the previous endpoint.
 
-
 ------
+<br>
 
-#### 3) GET `http://127.0.0.1:8000/questions/all`
+#### 3) POST `http://127.0.0.1:8000/plants/{plant_id}/like`
+##### Endpoint for liking a plant per ID
+
+- Query parameters:
+  - **plant_id**: int, the id of a plant you want to give a like. Counter will be increased
+- No request body, no authentication, returns the liked plant including like counter in the format of:
+
+```json
+{
+  "id": 1,
+  "name": "aloe vera",
+  "growth": "slow",
+  "soil": "sandy",
+  "sunlight": "indirect sunlight",
+  "watering": "water weekly",
+  "fertilization": "balanced",
+  "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Aloe_vera_flower_inset.png/500px-Aloe_vera_flower_inset.png",
+  "like_counter": 2
+}
+```
+-----
+<br>
+
+#### 4) GET `http://127.0.0.1:8000/plants/all/likes`
+##### Endpoint for fetching all plants that the user has liked
+
+- Query parameters: -
+- No request body, no authentication, returns a list of liked plants in the format of:
+```json
+[
+  {
+    "id": 1,
+    "name": "aloe vera",
+    "growth": "slow",
+    "soil": "sandy",
+    "sunlight": "indirect sunlight",
+    "watering": "water weekly",
+    "fertilization": "balanced",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Aloe_vera_flower_inset.png/500px-Aloe_vera_flower_inset.png",
+    "like_counter": 2
+  },
+  {
+    "id": 10,
+    "name": "spider plant",
+    "growth": "moderate",
+    "soil": "loamy",
+    "sunlight": "indirect sunlight",
+    "watering": "keep soil slightly moist",
+    "fertilization": "balanced",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Spiderplant1.jpg",
+    "like_counter": 1
+  }
+]
+```
+-------
+<br>
+
+
+#### 5) GET `http://127.0.0.1:8000/questions/all`
 ##### Endpoint to fetch all available questions
 
 🚨 Important: The id of the answer and the question must be remembered for the sending of the user-answer!
@@ -215,9 +274,11 @@
   }
 ]
 ```
-----
+-----
+<br>
 
-#### 4) POST `http://127.0.0.1:8000/questions`
+
+#### 6) POST `http://127.0.0.1:8000/questions`
 ##### Endpoint to post user answers from the questionnaire, and receive a list of recommendations
 
 - Query parameters:
@@ -369,8 +430,10 @@
   }
 ]
 ```
+-----
+<br>
 
-#### 5) POST `http://127.0.0.1:8000/questions/free_text`
+#### 7) POST `http://127.0.0.1:8000/questions/free_text`
 ##### Endpoint to send a user's free text, and receive a list of recommendations
 
 - Query parameters:
@@ -474,8 +537,341 @@
   }
 ]
 ```
+-----
+<br>
 
-## Explanation of Metadata
+#### 8) POST `http://127.0.0.1:8000/recommendation/{submission_id}/submit`
+##### Endpoint that lets the user rate a submission with a rating from 1 to 5
+
+- Query parameters:
+  - **submission_id**: int - the id of the submission where the recommendation belongs to
+  - **rating**: int - from 1 (very bad) to 5 (very good rating)
+- No request body
+- Response:
+```json
+{
+  "submission_id": 1,
+  "created_at": "2025-11-19T11:48:31.368000",
+  "rating": 5
+}
+```
+
+-----
+<br>
+
+#### 9) GET `http://127.0.0.1:8000/recommendation/all`
+##### Endpoint that fetches all recommendations the user has received
+
+- Query parameters: 
+  - **include_unrated**: bool - default: true, in case you only want to display rated recommendations, set to **false**.
+- No request body, no authentication, returns a **list of available recommendations** as json response.
+-----
+<br>
+
+#### 10) DELETE `http://127.0.0.1:8000/recommendation/metadata`
+##### Endpoint that deletes metadata (submissions, recommendations, metadata) for testing and development
+🚨 Important: This deletes all user data except posted user studies, the reports stay intact.
+- Query parameters: -
+- Request body: -
+- Response body:
+```json
+{
+  "detail": "All data deleted successfully!"
+}
+```
+
+-----
+<br>
+
+#### 11) GET `http://127.0.0.1:8000/user_study/questions`
+##### Endpoint that returns the complete user study questionnaire including answer options
+🚨 Important: Always remember the **section_id** and the **item_id** for submitting the answers. 
+
+🚨 Important 2: Also take care that "type": "scale_1_5" needs an integer between 1-5 as answer, "free_text" takes a string (in the submission endpoint)
+- Query parameters: -
+- Request body: -
+- Response body:
+```json
+{
+  "user_study_questions": [
+    {
+      "section_id": 1,
+      "title": "Overall User Interface Experience",
+      "sub_title": "How satisfied are you with the different parts of the user interface?",
+      "items": [
+        {
+          "item_id": 1,
+          "question": "Plant filtering",
+          "type": "scale_1_5"
+        },
+        {
+          "item_id": 2,
+          "question": "User questionnaire",
+          "type": "scale_1_5"
+        },
+        {
+          "item_id": 3,
+          "question": "Free-text submission process",
+          "type": "scale_1_5"
+        },
+        {
+          "item_id": 4,
+          "question": "Displayed metadata information",
+          "type": "scale_1_5"
+        }
+      ]
+    },
+    {
+      "section_id": 2,
+      "title": "Structured Questionnaire Recommendation",
+      "sub_title": "How satisfied are you with the recommendation generated from the structured questionnaire?",
+      "items": [
+        {
+          "item_id": 1,
+          "question": "Match with your growth preference",
+          "type": "scale_1_5"
+        },
+        {
+          "item_id": 2,
+          "question": "Match with your soil preference",
+          "type": "scale_1_5"
+        },
+        {
+          "item_id": 3,
+          "question": "Match with your sunlight preference",
+          "type": "scale_1_5"
+        },
+        {
+          "item_id": 4,
+          "question": "Match with your watering preference",
+          "type": "scale_1_5"
+        },
+        {
+          "item_id": 5,
+          "question": "Match with your fertilization preference",
+          "type": "scale_1_5"
+        },
+        {
+          "item_id": 6,
+          "question": "Overall satisfaction with this recommendation",
+          "type": "scale_1_5"
+        }
+      ]
+    },
+    {
+      "section_id": 3,
+      "title": "Free-Text Recommendation",
+      "sub_title": "How satisfied are you with the recommendation generated from your free-text submission?",
+      "items": [
+        {
+          "item_id": 1,
+          "question": "Match with your growth preference",
+          "type": "scale_1_5"
+        },
+        {
+          "item_id": 2,
+          "question": "Match with your soil preference",
+          "type": "scale_1_5"
+        },
+        {
+          "item_id": 3,
+          "question": "Match with your sunlight preference",
+          "type": "scale_1_5"
+        },
+        {
+          "item_id": 4,
+          "question": "Match with your watering preference",
+          "type": "scale_1_5"
+        },
+        {
+          "item_id": 5,
+          "question": "Match with your fertilization preference",
+          "type": "scale_1_5"
+        },
+        {
+          "item_id": 5,
+          "question": "Overall satisfaction with this recommendation",
+          "type": "scale_1_5"
+        }
+      ]
+    },
+    {
+      "section_id": 4,
+      "title": "Feedback",
+      "sub_title": "",
+      "items": [
+        {
+          "item_id": 1,
+          "question": "What did you particularly like?",
+          "type": "free_text"
+        },
+        {
+          "item_id": 2,
+          "question": "What could be improved?",
+          "type": "free_text"
+        }
+      ]
+    },
+    {
+      "section_id": 5,
+      "title": "Overall System Rating",
+      "sub_title": "",
+      "items": [
+        {
+          "item_id": 1,
+          "question": "How would you rate the overall recommender system?",
+          "type": "scale_1_5"
+        }
+      ]
+    }
+  ]
+}
+```
+
+-----
+<br>
+
+#### 12) POST `http://127.0.0.1:8000/user_study/submit`
+##### Endpoint that lets the user submit the user study answers and stores it locally
+- Query parameters: -
+- Request body: The request body has to send a **user_name**, current date **created_at**, and a list of **user_study_answers** in the format of:
+```
+{
+  "user_name": "string",
+  "created_at": "2025-12-08T08:40:37.547Z",
+  "user_study_answers": [
+    {
+      "section_id": 0,
+      "item_id": 0,
+      "rating": 0, // if free_text then this field is not sent
+      "free_text": "string" // if rating, then this field is not sent
+    }
+  ]
+}
+```
+- Request body example which is complete and valid:
+```json
+{
+  "user_name": "string",
+  "created_at": "2025-12-07T18:33:41.356Z",
+  "user_study_answers": [
+    {
+      "section_id": 1,
+      "item_id": 1,
+      "rating": 1
+    },
+    {
+      "section_id": 1,
+      "item_id": 2,
+      "rating": 1
+    },
+    {
+      "section_id": 1,
+      "item_id": 3,
+      "rating": 1
+    },
+    {
+      "section_id": 1,
+      "item_id": 4,
+      "rating": 1
+    },
+    {
+      "section_id": 2,
+      "item_id": 1,
+      "rating": 1
+    },
+    {
+      "section_id": 2,
+      "item_id": 2,
+      "rating": 1
+    },
+    {
+      "section_id": 2,
+      "item_id": 3,
+      "rating": 1
+    },
+    {
+      "section_id": 2,
+      "item_id": 4,
+      "rating": 1
+    },
+    {
+      "section_id": 2,
+      "item_id": 5,
+      "rating": 1
+    },
+    {
+      "section_id": 2,
+      "item_id": 6,
+      "rating": 1
+    },
+    {
+      "section_id": 3,
+      "item_id": 1,
+      "rating": 1
+    },
+    {
+      "section_id": 3,
+      "item_id": 2,
+      "rating": 1
+    },
+    {
+      "section_id": 3,
+      "item_id": 3,
+      "rating": 1
+    },
+    {
+      "section_id": 3,
+      "item_id": 4,
+      "rating": 1
+    },
+    {
+      "section_id": 3,
+      "item_id": 5,
+      "rating": 1
+    },
+    {
+      "section_id": 3,
+      "item_id": 6,
+      "rating": 1
+    },
+    {
+      "section_id": 4,
+      "item_id": 1,
+      "free_text": "string"
+    },
+    {
+      "section_id": 4,
+      "item_id": 2,
+      "free_text": ""
+    },
+    {
+      "section_id": 5,
+      "item_id": 1,
+      "rating": 1
+    }
+  ]
+}
+```
+- Response body:
+```json
+{
+  "detail": "User Study submitted successfully!"
+}
+```
+
+-----
+<br>
+
+#### 13) GET `http://127.0.0.1:8000/user_study/all`
+##### Endpoint that returns a list of all user study submissions
+- Query parameters: -
+- Request body: -
+- Response: a list of user study submissions, same as request body of endpoint 12)
+
+-----
+
+## 🌳 Explanation of Metadata
 
 ### BM25 Metadata (Endpoint POST http://127.0.0.1:8000/questions)
 

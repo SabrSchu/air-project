@@ -11,7 +11,6 @@ QUESTIONNAIRE_PATH = Path(__file__).parent.parent / "user_study/user_study_quest
 FINISHED_USER_STUDIES_PATH = Path(__file__).parent.parent / "user_study/reports"
 
 
-
 """ -----------------------------------------------------------------------------------------------
  Endpoint that returns the user study questionnaire for the frontend to display
 ----------------------------------------------------------------------------------------------- """
@@ -56,9 +55,7 @@ def submit_user_study(submission: UserStudySubmission):
 
         user_study_service.store_submission(submission=submission)
 
-        return UserStudySubmitted(
-                detail="User Study submitted successfully!"
-            )
+        return UserStudySubmitted(detail="User Study submitted successfully!")
 
     except HTTPException:
         raise
@@ -70,14 +67,14 @@ def submit_user_study(submission: UserStudySubmission):
 """ -----------------------------------------------------------------------------------------------
  Endpoint that returns all ever posted user studies. For further processing or evaluation.
 ----------------------------------------------------------------------------------------------- """
-@user_study_router.get("/user_studies",
+@user_study_router.get("/all",
                  summary="Get all submitted user studies",
                  status_code=status.HTTP_200_OK)
 
 def get_user_study_questionnaire():
 
     """
-    Get all user studies that were submitted
+    Get all user studies that were submitted, as a list of json files.
     """
     try:
         user_studies = []

@@ -1,9 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException, Path, Query
 from sqlalchemy.orm import Session
 from starlette import status
-
 from app.database.database import get_db
-from app.schemas import Plant, DeleteMetadataResponse
+from app.schemas import DeleteMetadataResponse
 from ..schemas.recommendations_schema import RecommendationRatingResponse, AllRecommendations
 from ..services import recommendations_service
 
@@ -19,7 +18,7 @@ recommendations_router = APIRouter(prefix="/recommendation", tags=["Recommendati
                              status_code=status.HTTP_200_OK)
 
 def rate_recommendation(submission_id: int = Path(description="The submission id of the recommendation received"),
-                        rating: int = Query(0, ge=0, le=5, description="Rating number"),
+                        rating: int = Query(1, ge=1, le=5, description="Rating number"),
                         db: Session = Depends(get_db)):
 
     """
@@ -42,7 +41,7 @@ def rate_recommendation(submission_id: int = Path(description="The submission id
         raise
     except:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                            detail="Unexpected error rating individual recommendation")
+                            detail="Unexpected error rating recommendation")
 
 
 """ -----------------------------------------------------------------------------------------------
@@ -65,7 +64,6 @@ def get_all_ratings(include_unrated: bool = True,
         all_recs = recommendations_service.get_all_recommendations(db=db, include_non_rated=include_unrated)
         return all_recs
 
-
     except HTTPException:
         raise
     except:
@@ -73,6 +71,10 @@ def get_all_ratings(include_unrated: bool = True,
                             detail="Unexpected error fetching all received recommendations")
 
 
+""" -----------------------------------------------------------------------------------------------
+ Endpoint that deletes all stored user data about recommendations (user studys stay!) This
+ is a helper for development
+----------------------------------------------------------------------------------------------- """
 @recommendations_router.delete("/metadata",
                                summary="Helper to clear all stored user data",
                                response_model=DeleteMetadataResponse,

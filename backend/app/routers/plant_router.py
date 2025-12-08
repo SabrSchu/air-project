@@ -2,7 +2,6 @@ from fastapi import APIRouter, Query, Depends, HTTPException, Path
 from sqlalchemy.orm import Session
 from starlette import status
 from starlette.status import HTTP_404_NOT_FOUND
-
 from app.database.database import get_db
 from app.schemas import Plant, PlantLikeResponse
 from app.services import plant_service
@@ -26,9 +25,13 @@ def get_all_plants(skip: int = Query(0, ge=0, description="Number of entries to 
     """
     Get all available plants. Pagination possible.
     """
-
-    plants = plant_service.fetch_plants(db=db, skip=skip, limit=limit)
-    return plants
+    try:
+        plants = plant_service.fetch_plants(db=db, skip=skip, limit=limit)
+        return plants
+    except HTTPException:
+        raise
+    except:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Unexpected error fetching all plants")
 
 
 """ -----------------------------------------------------------------------------------------------
@@ -50,15 +53,19 @@ def filter_plants(name: str = Query(None, description="Search for exact or simil
     """
     Filter plants by different options. If no filter option - all plants are returned
     """
-
-    filtered_plants = plant_service.filter_plants(db=db,
-                                                  name=name,
-                                                  growth=growth,
-                                                  soil=soil,
-                                                  sun=sun,
-                                                  water=water,
-                                                  fertilization=fertilization)
-    return filtered_plants
+    try:
+        filtered_plants = plant_service.filter_plants(db=db,
+                                                      name=name,
+                                                      growth=growth,
+                                                      soil=soil,
+                                                      sun=sun,
+                                                      water=water,
+                                                      fertilization=fertilization)
+        return filtered_plants
+    except HTTPException:
+        raise
+    except:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Unexpected error filtering plants")
 
 
 """ -----------------------------------------------------------------------------------------------

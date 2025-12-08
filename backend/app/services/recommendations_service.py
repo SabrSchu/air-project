@@ -4,6 +4,7 @@ from app.schemas import RecommendationMetadataSBERT, Plant as PlantSchema, Plant
     RecommendationMetadataBM25
 from app.schemas.recommendations_schema import AllRecommendations
 
+
 """ -----------------------------------------------------------------------------------------------
  Query all plants including pagination
 ----------------------------------------------------------------------------------------------- """
@@ -100,6 +101,5 @@ def delete_all_entries(db: Session):
     db.query(UserPlantLike).delete()
     db.query(UserSubmission).delete()
     db.query(UserAnswer).delete()
-
 
     db.commit()

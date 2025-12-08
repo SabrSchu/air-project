@@ -21,8 +21,7 @@ def store_user_answers(user_answers: UserAnswerSubmission, db: Session) -> int:
 
     submission = UserSubmission(
         free_text=sanitize_free_text(user_answers.free_text),
-        created_at=user_answers.created_at
-    )
+        created_at=user_answers.created_at)
 
     db.add(submission)
     db.commit()

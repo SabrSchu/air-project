@@ -4,6 +4,7 @@ from pathlib import Path
 from fastapi import HTTPException
 from ..schemas import UserStudySubmission
 
+
 REPORTS_PATH = Path(__file__).parent.parent / "user_study/reports"
 
 
@@ -71,8 +72,6 @@ def store_submission(submission: UserStudySubmission):
 
     with file_path.open("w", encoding="utf-8") as user_study_file:
         json.dump(data, user_study_file, indent=2, ensure_ascii=False)
-
-    return str(REPORTS_PATH / f"{file_name}")
 
 
 """ -----------------------------------------------------------------------------------------------

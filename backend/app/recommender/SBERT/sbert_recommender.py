@@ -39,7 +39,7 @@ class SBertRecommender:
     # Dataset embeddings are created from the database entries
     def _create_dataset_embeddings(self):
         plants_text_tuples = sbert_service.create_text_representation_plants(db=self.db)
-        plant_sentences = [text for id, text in plants_text_tuples]
+        plant_sentences = [text for _, text in plants_text_tuples]
         return self.sbert.encode(plant_sentences)
 
 

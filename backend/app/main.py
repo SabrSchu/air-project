@@ -35,6 +35,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# This could be commented out, it is needed only once for creating the tables
 Base.metadata.create_all(bind=engine)
 
 app.include_router(plants_router)

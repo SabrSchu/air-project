@@ -47,6 +47,7 @@ class Plant(BaseModel):
     # needed for transforming db model to schema
     model_config = ConfigDict(from_attributes=True)
 
+
 """ -----------------------------------------------------------------------------------------------
  Schema for including metadata to the plant recommendation
 ----------------------------------------------------------------------------------------------- """

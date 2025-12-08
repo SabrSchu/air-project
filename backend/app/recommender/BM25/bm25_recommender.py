@@ -92,8 +92,8 @@ class BM25Recommender:
                                                                     submission_id=self.submission_id,
                                                                     label="mismatch")
 
-        return [ PlantRecommendation(label="perfect", submission_id=self.submission_id, recommendation=plants_results),
-                 PlantRecommendation(label="good", submission_id=self.submission_id, recommendation=good_results),
-                 PlantRecommendation(label="mismatch", submission_id=self.submission_id, recommendation=bad_results)]
+        return [PlantRecommendation(label="perfect", submission_id=self.submission_id, recommendation=plants_results),
+                PlantRecommendation(label="good", submission_id=self.submission_id, recommendation=good_results),
+                PlantRecommendation(label="mismatch", submission_id=self.submission_id, recommendation=bad_results)]
 
 

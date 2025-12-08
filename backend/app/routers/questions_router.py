@@ -24,9 +24,14 @@ def get_all_questions(db: Session = Depends(get_db)):
     """
     Get all available questions with the corresponding answers
     """
+    try:
+        all_questions = question_service.fetch_all_questions(db=db)
+        return all_questions
 
-    all_questions = question_service.fetch_all_questions(db=db)
-    return all_questions
+    except HTTPException:
+        raise
+    except:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Unexpected error fetching all questions")
 
 
 """ -----------------------------------------------------------------------------------------------
@@ -69,9 +74,11 @@ def post_questions_receive_recommendation(
 
     except ValueError as e:
         raise HTTPException(status_code=HTTP_400_BAD_REQUEST, detail=str(e))
-
-
-
+    except HTTPException:
+        raise
+    except:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                            detail="Unexpected error posting user questionnaire and getting bm25 recommendation.")
 
 
 """ -----------------------------------------------------------------------------------------------
@@ -107,10 +114,11 @@ def post_free_text_receive_recommendation(
                                             num_good=num_good_fits,
                                             num_bad=num_bad_fits)
 
+    except HTTPException:
+        raise
     except:
-        raise HTTPException(status_code=HTTP_400_BAD_REQUEST, detail="Unexpected Error!")
-
-
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                            detail="Unexpected error posting free text and getting sbert recommendation.")
 
 
 

@@ -1,10 +1,10 @@
 from pathlib import Path
 from typing import Optional
-
 from sqlalchemy.orm import Session, Query
 from app.enums import Growth, Soil, SunLight, Watering, Fertilization
 from app.models import Plant, UserPlantLike
 from app.schemas import PlantLikeResponse
+
 
 DATASET_PATH = Path(__file__).parent.parent / "dataset/plants_clean.csv"
 
@@ -57,7 +57,6 @@ def get_all_liked_plants(db: Session) -> Optional[list[PlantLikeResponse]]:
         )
 
     return all_liked_plants
-
 
 
 """ -----------------------------------------------------------------------------------------------
