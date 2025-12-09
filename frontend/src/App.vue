@@ -3,7 +3,7 @@
   <Header/>
   <Questionnaire/>
   <PlantOverview/>
-
+<!--
   <div
       class="chat-drawer"
       :class="{ 'is-open': isOpen }"
@@ -15,6 +15,7 @@
         @togglePin="togglePin"
     />
   </div>
+  -->
 </template>
 
 <script setup lang="ts">
