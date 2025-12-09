@@ -5,6 +5,7 @@ import Question from './Question.vue'
 import PlantCard from "@/components/PlantCard.vue";
 import EndOfQuestions from "./EndOfQuestions.vue";
 import FreeTextQuestion from "@/components/Questions/FreeTextQuestion.vue";
+import LoadingAnimation from "@/components/LoadingAnimation.vue";
 import ArrowLeft from 'vue-material-design-icons/ArrowLeft.vue'
 
 import {accessQuestionsEndpoint, postFreeText, postQuestionnaire} from "@/services/questionsEnpointService.ts";
@@ -204,9 +205,14 @@ const handleSendFreeText = async (payload: string) => {
             :transition="{ duration: 0.3 }"
         >
           <component
+              v-if="!isLoading"
               :is="currentComponent"
               v-bind="currentProps"
               @next="isFreeTextMode ? handleSendFreeText($event) : handleNext($event)"
+          />
+          <component
+            v-if="isLoading"
+            :is="LoadingAnimation"
           />
         </Motion>
 
@@ -270,6 +276,7 @@ const handleSendFreeText = async (payload: string) => {
 
 .questionnaire-each-question {
   width: 100%;
+  height: 100%;
   justify-content: center;
   align-items: center;
   padding: 2rem;
