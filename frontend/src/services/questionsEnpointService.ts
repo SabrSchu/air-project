@@ -49,3 +49,45 @@ export async function postQuestionnaire(
     }
     return await response.json();
 }
+
+interface UserFreeTextPayload {
+    created_at: string;
+    free_text: string;
+}
+
+interface RecommendationParams {
+    num_perfect_fits?: number;
+    num_good_fits?: number;
+    num_bad_fits?: number;
+}
+
+/**
+ * Sends user free text to receive plant recommendations.
+ * @param freeText The user's free text.
+ * @param params Optional parameters to control the number of recommendations.
+ */
+export async function postFreeText(
+    freeText: UserFreeTextPayload,
+    params: RecommendationParams = {}
+) {
+    const query = new URLSearchParams({
+        num_perfect_fits: params.num_perfect_fits?.toString() ?? '3',
+        num_good_fits: params.num_good_fits?.toString() ?? '3',
+        num_bad_fits: params.num_bad_fits?.toString() ?? '3',
+    }).toString();
+
+    const response = await fetch(`${API_BASE_URL}/questions/free_text?${query}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(freeText),
+    });
+
+    if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ detail: 'Unknown error' }));
+        throw new Error(`HTTP error! status: ${response.status}, message: ${errorData.detail}`);
+    }
+
+    return await response.json();
+}

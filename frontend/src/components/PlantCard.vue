@@ -59,15 +59,18 @@ function filledCircles(type: string) {
   }
   if (type === 'water') {
     switch (props.waterAmount.toLowerCase()) {
-      case 'water when dry': return 1;
-      case 'moist': return 1;
-      case 'slightly moist': return 1;
-      case 'evenly_moist': return 2;
-      case 'regular moist': return 2;
-      case 'consistently moist': return 3;
-      case 'weekly': return 3;
-      case 'regular': return 4;
-      case 'regular well drained': return 4;
+      case 'keep soil consistently moist': return 4;
+      case 'keep soil evenly moist': return 4;
+      case 'keep soil moist': return 4;
+      case 'keep soil slightly moist': return 3;
+      case 'let soil dry between watering': return 3;
+      case 'regular watering': return 3;
+      case 'regular, moist soil': return 2;
+      case 'regular, well-drained soil': return 2;
+      case 'water weekly': return 2;
+      case 'water when soil feels dry': return 1;
+      case 'water when soil is dry': return 1;
+      case 'water when topsoil is dry': return 1;
       default: return 0;
     }
   }
