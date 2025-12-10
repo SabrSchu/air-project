@@ -3,7 +3,7 @@ import DemoPlant from '@/assets/DemoPlant.jpg'
 import WaterIcon from 'vue-material-design-icons/Water.vue'
 import WeatherSunnyIcon from 'vue-material-design-icons/WeatherSunny.vue'
 import CircleIcon from 'vue-material-design-icons/Circle.vue'
-import ThermometerIcon from 'vue-material-design-icons/Thermometer.vue'
+import SproutIcon from 'vue-material-design-icons/Sprout.vue'
 import HeartIcon from 'vue-material-design-icons/Heart.vue'
 import { ref } from 'vue'
 
@@ -21,6 +21,10 @@ const props = defineProps({
     required: true
   },
   sunlightAmount: {
+    type: String,
+    required: true
+  },
+  fertilizerAmount: {
     type: String,
     required: true
   },
@@ -74,6 +78,15 @@ function filledCircles(type: string) {
       default: return 0;
     }
   }
+  if (type === 'fertilizer') {
+    switch (props.fertilizerAmount?.toLowerCase()) {
+      case 'no': return 1;
+      case 'organic': return 1;
+      case 'balanced':return 2;
+      case 'low-nitrogen': return 3;
+      case 'acidic': return 4;
+    }
+  }
   return 0;
 }
 </script>
@@ -119,12 +132,14 @@ function filledCircles(type: string) {
       </div>
       <div class="temperature-value">
         <div class="temperature-icon-wrapper">
-          <ThermometerIcon :size="25" />
+          <SproutIcon :size="25" />
         </div>
-        <CircleIcon style="color: red" :size="15" />
-        <CircleIcon style="color: red" :size="15" />
-        <CircleIcon style="color: red" :size="15" />
-        <CircleIcon style="color: red" :size="15" />
+        <CircleIcon
+            v-for="index in 4"
+            :key="index"
+            :size="15"
+            :style="{ color: index <= filledCircles('fertilizer') ? 'red' : 'currentColor' }"
+        />
       </div>
     </div>
   </div>

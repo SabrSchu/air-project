@@ -38,6 +38,7 @@
           :description="plant.description"
           :waterAmount="plant.watering"
           :sunlightAmount="plant.sunlight"
+          :fertilizerAmount="plant.fertilization"
           :image_url="plant.image_url"/>
     </div>
   </div>
