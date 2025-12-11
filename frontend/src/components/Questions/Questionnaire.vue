@@ -241,7 +241,6 @@ const handleSendFreeText = async (payload: string) => {
       </template>
     </div>
   </div>
-  <hr class="separator"/>
 </template>
 
 <style scoped>

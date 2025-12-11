@@ -15,7 +15,6 @@
       </div>
 
       <div class="overview__actions">
-        <ChevronDownIcon class="overview__actions-item"/>
         <GridIcon
             v-if="!isGridLarge"
             class="overview__actions-item"
@@ -47,7 +46,6 @@
 import { ref, onMounted } from "vue";
 import TuneIcon from 'vue-material-design-icons/Tune.vue'
 import MagnifyIcon from 'vue-material-design-icons/Magnify.vue'
-import ChevronDownIcon from 'vue-material-design-icons/ChevronDown.vue'
 import ClearIcon from 'vue-material-design-icons/CloseThick.vue'
 import GridIcon from 'vue-material-design-icons/Grid.vue'
 import GridLargeIcon from 'vue-material-design-icons/GridLarge.vue'
@@ -85,6 +83,8 @@ onMounted(() => {
   flex-direction: column;
   gap: 1rem;
   padding: 1rem;
+  background-color: rgb(183,213,172,0.3);
+  background-blend-mode: lighten;
 }
 
 .overview__option-container {
@@ -102,11 +102,12 @@ onMounted(() => {
   display: flex;
   align-self: center;
   gap: 0.2rem;
-  border: 1px solid black;
+  border: 1px solid white;
   border-radius: 0.5rem;
   padding: 0.3rem 0.5rem;
   min-width: 18rem;
   max-width: 18rem;
+  background-color: white;
 }
 
 .overview__search input {

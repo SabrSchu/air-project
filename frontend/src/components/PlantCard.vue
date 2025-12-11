@@ -138,9 +138,10 @@ function filledCircles(type: string) {
   display: flex;
   flex-direction: row;
   align-items: stretch;
-  border: 2px solid #333;
+  border: 2px solid white;
   border-radius: 1rem;
   overflow: hidden;
+  background-color: white;
 }
 
 .plant-image {

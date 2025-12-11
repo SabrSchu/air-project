@@ -35,6 +35,10 @@ import { motion } from 'motion-v'
 .header {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .navbar {
@@ -82,6 +86,7 @@ import { motion } from 'motion-v'
   justify-content: center;
   gap: 0.5rem;
   padding: 0.5rem;
-  margin: 0 auto;
+  width: 100%;
+  background-color: white;
 }
 </style>
