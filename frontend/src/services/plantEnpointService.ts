@@ -7,3 +7,14 @@ export async function accessPlantsEndpoint() {
     }
     return await response.json();
 }
+
+export async function filterPlantsByName(name: string) {
+    const url = new URL(`${API_BASE_URL}/plants/filter`);
+    url.searchParams.append("name", name);
+
+    const response = await fetch(url.toString());
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return await response.json();
+}

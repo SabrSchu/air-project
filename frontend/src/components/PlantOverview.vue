@@ -29,7 +29,7 @@
       </div>
     </div>
 
-    <div class="overview__elements" :class="{ 'grid-layout': isGridLarge }">
+    <div v-if="response.length > 0" class="overview__elements" :class="{ 'grid-layout': isGridLarge }">
       <PlantCard
           v-for="plant in response"
           :key="plant.id"
@@ -39,11 +39,15 @@
           :sunlightAmount="plant.sunlight"
           :image_url="plant.image_url"/>
     </div>
+
+    <div v-else class="no-results">
+      <p>No plants found. Please try again!</p>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import {ref, onMounted, watch} from "vue";
 import TuneIcon from 'vue-material-design-icons/Tune.vue'
 import MagnifyIcon from 'vue-material-design-icons/Magnify.vue'
 import ClearIcon from 'vue-material-design-icons/CloseThick.vue'
@@ -51,6 +55,7 @@ import GridIcon from 'vue-material-design-icons/Grid.vue'
 import GridLargeIcon from 'vue-material-design-icons/GridLarge.vue'
 
 import {accessPlantsEndpoint} from "@/services/plantEnpointService.ts";
+import {filterPlantsByName} from "@/services/plantEnpointService.ts";
 import PlantCard from "@/components/PlantCard.vue";
 
 let input = ref("");
@@ -70,6 +75,25 @@ async function fetchPlants() {
     console.error("Error while fetching plants: ", error);
   }
 }
+
+let timer: number | undefined;
+
+watch(input, (newValue) => {
+  clearTimeout(timer);
+
+  if (!newValue.trim()) {
+    fetchPlants();
+    return;
+  }
+
+  timer = window.setTimeout(async () => {
+    try {
+      response.value = await filterPlantsByName(newValue.trim());
+    } catch (error) {
+      console.error("Error searching plants:", error);
+    }
+  }, 300);
+});
 
 onMounted(() => {
   fetchPlants();
@@ -100,8 +124,8 @@ onMounted(() => {
 .overview__search {
   flex: 1;
   display: flex;
-  align-self: center;
-  gap: 0.2rem;
+  align-items: center;
+  position: relative;
   border: 1px solid white;
   border-radius: 0.5rem;
   padding: 0.3rem 0.5rem;
@@ -111,12 +135,15 @@ onMounted(() => {
 }
 
 .overview__search input {
+  flex: 1;
   border: none;
   outline: none;
+  padding: 0 0.3rem;
 }
 
 .overview__search-clear-icon {
   cursor: pointer;
+  margin-left: auto;
 }
 
 .overview__actions {
@@ -148,6 +175,14 @@ onMounted(() => {
   margin: auto;
 }
 
-
+.no-results {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 12rem;
+  font-size: 1.2rem;
+  color: #555;
+  text-align: center;
+}
 
 </style>
