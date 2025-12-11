@@ -21,7 +21,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import NavBar from "@/components/NavBar.vue";
-import Header from "@/components/Header.vue";
 import Questionnaire from "@/components/Questions/Questionnaire.vue";
 import PlantOverview from "@/components/PlantOverview.vue";
 import Footer from "@/components/Footer.vue";
