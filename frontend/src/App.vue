@@ -2,6 +2,7 @@
   <NavBar/>
   <Questionnaire/>
   <PlantOverview/>
+  <Footer/>
 <!--
   <div
       class="chat-drawer"
@@ -23,6 +24,7 @@ import NavBar from "@/components/NavBar.vue";
 import Header from "@/components/Header.vue";
 import Questionnaire from "@/components/Questions/Questionnaire.vue";
 import PlantOverview from "@/components/PlantOverview.vue";
+import Footer from "@/components/Footer.vue";
 import ChatWindow from "@/components/ChatWindow.vue";
 
 const isHovered = ref(false);
