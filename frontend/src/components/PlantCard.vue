@@ -98,11 +98,13 @@ function filledCircles(type: string) {
     <div class="text-box">
       <h1>{{ name }}</h1>
 
+      <!--
       <p>{{ description }}</p>
 
       <button class="button-more-info" @click="showMessage">
         Let's find out more!
       </button>
+      -->
     </div>
     <div class="value-box">
       <div class="favorite-box">
@@ -203,6 +205,7 @@ function filledCircles(type: string) {
   display: flex;
   width:20%;
   padding-top: 2rem;
+  padding-right: 0.5rem;
   /*Just for development
   border: black solid 2px;*/
 }
