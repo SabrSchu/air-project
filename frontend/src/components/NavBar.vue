@@ -9,6 +9,8 @@
 
         <div class="links">
           <RouterLink to="/favourites">Favourites</RouterLink>
+          <span>|</span>
+          <RouterLink to="/feedback">Feedback</RouterLink>
         </div>
       </div>
     </nav>

@@ -91,3 +91,19 @@ export async function postFreeText(
 
     return await response.json();
 }
+
+export async function getUserStudyQuestions() {
+    const response = await fetch(`${API_BASE_URL}/user_study/questions`);
+    if (!response.ok) throw new Error("Failed to fetch user study questions");
+    return await response.json();
+}
+
+export async function submitUserStudy(submission: any) {
+    const response = await fetch(`${API_BASE_URL}/user_study/submit`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(submission),
+    });
+    if (!response.ok) throw new Error("Failed to submit user study");
+    return await response.json();
+}
