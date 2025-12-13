@@ -1,5 +1,13 @@
 import { API_BASE_URL } from "@/config/api.ts";
 
+export interface PlantFilterOptions {
+    growth?: string;
+    soil?: string;
+    sun?: string;
+    water?: string;
+    fertilization?: string;
+}
+
 export async function accessPlantsEndpoint(skip = 0, limit = 600) {
     const response = await fetch(`${API_BASE_URL}/plants/all?skip=${skip}&limit=${limit}`);
     if (!response.ok) {
@@ -16,6 +24,24 @@ export async function filterPlantsByName(name: string) {
     if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
     }
+    return await response.json();
+}
+
+export async function filterPlantsByOptions(filters: PlantFilterOptions) {
+    const url = new URL(`${API_BASE_URL}/plants/filter`);
+
+    Object.entries(filters).forEach(([key, value]) => {
+        if (value && value !== 'All') {
+            url.searchParams.append(key, value);
+        }
+    });
+
+    const response = await fetch(url.toString());
+
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
     return await response.json();
 }
 
