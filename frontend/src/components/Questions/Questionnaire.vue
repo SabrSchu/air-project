@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
-import { Motion } from 'motion-v'
+import {computed, onMounted, ref} from 'vue'
+import {Motion} from 'motion-v'
 import Question from './Question.vue'
 import PlantCard from "@/components/PlantCard.vue";
 import EndOfQuestions from "./EndOfQuestions.vue";
@@ -8,7 +8,11 @@ import FreeTextQuestion from "@/components/Questions/FreeTextQuestion.vue";
 import LoadingAnimation from "@/components/LoadingAnimation.vue";
 import ArrowLeft from 'vue-material-design-icons/ArrowLeft.vue'
 
-import {accessQuestionsEndpoint, postFreeText, postQuestionnaire} from "@/services/questionsEnpointService.ts";
+import {
+  accessQuestionsEndpoint,
+  postFreeText,
+  postQuestionnaire
+} from "@/services/questionsEnpointService.ts";
 
 const isLoading = ref(true)
 const questions = ref([])
@@ -33,9 +37,7 @@ const animationKey = computed(() => {
  */
 async function fetchData() {
   try {
-    const fetchedQuestions = await accessQuestionsEndpoint()
-    questions.value = fetchedQuestions
-
+    questions.value = await accessQuestionsEndpoint()
   } catch (err) {
     console.error("Error:", err)
     questions.value = []
@@ -233,6 +235,8 @@ const handleSendFreeText = async (payload: string) => {
         <h2>{{ group.label }}</h2>
         <PlantCard
             v-for="plant in group.recommendation"
+            :key="plant.id"
+            :id="plant.id"
             :name="plant.name"
             :description="plant.description"
             :waterAmount="plant.watering"
@@ -240,6 +244,18 @@ const handleSendFreeText = async (payload: string) => {
             :fertilizerAmount="plant.fertilization"
             :image_url="plant.image_url"/>
       </template>
+
+      <RouterLink to="/evaluation">
+        <Motion
+            class="feedback-button"
+            is="button"
+            :whileHover="{ scale: 1.1 }"
+            :whilePress="{ scale: 0.95 }"
+            :transition="{ duration: 0.2 }"
+        >
+          <h1>Please give us Feedback!</h1>
+        </Motion>
+      </RouterLink>
     </div>
   </div>
 </template>
@@ -249,6 +265,7 @@ const handleSendFreeText = async (payload: string) => {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 1rem;
 
   background-image: url("public/background.jpeg");
   background-color: rgba(255,255,255,0.3);
@@ -381,5 +398,18 @@ const handleSendFreeText = async (payload: string) => {
   color: black;
   font-weight: bold;
   box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1);
+}
+
+.feedback-button{
+  margin-top: 1rem;
+  background-color: #b7d5ac;
+  border: none;
+  padding: 1rem;
+  border-radius: 1rem;
+  cursor: pointer;
+
+  h1 {
+    font-size: 1rem;
+  }
 }
 </style>

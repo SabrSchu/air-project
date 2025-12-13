@@ -26,6 +26,7 @@
               :description="plant.description"
               :waterAmount="plant.watering"
               :sunlightAmount="plant.sunlight"
+              :fertilizerAmount="plant.fertilization"
               :image_url="plant.image_url"
               :liked="true"
               @toggle-like="handleLikeToggle"/>
@@ -108,7 +109,7 @@ onMounted(() => {
     background-color: rgb(183,213,172,0.6);
     max-width: 90%;
     width: 100%;
-    max-height: 37rem;
+    max-height: 40rem;
     overflow-y: auto;
     scroll-behavior: smooth;
 
