@@ -161,7 +161,7 @@ const handleSendFreeText = async (payload: string) => {
         is="div"
         :initial="{ opacity: 0 }"
         :animate="{ opacity: 1 }"
-        :transition="{ duration: 1.8 }"
+        :transition="{ duration: 0.7 }"
         class="questionnaire-main-container">
 
       <!-- Start Screen -->
@@ -242,7 +242,6 @@ const handleSendFreeText = async (payload: string) => {
       </template>
     </div>
   </div>
-  <hr class="separator"/>
 </template>
 
 <style scoped>
@@ -250,12 +249,20 @@ const handleSendFreeText = async (payload: string) => {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  background-image: url("public/background.jpeg");
+  background-color: rgba(255,255,255,0.3);
+  background-blend-mode: lighten;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
 }
 
 .questionnaire-main-container {
   position: relative;
   width: 60%;
   max-width: 50rem;
+  margin: 1rem;
   height: 30rem;
   display: flex;
   flex-direction: column;
@@ -263,6 +270,7 @@ const handleSendFreeText = async (payload: string) => {
   border-radius: 1rem;
   box-shadow: 0 0.5rem 1rem 0 rgba(0,0,0,0.3);
   transition: transform 0.2s ease;
+  background-color: rgba(255,255,255,1);
 }
 .questionnaire-main-container h2 {
   width: 100%;

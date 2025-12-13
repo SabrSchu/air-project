@@ -1,29 +1,32 @@
 <template>
-  <NavBar/>
-  <Header/>
-  <Questionnaire/>
-  <PlantOverview/>
-<!--
-  <div
-      class="chat-drawer"
-      :class="{ 'is-open': isOpen }"
-      @mouseenter="openChat"
-      @mouseleave="closeChat"
-  >
-    <ChatWindow
-        :isPinned="isPinned"
-        @togglePin="togglePin"
-    />
+  <div class="app-container">
+    <NavBar/>
+    <main>
+      <RouterView />
+    </main>
+    <Footer/>
+
+      <!--
+    <div
+        class="chat-drawer"
+        :class="{ 'is-open': isOpen }"
+        @mouseenter="openChat"
+        @mouseleave="closeChat"
+    >
+      <ChatWindow
+          :isPinned="isPinned"
+          @togglePin="togglePin"
+      />
+    </div>
+    -->
   </div>
-  -->
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
+import {RouterView} from 'vue-router';
 import NavBar from "@/components/NavBar.vue";
-import Header from "@/components/Header.vue";
-import Questionnaire from "@/components/Questions/Questionnaire.vue";
-import PlantOverview from "@/components/PlantOverview.vue";
+import Footer from "@/components/Footer.vue";
 import ChatWindow from "@/components/ChatWindow.vue";
 
 const isHovered = ref(false);
@@ -52,6 +55,19 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 /* ChatWindow Style */

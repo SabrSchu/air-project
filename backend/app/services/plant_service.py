@@ -69,11 +69,25 @@ def add_like(db: Session, plant_id: int) -> int:
         like_entry = UserPlantLike(plant_id=plant_id, like_counter=1)
         db.add(like_entry)
     else:
-        like_entry.like_counter += 1
+        like_entry.like_counter = 1
 
     db.commit()
     db.refresh(like_entry)
     return like_entry.like_counter
+
+""" -----------------------------------------------------------------------------------------------
+ Remove a like from a plant
+----------------------------------------------------------------------------------------------- """
+def remove_like(db: Session, plant_id: int) -> int:
+    like_entry = db.query(UserPlantLike).filter_by(plant_id=plant_id).first()
+
+    if not like_entry:
+        return 0
+
+    db.delete(like_entry)
+    db.commit()
+
+    return 0
 
 
 """ -----------------------------------------------------------------------------------------------

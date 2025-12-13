@@ -5,9 +5,16 @@ import WeatherSunnyIcon from 'vue-material-design-icons/WeatherSunny.vue'
 import CircleIcon from 'vue-material-design-icons/Circle.vue'
 import SproutIcon from 'vue-material-design-icons/Sprout.vue'
 import HeartIcon from 'vue-material-design-icons/Heart.vue'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import {likePlantEndpoint, unlikePlantEndpoint} from "@/services/plantEnpointService.ts";
+
+const emit = defineEmits(['toggle-like']);
 
 const props = defineProps({
+  id: {
+    type: Number,
+    required: true
+  },
   name: {
     type: String,
     required: true
@@ -32,25 +39,43 @@ const props = defineProps({
     type: String,
     required: false,
     default: DemoPlant
+  },
+  liked: {
+    type: Boolean,
+    required: false,
+    default: false
   }
 });
 
-const isLiked = ref(false)
+const isLiked = ref(props.liked)
+
+watch(() => props.liked, (newVal) => {
+  isLiked.value = newVal;
+});
 
 function showMessage() {
   console.log('Hello World');
 }
 
-function toggleLike() {
+async function toggleLike() {
+  const previousState = isLiked.value;
+
   isLiked.value = !isLiked.value
-  if (isLiked.value === false) {
-    console.log('Disliked this plant!')
-  }
-  else {
-    console.log('Liked this plant!')
+  emit('toggle-like', props.id, isLiked.value);
+
+  try {
+    if (isLiked.value) {
+      await likePlantEndpoint(props.id);
+    } else {
+      await unlikePlantEndpoint(props.id);
+    }
+  } catch (error) {
+    console.error("API Error - Rolling back UI:", error);
+
+    isLiked.value = previousState;
+    emit('toggle-like', props.id, previousState);
   }
 }
-
 
 function filledCircles(type: string) {
   if (type === 'sunlight') {
@@ -155,9 +180,10 @@ function filledCircles(type: string) {
   display: flex;
   flex-direction: row;
   align-items: stretch;
-  border: 2px solid #333;
+  border: 2px solid white;
   border-radius: 1rem;
   overflow: hidden;
+  background-color: white;
 }
 
 .plant-image {
