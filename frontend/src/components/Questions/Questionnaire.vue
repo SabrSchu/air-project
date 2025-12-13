@@ -233,6 +233,8 @@ const handleSendFreeText = async (payload: string) => {
         <h2>{{ group.label }}</h2>
         <PlantCard
             v-for="plant in group.recommendation"
+            :key="plant.id"
+            :id="plant.id"
             :name="plant.name"
             :description="plant.description"
             :waterAmount="plant.watering"
@@ -249,6 +251,7 @@ const handleSendFreeText = async (payload: string) => {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 1rem;
 
   background-image: url("public/background.jpeg");
   background-color: rgba(255,255,255,0.3);
