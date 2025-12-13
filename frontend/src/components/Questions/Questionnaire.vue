@@ -245,7 +245,7 @@ const handleSendFreeText = async (payload: string) => {
             :image_url="plant.image_url"/>
       </template>
 
-      <RouterLink to="/evaluation">
+      <RouterLink to="/feedback">
         <Motion
             class="feedback-button"
             is="button"
