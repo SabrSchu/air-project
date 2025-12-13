@@ -39,11 +39,14 @@
       <PlantCard
           v-for="plant in plants"
           :key="plant.id"
+          :id="plant.id"
           :name="plant.name"
           :description="plant.description"
           :waterAmount="plant.watering"
           :sunlightAmount="plant.sunlight"
-          :image_url="plant.image_url"/>
+          :image_url="plant.image_url"
+          :liked="isPlantLiked(plant.id)"
+          @toggle-like="handleOverviewToggleLike"/>
     </div>
 
     <!-- Pagination -->
@@ -91,8 +94,11 @@ import ClearIcon from 'vue-material-design-icons/CloseThick.vue'
 import GridIcon from 'vue-material-design-icons/Grid.vue'
 import GridLargeIcon from 'vue-material-design-icons/GridLarge.vue'
 
-import {accessPlantsEndpoint} from "@/services/plantEnpointService.ts";
-import {filterPlantsByName} from "@/services/plantEnpointService.ts";
+import {
+  accessPlantsEndpoint,
+  filterPlantsByName,
+  getAllFavouritePlantsEndpoint
+} from "@/services/plantEnpointService.ts";
 import PlantCard from "@/components/PlantCard.vue";
 
 let input = ref("");
@@ -102,6 +108,7 @@ const plantsPerPage = 9;
 const totalPlants = ref(0);
 const totalPages = ref(1);
 const isGridLarge = ref(true);
+const likedPlantIds = ref<number[]>([]);
 
 function toggleGridView() {
   isGridLarge.value = !isGridLarge.value;
@@ -190,7 +197,31 @@ const visiblePages = computed(() => {
   return pages;
 });
 
+async function fetchLikedPlants() {
+  try {
+    const favorites = await getAllFavouritePlantsEndpoint();
+    likedPlantIds.value = favorites.map((plant: any) => plant.id);
+  } catch (error) {
+    console.error("Error fetching favorites:", error);
+  }
+}
+
+function isPlantLiked(plantId: number): boolean {
+  return likedPlantIds.value.includes(plantId);
+}
+
+function handleOverviewToggleLike(id: number, isLiked: boolean) {
+  if (isLiked) {
+    if (!likedPlantIds.value.includes(id)) {
+      likedPlantIds.value.push(id);
+    }
+  } else {
+    likedPlantIds.value = likedPlantIds.value.filter(existingId => existingId !== id);
+  }
+}
+
 onMounted(() => {
+  fetchLikedPlants();
   fetchAllPlants(); // fetch all plants to get number of all plants
   fetchPlants(1);
 });

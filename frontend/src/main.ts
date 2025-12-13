@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import router from './router'
 import PrimeVue from 'primevue/config'
 import 'primeicons/primeicons.css'
 
@@ -12,6 +13,7 @@ import InputText from 'primevue/inputtext';
 const app = createApp(App);
 
 app.use(PrimeVue, { unstyled : true });
+app.use(router);
 
 // Registration of global PrimeVue components
 app.component('IconField', IconField);

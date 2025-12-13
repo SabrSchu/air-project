@@ -18,3 +18,33 @@ export async function filterPlantsByName(name: string) {
     }
     return await response.json();
 }
+
+export async function likePlantEndpoint(plantId: number) {
+    const response = await fetch(`${API_BASE_URL}/plants/${plantId}/like`, {
+        method: 'POST',
+    });
+
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return await response.json();
+}
+
+export async function unlikePlantEndpoint(plantId: number) {
+    const response = await fetch(`${API_BASE_URL}/plants/${plantId}/like`, {
+        method: 'DELETE',
+    });
+
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return await response.json();
+}
+
+export async function getAllFavouritePlantsEndpoint() {
+    const response = await fetch(`${API_BASE_URL}/plants/all/likes`);
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return await response.json();
+}

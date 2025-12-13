@@ -109,6 +109,46 @@ def like_plant(plant_id: int = Path(description="The id of a plant"),
 
 
 """ -----------------------------------------------------------------------------------------------
+ Endpoint that lets the user remove a like from a plant
+----------------------------------------------------------------------------------------------- """
+@plants_router.delete("/{plant_id}/like",
+                    summary="Remove a like from a single plant",
+                    response_model=PlantLikeResponse,
+                    status_code=status.HTTP_200_OK)
+
+def unlike_plant(plant_id: int = Path(description="The id of a plant"),
+               db: Session = Depends(get_db)):
+
+    """
+    Remove a like from a plant via plant id.
+    """
+    try:
+        plant = plant_service.get_plant_by_id(db=db, plant_id=plant_id)
+
+        if plant is None:
+            raise HTTPException(status_code=HTTP_404_NOT_FOUND, detail="Plant not found!")
+
+        like_count = plant_service.remove_like(db=db, plant_id=plant_id)
+
+        return PlantLikeResponse(
+            id=plant.id,
+            name=plant.name,
+            growth=plant.growth,
+            soil=plant.soil,
+            sunlight=plant.sunlight,
+            watering=plant.watering,
+            fertilization=plant.fertilization,
+            image_url=plant.image_url,
+            like_counter=like_count
+        )
+
+    except HTTPException:
+        raise
+    except:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Unexpected error unliking plant")
+
+
+""" -----------------------------------------------------------------------------------------------
  Endpoint that returns all liked plants and their like count
 ----------------------------------------------------------------------------------------------- """
 @plants_router.get("/all/likes",

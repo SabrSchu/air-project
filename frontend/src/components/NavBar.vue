@@ -4,31 +4,20 @@
       <div class="wrapper">
         <div class="logo">
           <LeafIcon/>
-          <a href="/">Plant Finder</a>
+          <RouterLink to="/">Plant Finder</RouterLink>
         </div>
 
         <div class="links">
-          <a href="#categories">Categories</a>
-          <span>|</span>
-          <a href="#favourites">Favourites</a>
+          <RouterLink to="/favourites">Favourites</RouterLink>
         </div>
       </div>
     </nav>
-
-    <motion.div class="title"
-                :initial="{ scale: 0 }"
-                :animate="{ scale: 1, transition: { duration: 0.6 } }"
-    >
-      <h1>Welcome to Plant Finder!</h1>
-      <TreeIcon/>
-    </motion.div>
   </header>
 </template>
 
 <script setup lang="ts">
 import LeafIcon from 'vue-material-design-icons/Leaf.vue'
-import TreeIcon from 'vue-material-design-icons/Tree.vue'
-import { motion } from 'motion-v'
+import { RouterLink } from 'vue-router'
 </script>
 
 <style scoped>
@@ -39,54 +28,44 @@ import { motion } from 'motion-v'
   position: sticky;
   top: 0;
   z-index: 100;
-}
 
-.navbar {
-  background-color: #b7d5ac;
-  padding: 1rem;
+  .navbar {
+    background-color: #b7d5ac;
+    padding: 1rem;
 
-  .wrapper {
-    display: flex;
-    flex-direction: row;
-    margin-right: 2rem;
-    gap: 2rem;
-  }
+    .wrapper {
+      display: flex;
+      flex-direction: row;
+      margin-right: 2rem;
+      gap: 2rem;
 
-  .logo {
-    display: flex;
-    gap: 0.5rem;
+      .logo {
+        display: flex;
+        gap: 0.5rem;
 
-    a {
-      font-size: 1.3rem;
-      text-decoration: none;
-    }
-  }
+        a {
+          font-size: 1.3rem;
+          text-decoration: none;
+        }
+      }
 
-  .links {
-    display: flex;
-    gap: 1.5rem;
-    align-self: center;
-    justify-self: flex-end;
-    margin-left: auto;
+      .links {
+        display: flex;
+        gap: 1.5rem;
+        align-self: center;
+        justify-self: flex-end;
+        margin-left: auto;
 
-    a {
-      text-decoration: none;
+        a {
+          text-decoration: none;
 
-      &:hover {
-        transition: transform 0.2s ease;
-        transform: scale(1.1);
+          &:hover {
+            transition: transform 0.2s ease;
+            transform: scale(1.1);
+          }
+        }
       }
     }
   }
-}
-
-.title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.5rem;
-  width: 100%;
-  background-color: white;
 }
 </style>
