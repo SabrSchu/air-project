@@ -291,6 +291,8 @@ const clearFilters = () => {
   selectedFilters.water = "All";
   selectedFilters.fertilization = "All";
 
+  input.value = "";
+
   toggleFilterVisible();
   resetOverview();
 }
