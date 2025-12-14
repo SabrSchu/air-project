@@ -168,8 +168,6 @@ const submitFeedback = async () => {
     user_study_answers: formattedAnswers
   };
 
-  console.log("Submitting Payload:", JSON.stringify(payload, null, 2));
-
   try {
     await submitUserStudy(payload);
     studySubmitted.value = true;
@@ -191,6 +189,7 @@ onMounted(() => {
   flex-direction: column;
   width: 100%;
   align-items: center;
+  min-height: 100%;
 
   .title {
     display: flex;
@@ -204,10 +203,10 @@ onMounted(() => {
 
   .feedback-background{
     display: flex;
+    flex: 1;
     align-content: center;
     justify-content: center;
     width: 100%;
-    min-height: 0;
     padding: 1rem;
     background-image: url("/background.jpeg");
     background-color: rgba(255,255,255,0.3);
