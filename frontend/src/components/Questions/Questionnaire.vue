@@ -168,7 +168,7 @@ const handleSendFreeText = async (payload: string) => {
 
       <!-- Start Screen -->
       <template v-if="!quizStarted">
-        <h2>Discover our plant recommender!</h2>
+        <h1>Discover our plant recommender!</h1>
         <p>This tool is made for you. Feel free to use it, to find the perfect companion for you and your flat.</p>
 
         <div class="mode-toggle-container">
@@ -280,24 +280,34 @@ const handleSendFreeText = async (payload: string) => {
   width: 60%;
   max-width: 50rem;
   margin: 1rem;
-  height: 30rem;
+  padding: 1rem;
+  border-radius: 1.5rem;
+  min-height: 30rem;
+  height: auto;
+  gap: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 1rem;
   box-shadow: 0 0.5rem 1rem 0 rgba(0,0,0,0.3);
   transition: transform 0.2s ease;
   background-color: rgba(255,255,255,1);
 }
-.questionnaire-main-container h2 {
-  width: 100%;
+.questionnaire-main-container h1 {
+  width: calc(100% + 2rem);
+  padding-top: 1em;
+  padding-bottom: 1em;
+  margin: -1rem -1rem 0 -1rem;
   text-align: center;
   font-size: 1.75rem;
   background-color: #b7d5ac;
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
 }
 .questionnaire-main-container p {
   width: 80%;
   font-size: 1.5rem;
+  margin: 0;
+  text-align: center;
 }
 
 .questionnaire-each-question {
@@ -310,9 +320,11 @@ const handleSendFreeText = async (payload: string) => {
 
 .questionnaire-start-button {
   width: 40%;
-  height: 3rem;
+  margin-bottom: 1rem;
+  min-height: 3rem;
+  height: auto;
+  padding: 0.5rem 1rem;
   position: relative;
-  margin-top: 3rem;
   cursor: pointer;
   align-content: center;
   text-align: center;
@@ -376,10 +388,11 @@ const handleSendFreeText = async (payload: string) => {
 .mode-toggle-container {
   display: flex;
   gap: 1rem;
-  margin-bottom: 3rem;
   background: #f0f0f0;
   padding: 0.5rem;
   border-radius: 2rem;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .toggle-btn {

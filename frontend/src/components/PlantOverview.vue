@@ -291,6 +291,8 @@ const clearFilters = () => {
   selectedFilters.water = "All";
   selectedFilters.fertilization = "All";
 
+  input.value = "";
+
   toggleFilterVisible();
   resetOverview();
 }
@@ -365,6 +367,8 @@ const handleOverviewToggleLike= (id: number, isLiked: boolean) => {
   padding: 1rem;
   background-color: rgb(183,213,172,0.3);
   background-blend-mode: lighten;
+  container-type: inline-size;
+  container-name: plant-overview;
 
   .overview__header{
     display: flex;
@@ -526,6 +530,14 @@ const handleOverviewToggleLike= (id: number, isLiked: boolean) => {
       width: 90%;
       align-items: flex-start;
       margin: auto;
+
+      @container plant-overview (max-width: 1100px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @container plant-overview (max-width: 700px) {
+        grid-template-columns: 1fr;
+      }
     }
   }
 

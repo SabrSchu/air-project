@@ -54,13 +54,13 @@ a {
 body {
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
 }
 
 .app-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  min-width: 320px;
 }
 
 main {

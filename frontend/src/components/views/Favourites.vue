@@ -101,7 +101,6 @@ onMounted(() => {
   }
 
   .favourites-grid {
-    container-type: inline-size;
     padding: 2rem;
     margin: 1rem;
     border-radius: 1rem;
@@ -112,6 +111,8 @@ onMounted(() => {
     max-height: 40rem;
     overflow-y: auto;
     scroll-behavior: smooth;
+    container-type: inline-size;
+    container-name: favourites-list;
 
     .empty-message {
       grid-column: 1 / -1;
@@ -128,16 +129,12 @@ onMounted(() => {
       align-items: flex-start;
       justify-items: center;
       margin: auto;
-    }
 
-    @container (max-width: 90rem) {
-      .grid-layout {
+      @container favourites-list (max-width: 1100px) {
         grid-template-columns: repeat(2, 1fr);
       }
-    }
 
-    @container (max-width: 60rem) {
-      .grid-layout {
+      @container favourites-list (max-width: 700px) {
         grid-template-columns: 1fr;
       }
     }
