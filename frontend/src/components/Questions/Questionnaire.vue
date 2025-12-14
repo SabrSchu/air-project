@@ -168,7 +168,7 @@ const handleSendFreeText = async (payload: string) => {
 
       <!-- Start Screen -->
       <template v-if="!quizStarted">
-        <h2>Discover our plant recommender!</h2>
+        <h1>Discover our plant recommender!</h1>
         <p>This tool is made for you. Feel free to use it, to find the perfect companion for you and your flat.</p>
 
         <div class="mode-toggle-container">
@@ -289,11 +289,16 @@ const handleSendFreeText = async (payload: string) => {
   transition: transform 0.2s ease;
   background-color: rgba(255,255,255,1);
 }
-.questionnaire-main-container h2 {
+.questionnaire-main-container h1 {
   width: 100%;
+  margin-top: 0;
+  padding-top: 1em;
+  padding-bottom: 1em;
   text-align: center;
   font-size: 1.75rem;
   background-color: #b7d5ac;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
 }
 .questionnaire-main-container p {
   width: 80%;
