@@ -564,7 +564,238 @@
 
 - Query parameters: 
   - **include_unrated**: bool - default: true, in case you only want to display rated recommendations, set to **false**.
-- No request body, no authentication, returns a **list of available recommendations** as json response.
+- No request body, no authentication, returns a **list of available recommendations** as json response, including the user answers. The following is an example of two existing recommendations, one questionnaire and one free text submission with one result each.
+```json
+[
+  {
+    "submission_id": 1,
+    "rating": 5,
+    "user_input": {
+      "type": "questionnaire",
+      "free_text": "",
+      "questionnaire": [
+        {
+          "question_type": "water",
+          "question": "How much time do you want to spend on watering the plant?",
+          "answer": "high"
+        },
+        {
+          "question_type": "sun",
+          "question": "How much sunlight does the plant's spot get?",
+          "answer": "partial"
+        },
+        {
+          "question_type": "soil",
+          "question": "What soil type do you prefer?",
+          "answer": "moist"
+        },
+        {
+          "question_type": "fertilizer",
+          "question": "Is it ok for you to use a fertilizer regularly?",
+          "answer": "no"
+        },
+        {
+          "question_type": "growth",
+          "question": "Do you want something that grows quickly or stays small?",
+          "answer": "fast"
+        }
+      ]
+    },
+    "recommendations_per_submission": [
+      {
+        "label": "perfect",
+        "submission_id": 1,
+        "recommendation": [
+          {
+            "id": 572,
+            "name": "galax",
+            "growth": "moderate",
+            "soil": "moist",
+            "sunlight": "partial sunlight",
+            "watering": "keep soil evenly moist",
+            "fertilization": "no",
+            "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Galax_urceolata.jpg/500px-Galax_urceolata.jpg",
+            "metadata": {
+              "algorithm": "BM25",
+              "model_name": "BM25Okapi",
+              "score_raw": 8.6559,
+              "score_normalized": 1,
+              "score_percentile": 0.998,
+              "rank": 1,
+              "matched_terms": [
+                "['soil_moist', 'water_high', 'sun_partial', 'fertilizer_no']"
+              ],
+              "unmatched_terms": [
+                "['growth_moderate']"
+              ],
+              "max_matches": 5,
+              "match_count": 4,
+              "match_ratio": 0.8
+            }
+          }
+        ]
+      },
+      {
+        "label": "good",
+        "submission_id": 1,
+        "recommendation": [
+          {
+            "id": 517,
+            "name": "quinoa",
+            "growth": "fast",
+            "soil": "loamy",
+            "sunlight": "full sunlight",
+            "watering": "regular, well-drained soil",
+            "fertilization": "no",
+            "image_url": "https://bs.plantnet.org/image/o/66b115ab5b821a9887d915d9483bd54376143faa",
+            "metadata": {
+              "algorithm": "BM25",
+              "model_name": "BM25Okapi",
+              "score_raw": 3.334,
+              "score_normalized": 0.39,
+              "score_percentile": 0.892,
+              "rank": 56,
+              "matched_terms": [
+                "['growth_fast', 'fertilizer_no']"
+              ],
+              "unmatched_terms": [
+                "['soil_loamy', 'water_moderate', 'sun_full']"
+              ],
+              "max_matches": 5,
+              "match_count": 2,
+              "match_ratio": 0.4
+            }
+          }
+        ]
+      },
+      {
+        "label": "mismatch",
+        "submission_id": 1,
+        "recommendation": [
+          {
+            "id": 104,
+            "name": "candytuft",
+            "growth": "moderate",
+            "soil": "sandy",
+            "sunlight": "full sunlight",
+            "watering": "water weekly",
+            "fertilization": "low-nitrogen",
+            "image_url": "https://bs.plantnet.org/image/o/3de7b3356d6550480b09c8dfae061aa29f8b3274",
+            "metadata": {
+              "algorithm": "BM25",
+              "model_name": "BM25Okapi",
+              "score_raw": 0,
+              "score_normalized": 0,
+              "score_percentile": 0,
+              "rank": 337,
+              "matched_terms": [
+                "[]"
+              ],
+              "unmatched_terms": [
+                "['growth_moderate', 'soil_sandy', 'water_low', 'sun_full', 'fertilizer_yes']"
+              ],
+              "max_matches": 5,
+              "match_count": 0,
+              "match_ratio": 0
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "submission_id": 2,
+    "rating": null,
+    "user_input": {
+      "type": "free_text",
+      "free_text": "Crazy balcony with cats and dogs.",
+      "questionnaire": []
+    },
+    "recommendations_per_submission": [
+      {
+        "label": "perfect",
+        "submission_id": 2,
+        "recommendation": [
+          {
+            "id": 40,
+            "name": "petunia",
+            "growth": "fast",
+            "soil": "well-drained",
+            "sunlight": "full sunlight",
+            "watering": "water weekly",
+            "fertilization": "balanced",
+            "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Petunia_exserta_by_Scott_Zona_-_004_%281%29.jpg/500px-Petunia_exserta_by_Scott_Zona_-_004_%281%29.jpg",
+            "metadata": {
+              "algorithm": "SBERT",
+              "model_name": "sentence-transformers/all-MiniLM-L6-v2",
+              "cosine_sim_raw": 0.2663,
+              "cosine_sim_normalized": 1,
+              "cosine_sim_percentile": 1,
+              "rank": 1,
+              "cosine_distance": 0.7337,
+              "gap_to_best": 0
+            }
+          }
+        ]
+      },
+      {
+        "label": "good",
+        "submission_id": 2,
+        "recommendation": [
+          {
+            "id": 10,
+            "name": "spider plant",
+            "growth": "moderate",
+            "soil": "loamy",
+            "sunlight": "indirect sunlight",
+            "watering": "keep soil slightly moist",
+            "fertilization": "balanced",
+            "image_url": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Spiderplant1.jpg",
+            "metadata": {
+              "algorithm": "SBERT",
+              "model_name": "sentence-transformers/all-MiniLM-L6-v2",
+              "cosine_sim_raw": 0.0827,
+              "cosine_sim_normalized": 0.52,
+              "cosine_sim_percentile": 0.81,
+              "rank": 114,
+              "cosine_distance": 0.9173,
+              "gap_to_best": 0.1835
+            }
+          }
+        ]
+      },
+      {
+        "label": "mismatch",
+        "submission_id": 2,
+        "recommendation": [
+          {
+            "id": 5,
+            "name": "cactus",
+            "growth": "slow",
+            "soil": "sandy",
+            "sunlight": "full sunlight",
+            "watering": "let soil dry between watering",
+            "fertilization": "low-nitrogen",
+            "image_url": "https://bs.plantnet.org/image/o/47d4f01e2bc2c2db602fce38f864a40309f5f293",
+            "metadata": {
+              "algorithm": "SBERT",
+              "model_name": "sentence-transformers/all-MiniLM-L6-v2",
+              "cosine_sim_raw": -0.0291,
+              "cosine_sim_normalized": 0.24,
+              "cosine_sim_percentile": 0.09,
+              "rank": 541,
+              "cosine_distance": 1.0291,
+              "gap_to_best": 0.2954
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
+```
+
+
 -----
 <br>
 

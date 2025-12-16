@@ -1,9 +1,9 @@
 from sqlalchemy.orm import Session
-from app.models import UserSubmission, Recommendation, Plant, SbertMetadata, Bm25Metadata, UserPlantLike, UserAnswer
+from app.models import UserSubmission, Recommendation, Plant, SbertMetadata, Bm25Metadata, UserPlantLike, UserAnswer, \
+    Question, Answer
 from app.schemas import RecommendationMetadataSBERT, Plant as PlantSchema, PlantMetadata, PlantRecommendation, \
-    RecommendationMetadataBM25
-from app.schemas.recommendations_schema import AllRecommendations
-
+    RecommendationMetadataBM25, UserInputQuestionnaire
+from app.schemas.recommendations_schema import AllRecommendations, UserInput
 
 """ -----------------------------------------------------------------------------------------------
  Query all plants including pagination
@@ -29,6 +29,7 @@ def get_all_recommendations(db: Session, include_non_rated: bool):
     global metadata
     all_submissions_recs: list[AllRecommendations] = []
     all_submissions = db.query(UserSubmission).all()
+    submission_type = ""
 
     for sub in all_submissions:
 
@@ -43,6 +44,7 @@ def get_all_recommendations(db: Session, include_non_rated: bool):
             plant = db.query(Plant).filter_by(id=recom.plant_id).first()
 
             if recom.algorithm == 'sbert':
+                submission_type = "free_text"
                 metadata_sbert = db.query(SbertMetadata).filter_by(recommendation_id=recom.id).first()
 
                 metadata = RecommendationMetadataSBERT(
@@ -56,6 +58,7 @@ def get_all_recommendations(db: Session, include_non_rated: bool):
                 )
 
             elif recom.algorithm == 'bm25':
+                submission_type = "questionnaire"
                 metadata_bm25 = db.query(Bm25Metadata).filter_by(recommendation_id=recom.id).first()
 
                 metadata = RecommendationMetadataBM25(
@@ -80,10 +83,45 @@ def get_all_recommendations(db: Session, include_non_rated: bool):
                     submission_id=recom.submission_id, # type: ignore
                     recommendation=[plant_metadata]))
 
+        # Add user answers to the recommendation, such that frontend can display nicely
+        user_answer = db.query(UserAnswer).filter_by(submission_id=sub.id).all()
+        user_input_questionnaire_list = []
+        user_input_free_text = ""
+
+        if not user_answer:
+            user_input_free_text = sub.free_text
+
+        else:
+            for answer in user_answer:
+                question_id = answer.question_id
+                answer_id = answer.answer_id
+
+                question = db.query(Question).filter_by(id=question_id).first()
+                answer = db.query(Answer).filter_by(id=answer_id).first()
+
+                if question is not None and answer is not None:
+                    question_type = question.type
+                    question_text = question.question
+                    answer_text = answer.answer
+
+                    user_input_questionnaire_list.append(UserInputQuestionnaire(
+                        question_type=question_type.value,
+                        question=str(question_text),
+                        answer=str(answer_text)
+                    ))
+
+
+        user_input = UserInput(
+            type=submission_type,
+            questionnaire=user_input_questionnaire_list,
+            free_text=user_input_free_text
+        )
+
         all_submissions_recs.append(
             AllRecommendations(
                 submission_id=sub.id, # type: ignore
                 rating=sub.rating,  # type: ignore
+                user_input=user_input,
                 recommendations_per_submission=recommendation_list # type: ignore
             )
         )

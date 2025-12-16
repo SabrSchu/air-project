@@ -16,3 +16,6 @@ dist/
 # IDE
 .idea/
 .vscode/
+
+# DB file
+plants_database.py
