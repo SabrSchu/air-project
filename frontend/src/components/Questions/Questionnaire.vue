@@ -6,6 +6,8 @@ import PlantCard from "@/components/PlantCard.vue";
 import EndOfQuestions from "./EndOfQuestions.vue";
 import FreeTextQuestion from "@/components/Questions/FreeTextQuestion.vue";
 import LoadingAnimation from "@/components/LoadingAnimation.vue";
+import ScoreGauge from "@/components/ScoreGauge.vue";
+import MetadataVisulizerTest from "@/components/MetadataVisulizerTest.vue";
 import ArrowLeft from 'vue-material-design-icons/ArrowLeft.vue'
 
 import {
@@ -140,8 +142,8 @@ const handleSendFreeText = async (payload: string) => {
   try {
     const result = await postFreeText(finalResults.value, {
       num_perfect_fits: 3,
-      num_good_fits: 3,
-      num_bad_fits: 3
+      num_good_fits: 2,
+      num_bad_fits: 1
     });
 
     recommendations.value = result;
@@ -243,6 +245,15 @@ const handleSendFreeText = async (payload: string) => {
             :sunlightAmount="plant.sunlight"
             :fertilizerAmount="plant.fertilization"
             :image_url="plant.image_url"/>
+
+        <section class="metadata-grid" v-for="recommendation in group.recommendation.values()">
+
+          <MetadataVisulizerTest :metadata="recommendation.metadata" />
+
+          <ScoreGauge label="Normalized" :value="recommendation.metadata.cosine_sim_normalized" />
+          <ScoreGauge label="Percentile" :value="recommendation.metadata.cosine_sim_percentile" />
+
+        </section>
       </template>
 
       <RouterLink to="/feedback">
@@ -375,7 +386,7 @@ const handleSendFreeText = async (payload: string) => {
 
 .recommender-group-container {
   border: solid 1rem black;
-   border-radius: 0.5rem;
+  border-radius: 0.5rem;
 }
 
 .separator {
@@ -424,5 +435,14 @@ const handleSendFreeText = async (payload: string) => {
   h1 {
     font-size: 1rem;
   }
+}
+
+.metadata-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  background: #ffffff;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
 }
 </style>
