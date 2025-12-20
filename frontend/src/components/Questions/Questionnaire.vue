@@ -244,16 +244,18 @@ const handleSendFreeText = async (payload: string) => {
             :waterAmount="plant.watering"
             :sunlightAmount="plant.sunlight"
             :fertilizerAmount="plant.fertilization"
-            :image_url="plant.image_url"/>
+            :image_url="plant.image_url"
+            :metadata="plant.metadata"
+        >
+          <template #metadata="{ metadata }">
+            <section class="metadata-grid">
+              <MetadataVisulizerTest :metadata="metadata" />
+              <ScoreGauge label="Normalized" :value="metadata.cosine_sim_normalized" />
+              <ScoreGauge label="Percentile" :value="metadata.cosine_sim_percentile" />
+            </section>
+          </template>
+        </PlantCard>
 
-        <section class="metadata-grid" v-for="recommendation in group.recommendation.values()">
-
-          <MetadataVisulizerTest :metadata="recommendation.metadata" />
-
-          <ScoreGauge label="Normalized" :value="recommendation.metadata.cosine_sim_normalized" />
-          <ScoreGauge label="Percentile" :value="recommendation.metadata.cosine_sim_percentile" />
-
-        </section>
       </template>
 
       <RouterLink to="/feedback">

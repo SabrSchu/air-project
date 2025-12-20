@@ -22,8 +22,16 @@ const options = {
 </script>
 
 <template>
-  <div class="metric-column">
-    <h2>{{ props.label }}</h2>
+  <div v-if="props.label == 'Normalized'" class="metric-column">
+    <h2>Normalized</h2>
+    <div class="gauge-wrapper">
+      <Doughnut :data="data" :options="options" />
+      <span class="gauge-value">{{ (value * 100).toFixed(0) }}</span>
+    </div>
+  </div>
+
+  <div v-else class="metric-column">
+    <h2>Match Percentage</h2>
     <div class="gauge-wrapper">
       <Doughnut :data="data" :options="options" />
       <span class="gauge-value">{{ (value * 100).toFixed(0) }}%</span>
@@ -35,12 +43,21 @@ const options = {
 .metric-column {
   display: flex;
   flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+
+  h2 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-wrap: nowrap;
+  }
 }
 
 .gauge-wrapper {
   position: relative;
-  width: 12rem;
-  height: 12rem;
+  width: 8rem;
+  height: 8rem;
 }
 .gauge-value {
   position: absolute;
