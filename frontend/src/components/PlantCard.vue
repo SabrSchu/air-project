@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import DemoPlant from '@/assets/DemoPlant.jpg'
-import ScoreGauge from "@/components/ScoreGauge.vue";
-import MetadataVisulizerTest from "@/components/MetadataVisulizerTest.vue";
 import WaterIcon from 'vue-material-design-icons/Water.vue'
 import WeatherSunnyIcon from 'vue-material-design-icons/WeatherSunny.vue'
 import CircleIcon from 'vue-material-design-icons/Circle.vue'
@@ -210,14 +208,7 @@ function filledCircles(type: string) {
           class="metadata-popover"
           ref="popoverRef"
       >
-        <slot name="metadata" :metadata="metadata">
-          <!-- fallback -->
-          <section class="metadata-grid">
-            <MetadataVisulizerTest :metadata="metadata" />
-            <ScoreGauge label="Normalized" :value="metadata.cosine_sim_normalized" />
-            <ScoreGauge label="Percentile" :value="metadata.cosine_sim_percentile" />
-          </section>
-        </slot>
+        <slot name="metadata" :metadata="metadata" />
       </div>
     </transition>
   </div>

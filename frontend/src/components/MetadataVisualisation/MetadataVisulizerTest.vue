@@ -45,17 +45,6 @@ const RAW_SIMILARITY_HELP =
           {{ RAW_SIMILARITY_HELP }}
         </span>
       </span>
-      <span class="label">Match Percentage:</span>
-      <span class="value">{{ (metadata.cosine_sim_percentile * 100).toFixed(0) }}%</span>
-    </div>
-
-    <div class="metric-row">
-      <span class="tooltip-trigger" tabindex="0">
-        <InformationOutline :size="16" />
-        <span class="tooltip" role="tooltip">
-          {{ RAW_SIMILARITY_HELP }}
-        </span>
-      </span>
       <span class="label">Cosine Distance:</span>
       <span class="value">{{ (metadata.cosine_distance).toFixed(4) }}</span>
     </div>

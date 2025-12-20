@@ -29,14 +29,6 @@ const options = {
       <span class="gauge-value">{{ (value * 100).toFixed(0) }}</span>
     </div>
   </div>
-
-  <div v-else class="metric-column">
-    <h2>Match Percentage</h2>
-    <div class="gauge-wrapper">
-      <Doughnut :data="data" :options="options" />
-      <span class="gauge-value">{{ (value * 100).toFixed(0) }}%</span>
-    </div>
-  </div>
 </template>
 
 <style scoped>

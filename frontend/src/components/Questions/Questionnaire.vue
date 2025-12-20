@@ -6,8 +6,10 @@ import PlantCard from "@/components/PlantCard.vue";
 import EndOfQuestions from "./EndOfQuestions.vue";
 import FreeTextQuestion from "@/components/Questions/FreeTextQuestion.vue";
 import LoadingAnimation from "@/components/LoadingAnimation.vue";
-import ScoreGauge from "@/components/ScoreGauge.vue";
-import MetadataVisulizerTest from "@/components/MetadataVisulizerTest.vue";
+import ScoreGauge from "@/components/MetadataVisualisation/ScoreGauge.vue";
+import MetadataVisulizerTest from "@/components/MetadataVisualisation/MetadataVisulizerTest.vue";
+import MatchPercentageBar from "@/components/MetadataVisualisation/MatchPercentageBar.vue";
+import CosineVector from "@/components/MetadataVisualisation/CosineVector.vue";
 import ArrowLeft from 'vue-material-design-icons/ArrowLeft.vue'
 
 import {
@@ -251,7 +253,10 @@ const handleSendFreeText = async (payload: string) => {
             <section class="metadata-grid">
               <MetadataVisulizerTest :metadata="metadata" />
               <ScoreGauge label="Normalized" :value="metadata.cosine_sim_normalized" />
-              <ScoreGauge label="Percentile" :value="metadata.cosine_sim_percentile" />
+              <div class="match-and-cosine-div">
+                <MatchPercentageBar :value="metadata.cosine_sim_percentile" />
+                <CosineVector :distance="metadata.cosine_distance" />
+              </div>
             </section>
           </template>
         </PlantCard>
@@ -446,5 +451,13 @@ const handleSendFreeText = async (payload: string) => {
   background: #ffffff;
   padding: 0.5rem;
   border-radius: 0.5rem;
+}
+
+.match-and-cosine-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
 }
 </style>
