@@ -8,8 +8,20 @@ const props = defineProps({
   },
 });
 
-const RAW_SIMILARITY_HELP =
-    'Raw cosine similarity between your answers and this plant profile. Higher is closer to a perfect match.'
+const RANK_TOOLTIP =
+    "Position of the plant compared to all others. 1 means best match."
+
+const RAW_SIMILARITY_TOOLTIP =
+    "Un-scaled cosine similarity between your answers and this plant's profile. Higher is better."
+
+const NORMALIZED_SIMILARITY_TOOLTIP =
+    "Cosine similarity rescaled between 0 and 1 so you can compare plants at a glance. Closer to 1 means stronger match."
+
+const COSINE_DISTANCE_TOOLTIP =
+    "How far this plant's profile is from your ideal vector. Smaller value = better match."
+
+const GAP_TO_BEST_TOOLTIP =
+    "Difference between this plant an the top-ranked option. Zero means it's tied for best."
 </script>
 
 <template>
@@ -20,7 +32,7 @@ const RAW_SIMILARITY_HELP =
       <span class="tooltip-trigger" tabindex="0">
         <InformationOutline :size="16" />
         <span class="tooltip" role="tooltip">
-          {{ RAW_SIMILARITY_HELP }}
+          {{ RANK_TOOLTIP }}
         </span>
       </span>
       <span class="label">Rank:</span>
@@ -31,7 +43,7 @@ const RAW_SIMILARITY_HELP =
       <span class="tooltip-trigger" tabindex="0">
         <InformationOutline :size="16" />
         <span class="tooltip" role="tooltip">
-          {{ RAW_SIMILARITY_HELP }}
+          {{ RAW_SIMILARITY_TOOLTIP }}
         </span>
       </span>
       <span class="label">Raw Similarity:</span>
@@ -42,7 +54,18 @@ const RAW_SIMILARITY_HELP =
       <span class="tooltip-trigger" tabindex="0">
         <InformationOutline :size="16" />
         <span class="tooltip" role="tooltip">
-          {{ RAW_SIMILARITY_HELP }}
+          {{ NORMALIZED_SIMILARITY_TOOLTIP }}
+        </span>
+      </span>
+      <span class="label">Normalized Similarity:</span>
+      <span class="value">{{ (metadata.cosine_sim_normalized).toFixed(2) }}</span>
+    </div>
+
+    <div class="metric-row">
+      <span class="tooltip-trigger" tabindex="0">
+        <InformationOutline :size="16" />
+        <span class="tooltip" role="tooltip">
+          {{ COSINE_DISTANCE_TOOLTIP }}
         </span>
       </span>
       <span class="label">Cosine Distance:</span>
@@ -53,7 +76,7 @@ const RAW_SIMILARITY_HELP =
       <span class="tooltip-trigger" tabindex="0">
         <InformationOutline :size="16" />
         <span class="tooltip" role="tooltip">
-          {{ RAW_SIMILARITY_HELP }}
+          {{ GAP_TO_BEST_TOOLTIP }}
         </span>
       </span>
       <span class="label">Gap to best:</span>
