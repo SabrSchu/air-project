@@ -6,6 +6,10 @@ import PlantCard from "@/components/PlantCard.vue";
 import EndOfQuestions from "./EndOfQuestions.vue";
 import FreeTextQuestion from "@/components/Questions/FreeTextQuestion.vue";
 import LoadingAnimation from "@/components/LoadingAnimation.vue";
+import ScoreGauge from "@/components/MetadataVisualisation/ScoreGauge.vue";
+import MetadataVisulizerTest from "@/components/MetadataVisualisation/MetadataVisulizerTest.vue";
+import MatchPercentageBar from "@/components/MetadataVisualisation/MatchPercentageBar.vue";
+import CosineVector from "@/components/MetadataVisualisation/CosineVector.vue";
 import ArrowLeft from 'vue-material-design-icons/ArrowLeft.vue'
 
 import {
@@ -140,8 +144,8 @@ const handleSendFreeText = async (payload: string) => {
   try {
     const result = await postFreeText(finalResults.value, {
       num_perfect_fits: 3,
-      num_good_fits: 3,
-      num_bad_fits: 3
+      num_good_fits: 2,
+      num_bad_fits: 1
     });
 
     recommendations.value = result;
@@ -233,16 +237,42 @@ const handleSendFreeText = async (payload: string) => {
 
       <template class="recommender-group-container" v-for="group in recommendations.values()">
         <h2>{{ group.label }}</h2>
-        <PlantCard
-            v-for="plant in group.recommendation"
-            :key="plant.id"
-            :id="plant.id"
-            :name="plant.name"
-            :description="plant.description"
-            :waterAmount="plant.watering"
-            :sunlightAmount="plant.sunlight"
-            :fertilizerAmount="plant.fertilization"
-            :image_url="plant.image_url"/>
+        <div v-for="plant in group.recommendation">
+          <PlantCard
+              v-if="plant.metadata.algorithm != 'BM25'"
+              :key="plant.id"
+              :id="plant.id"
+              :name="plant.name"
+              :description="plant.description"
+              :waterAmount="plant.watering"
+              :sunlightAmount="plant.sunlight"
+              :fertilizerAmount="plant.fertilization"
+              :image_url="plant.image_url"
+              :metadata="plant.metadata"
+          >
+            <template #metadata="{ metadata }">
+              <section class="metadata-grid">
+                <MetadataVisulizerTest :metadata="metadata" />
+                <ScoreGauge label="Normalized" :value="metadata.cosine_sim_normalized" />
+                <div class="match-and-cosine-div">
+                  <MatchPercentageBar :value="metadata.cosine_sim_percentile" />
+                  <CosineVector :distance="metadata.cosine_distance" />
+                </div>
+              </section>
+            </template>
+          </PlantCard>
+
+          <PlantCard
+              v-else
+              :id="plant.id"
+              :name="plant.name"
+              :description="plant.description"
+              :waterAmount="plant.watering"
+              :sunlightAmount="plant.sunlight"
+              :fertilizerAmount="plant.fertilization"
+              :image_url="plant.image_url"
+          />
+        </div>
       </template>
 
       <RouterLink to="/feedback">
@@ -375,7 +405,7 @@ const handleSendFreeText = async (payload: string) => {
 
 .recommender-group-container {
   border: solid 1rem black;
-   border-radius: 0.5rem;
+  border-radius: 0.5rem;
 }
 
 .separator {
@@ -424,5 +454,22 @@ const handleSendFreeText = async (payload: string) => {
   h1 {
     font-size: 1rem;
   }
+}
+
+.metadata-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  background: #ffffff;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.match-and-cosine-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
 }
 </style>

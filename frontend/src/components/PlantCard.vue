@@ -5,7 +5,8 @@ import WeatherSunnyIcon from 'vue-material-design-icons/WeatherSunny.vue'
 import CircleIcon from 'vue-material-design-icons/Circle.vue'
 import SproutIcon from 'vue-material-design-icons/Sprout.vue'
 import HeartIcon from 'vue-material-design-icons/Heart.vue'
-import { ref, watch } from 'vue'
+import InformationOutline from 'vue-material-design-icons/InformationOutline.vue'
+import { ref, watch, onMounted, onBeforeUnmount } from 'vue'
 import {likePlantEndpoint, unlikePlantEndpoint} from "@/services/plantEnpointService.ts";
 
 const emit = defineEmits(['toggle-like']);
@@ -44,18 +45,41 @@ const props = defineProps({
     type: Boolean,
     required: false,
     default: false
+  },
+  metadata: {
+    type: Object,
+    required: false,
+    default: null
   }
 });
+
+// Section for PopoverItem
+const isMetadataOpen = ref(false)
+const popoverRef = ref<HTMLElement | null>(null)
+
+function toggleMetadata() {
+  if (!props.metadata) return
+  isMetadataOpen.value = !isMetadataOpen.value
+}
+
+function closeMetadata() {
+  isMetadataOpen.value = false
+}
+
+function handleClickOutside(event: MouseEvent) {
+  if (popoverRef.value && !popoverRef.value.contains(event.target as Node)) {
+    closeMetadata()
+  }
+}
+
+onMounted(() => document.addEventListener('click', handleClickOutside))
+onBeforeUnmount(() => document.removeEventListener('click', handleClickOutside))
 
 const isLiked = ref(props.liked)
 
 watch(() => props.liked, (newVal) => {
   isLiked.value = newVal;
 });
-
-function showMessage() {
-  console.log('Hello World');
-}
 
 async function toggleLike() {
   const previousState = isLiked.value;
@@ -118,6 +142,15 @@ function filledCircles(type: string) {
 
 <template>
   <div class="plant-card">
+    <button
+        v-if="metadata"
+        class="info-button"
+        type="button"
+        @click.stop="toggleMetadata"
+    >
+      <InformationOutline :size="18" />
+    </button>
+
     <img class="plant-image" :src="image_url && image_url !== '' ? image_url : DemoPlant" alt="Demo Plant" />
 
     <div class="text-box">
@@ -169,6 +202,15 @@ function filledCircles(type: string) {
         />
       </div>
     </div>
+    <transition name="fade-scale">
+      <div
+          v-if="isMetadataOpen"
+          class="metadata-popover"
+          ref="popoverRef"
+      >
+        <slot name="metadata" :metadata="metadata" />
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -182,7 +224,7 @@ function filledCircles(type: string) {
   align-items: stretch;
   border: 2px solid white;
   border-radius: 1rem;
-  overflow: hidden;
+  overflow: visible;
   background-color: white;
 }
 
@@ -276,6 +318,47 @@ function filledCircles(type: string) {
 .water-icon-wrapper:active,
 .temperature-icon-wrapper:active,
 .sun-icon-wrapper:active{
+  transform: scale(0.95);
+}
+
+.info-button {
+  position: absolute;
+  top: 0.3rem;
+  left: 0.3rem;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 100rem;
+  background: white;
+  box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.2);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.info-button:hover {
+  background: rgba(240, 240, 240, 0.5);
+}
+
+.metadata-popover {
+  position: absolute;
+  bottom: calc(100% + 0.5rem);
+  width: fit-content;
+  padding: 1rem;
+  z-index: 20;
+  border-radius: 0.75rem;
+  background: #ffffff;
+  box-shadow: 0 0.75rem 1.5rem rgba(0,0,0,0.25);
+  transform-origin: bottom left;
+}
+
+.fade-scale-enter-active,
+.fade-scale-leave-active {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.fade-scale-enter-from,
+.fade-scale-leave-to {
+  opacity: 0;
   transform: scale(0.95);
 }
 </style>
