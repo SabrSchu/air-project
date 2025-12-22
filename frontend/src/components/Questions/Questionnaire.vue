@@ -237,30 +237,42 @@ const handleSendFreeText = async (payload: string) => {
 
       <template class="recommender-group-container" v-for="group in recommendations.values()">
         <h2>{{ group.label }}</h2>
-        <PlantCard
-            v-for="plant in group.recommendation"
-            :key="plant.id"
-            :id="plant.id"
-            :name="plant.name"
-            :description="plant.description"
-            :waterAmount="plant.watering"
-            :sunlightAmount="plant.sunlight"
-            :fertilizerAmount="plant.fertilization"
-            :image_url="plant.image_url"
-            :metadata="plant.metadata"
-        >
-          <template #metadata="{ metadata }">
-            <section class="metadata-grid">
-              <MetadataVisulizerTest :metadata="metadata" />
-              <ScoreGauge label="Normalized" :value="metadata.cosine_sim_normalized" />
-              <div class="match-and-cosine-div">
-                <MatchPercentageBar :value="metadata.cosine_sim_percentile" />
-                <CosineVector :distance="metadata.cosine_distance" />
-              </div>
-            </section>
-          </template>
-        </PlantCard>
+        <div v-for="plant in group.recommendation">
+          <PlantCard
+              v-if="plant.metadata.algorithm != 'BM25'"
+              :key="plant.id"
+              :id="plant.id"
+              :name="plant.name"
+              :description="plant.description"
+              :waterAmount="plant.watering"
+              :sunlightAmount="plant.sunlight"
+              :fertilizerAmount="plant.fertilization"
+              :image_url="plant.image_url"
+              :metadata="plant.metadata"
+          >
+            <template #metadata="{ metadata }">
+              <section class="metadata-grid">
+                <MetadataVisulizerTest :metadata="metadata" />
+                <ScoreGauge label="Normalized" :value="metadata.cosine_sim_normalized" />
+                <div class="match-and-cosine-div">
+                  <MatchPercentageBar :value="metadata.cosine_sim_percentile" />
+                  <CosineVector :distance="metadata.cosine_distance" />
+                </div>
+              </section>
+            </template>
+          </PlantCard>
 
+          <PlantCard
+              v-else
+              :id="plant.id"
+              :name="plant.name"
+              :description="plant.description"
+              :waterAmount="plant.watering"
+              :sunlightAmount="plant.sunlight"
+              :fertilizerAmount="plant.fertilization"
+              :image_url="plant.image_url"
+          />
+        </div>
       </template>
 
       <RouterLink to="/feedback">
