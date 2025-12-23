@@ -50,6 +50,11 @@ const props = defineProps({
     type: Object,
     required: false,
     default: null
+  },
+  can_be_liked: {
+    type: Boolean,
+    required: false,
+    default: true
   }
 });
 
@@ -165,7 +170,7 @@ function filledCircles(type: string) {
       -->
     </div>
     <div class="value-box">
-      <div class="favorite-box">
+      <div v-if="can_be_liked" class="favorite-box">
         <HeartIcon :style="{ color: isLiked ? 'red' : 'black' }" @click="toggleLike" />
       </div>
       <div class="water-value">

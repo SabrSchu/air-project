@@ -13,6 +13,7 @@
     <div class="feedback-background">
       <div class="feedback-container">
         <template v-if="!studySubmitted">
+          <h1>Feedback Questionnaire</h1>
           <p>Please help us improve our Plant Recommender by giving us feedback.</p>
 
           <div class="study-questions-list">
@@ -72,18 +73,18 @@
           </div>
         </template>
       </div>
+
+      <RecommendationsOverview/>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { motion } from 'motion-v'
-import TreeIcon from "vue-material-design-icons/Tree.vue";
+import RecommendationsOverview from "@/components/RecommendationsOverview.vue";
 import { onMounted, ref, computed } from "vue";
-import {
-  getUserStudyQuestions,
-  submitUserStudy
-} from "@/services/questionsEnpointService.ts";
+import { getUserStudyQuestions, submitUserStudy } from "@/services/questionsEnpointService.ts";
+import TreeIcon from "vue-material-design-icons/Tree.vue";
 import LeafIcon from "vue-material-design-icons/Leaf.vue";
 
 const userStudySections = ref([]);
@@ -177,7 +178,7 @@ const submitFeedback = async () => {
 }
 
 onMounted(() => {
-  fetchUserStudyQuestions()
+  fetchUserStudyQuestions();
 })
 
 </script>
@@ -204,6 +205,7 @@ onMounted(() => {
   .feedback-background{
     display: flex;
     flex: 1;
+    gap: 1rem;
     align-content: center;
     justify-content: center;
     width: 100%;
@@ -216,19 +218,20 @@ onMounted(() => {
     background-repeat: no-repeat;
 
     .feedback-container {
-      display: flex;
-      flex-direction: column;
-      align-self: center;
-      justify-self: center;
-      justify-content: center;
-      align-items: center;
-      padding: 1rem;
+      flex: 1;
+      max-width: 35%;
+      height: 67vh;
+      overflow-y: auto;
+      padding: 1.5rem;
       border-radius: 1rem;
-      background-color: rgb(183,213,172,0.8);
-      background-blend-mode: lighten;
+      background-color: rgba(255, 255, 255, 0.9);
       text-align: center;
-      max-width: 50%;
-      height: fit-content;
+
+      h1 {
+        margin-bottom: 1rem;
+        color: #4a6a41;
+        font-size: 1.5rem;
+      }
 
       .feedback-icons-container {
         display: flex;
@@ -238,7 +241,7 @@ onMounted(() => {
 
         .plant-icon {
           cursor: pointer;
-          color: white;
+          color: #d3d3d3;
           transition: color 0.2s ease, transform 0.1s ease;
 
           &:hover {
