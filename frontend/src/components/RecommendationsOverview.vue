@@ -50,31 +50,6 @@
               </h1>
 
               <PlantCard
-                  v-if="recGroup.recommendation[0].metadata.algorithm != 'BM25'"
-                  :id="recGroup.recommendation[0].id"
-                  :name="recGroup.recommendation[0].name"
-                  :description="recGroup.recommendation[0].description"
-                  :waterAmount="recGroup.recommendation[0].watering"
-                  :sunlightAmount="recGroup.recommendation[0].sunlight"
-                  :fertilizerAmount="recGroup.recommendation[0].fertilization"
-                  :image_url="recGroup.recommendation[0].image_url"
-                  :can_be_liked="false"
-                  :metadata="recGroup.recommendation[0].metadata"
-              >
-                <template #metadata v-if="recGroup.recommendation[0].metadata.algorithm.toUpperCase() !== 'BM25'">
-                  <section class="metadata-grid">
-                    <MetadataVisulizerTest :metadata="recGroup.recommendation[0].metadata"/>
-                    <ScoreGauge label="Normalized" :value="recGroup.recommendation[0].metadata.cosine_sim_normalized"/>
-                    <div class="match-and-cosine-div">
-                      <MatchPercentageBar :value="recGroup.recommendation[0].metadata.cosine_sim_percentile"/>
-                      <CosineVector :distance="recGroup.recommendation[0].metadata.cosine_distance"/>
-                    </div>
-                  </section>
-                </template>
-              </PlantCard>
-
-              <PlantCard
-                  v-else
                   :id="recGroup.recommendation[0].id"
                   :name="recGroup.recommendation[0].name"
                   :description="recGroup.recommendation[0].description"
@@ -137,7 +112,7 @@ onMounted(() => {
 <style scoped>
 .recommendations-overview-container {
   flex: 1;
-  max-width: 45%;
+  max-width: 40%;
   height: 67vh;
   overflow-y: auto;
   padding: 1.5rem;
