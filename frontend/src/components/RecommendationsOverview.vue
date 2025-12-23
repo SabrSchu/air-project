@@ -137,7 +137,7 @@ onMounted(() => {
 <style scoped>
 .recommendations-overview-container {
   flex: 1;
-  max-width: 40%;
+  max-width: 45%;
   height: 67vh;
   overflow-y: auto;
   padding: 1.5rem;
