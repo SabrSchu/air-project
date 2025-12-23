@@ -20,3 +20,15 @@ export async function rateRecommendationEndpoint(submissionId: number, rating: n
 
   return await response.json();
 }
+
+/**
+ * Fetches all recommendations from the database.
+ * @param includeNonRated - If true, returns submissions even if they haven't been rated yet.
+ */
+export async function getAllRecommendationsEndpoint(includeNonRated: boolean = true) {
+  const response = await fetch(`${API_BASE_URL}/recommendation/all?include_unrated=${includeNonRated}`);
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  return await response.json();
+}

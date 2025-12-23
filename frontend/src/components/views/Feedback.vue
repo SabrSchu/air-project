@@ -73,12 +73,15 @@
           </div>
         </template>
       </div>
+
+      <RecommendationsOverview/>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { motion } from 'motion-v'
+import RecommendationsOverview from "@/components/RecommendationsOverview.vue";
 import { onMounted, ref, computed } from "vue";
 import { getUserStudyQuestions, submitUserStudy } from "@/services/questionsEnpointService.ts";
 import TreeIcon from "vue-material-design-icons/Tree.vue";
@@ -216,7 +219,7 @@ onMounted(() => {
 
     .feedback-container {
       flex: 1;
-      max-width: 40%;
+      max-width: 35%;
       height: 67vh;
       overflow-y: auto;
       padding: 1.5rem;
