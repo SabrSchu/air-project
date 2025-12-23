@@ -11,12 +11,15 @@ import MetadataVisulizerTest from "@/components/MetadataVisualisation/MetadataVi
 import MatchPercentageBar from "@/components/MetadataVisualisation/MatchPercentageBar.vue";
 import CosineVector from "@/components/MetadataVisualisation/CosineVector.vue";
 import ArrowLeft from 'vue-material-design-icons/ArrowLeft.vue'
+import LeafIcon from 'vue-material-design-icons/Leaf.vue'
 
 import {
   accessQuestionsEndpoint,
   postFreeText,
   postQuestionnaire
 } from "@/services/questionsEnpointService.ts";
+
+import { rateRecommendationEndpoint } from "@/services/recommendationsEndpointService.ts";
 
 const isLoading = ref(true)
 const questions = ref([])
@@ -31,10 +34,39 @@ const userInput = ref("");
 const finalResults = ref(null)
 const recommendations = ref([])
 
+const hoveredRating = ref(0);
+const selectedRating = ref(0);
+const isRating = ref(false);
+const hasRated = ref(false);
+
 const animationKey = computed(() => {
   if (quizFinished.value) return 'end-screen';
   return isFreeTextMode.value ? 'submitFreeTextQuestion' : currentStep.value;
 });
+
+const activeSubmissionId = computed(() => {
+  if (recommendations.value.length > 0) {
+    return recommendations.value[0].submission_id;
+  }
+  return null;
+});
+
+const rateCurrentRecommendation = async (rating: number) => {
+  if (!activeSubmissionId.value || isRating.value || hasRated.value) return;
+
+  isRating.value = true;
+
+  try {
+    await rateRecommendationEndpoint(activeSubmissionId.value, rating);
+    selectedRating.value = rating;
+    hasRated.value = true;
+  } catch (err) {
+    console.error("Rating failed:", err);
+    alert("Could not save rating. Please try again.");
+  } finally {
+    isRating.value = false;
+  }
+};
 
 /**
  * Function that calls the services which call our Backend endpoints
@@ -275,6 +307,30 @@ const handleSendFreeText = async (payload: string) => {
         </div>
       </template>
 
+      <!-- Recommendation rating -->
+      <div class="recommendatino-rating-container">
+        <h1>Rate this Recommendation</h1>
+        <div class="leaf-rating">
+          <LeafIcon
+              v-for="n in 5"
+              :key="n"
+              :size="35"
+              class="plant-icon"
+              :class="{
+                'filled': n <= (hoveredRating || selectedRating),
+                'readonly': hasRated
+              }"
+              @mouseenter="!hasRated && (hoveredRating = n)"
+              @mouseleave="hoveredRating = 0"
+              @click="rateCurrentRecommendation(n)"
+          />
+        </div>
+        <p v-if="hasRated" class="rating-thanks">
+          Thank you for rating!
+        </p>
+      </div>
+
+      <!-- Feedback Button -->
       <RouterLink to="/feedback">
         <Motion
             class="feedback-button"
@@ -441,6 +497,52 @@ const handleSendFreeText = async (payload: string) => {
   color: black;
   font-weight: bold;
   box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1);
+}
+
+.recommendatino-rating-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  gap: 0.5rem;
+  background-color: white;
+
+  h1 {
+    font-size: 1.2rem;
+  }
+
+  .leaf-rating {
+    display: flex;
+    gap: 0.5rem;
+
+    .plant-icon {
+      cursor: pointer;
+      color: #d3d3d3;
+      transition: color 0.2s ease, transform 0.1s ease;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+
+      &.filled {
+        color: #6a9a5f;
+      }
+
+      &.readonly {
+        cursor: default;
+      }
+    }
+  }
+
+  .rating-thanks {
+    font-size: 0.9rem;
+    color: #6a9a5f;
+    font-weight: bold;
+    margin-top: 0.5rem;
+    animation: fadeIn 0.5s ease;
+  }
 }
 
 .feedback-button{
