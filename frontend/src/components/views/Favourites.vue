@@ -40,7 +40,7 @@
 import { motion } from 'motion-v'
 import {onMounted, ref} from 'vue';
 import TreeIcon from "vue-material-design-icons/Tree.vue";
-import {getAllFavouritePlantsEndpoint} from "@/services/plantEnpointService.ts";
+import {getAllFavouritePlantsEndpoint} from "@/services/plantEndpointService.ts";
 import PlantCard from "@/components/PlantCard.vue";
 
 const favourites = ref<any[]>([]);

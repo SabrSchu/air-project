@@ -83,7 +83,7 @@
 import { motion } from 'motion-v'
 import RecommendationsOverview from "@/components/RecommendationsOverview.vue";
 import { onMounted, ref, computed } from "vue";
-import { getUserStudyQuestions, submitUserStudy } from "@/services/questionsEnpointService.ts";
+import { getUserStudyQuestions, submitUserStudy } from "@/services/questionsEndpointService.ts";
 import TreeIcon from "vue-material-design-icons/Tree.vue";
 import LeafIcon from "vue-material-design-icons/Leaf.vue";
 

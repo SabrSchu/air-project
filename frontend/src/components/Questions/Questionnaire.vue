@@ -17,7 +17,7 @@ import {
   accessQuestionsEndpoint,
   postFreeText,
   postQuestionnaire
-} from "@/services/questionsEnpointService.ts";
+} from "@/services/questionsEndpointService.ts";
 
 import { rateRecommendationEndpoint } from "@/services/recommendationsEndpointService.ts";
 

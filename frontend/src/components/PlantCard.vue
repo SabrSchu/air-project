@@ -7,7 +7,7 @@ import SproutIcon from 'vue-material-design-icons/Sprout.vue'
 import HeartIcon from 'vue-material-design-icons/Heart.vue'
 import InformationOutline from 'vue-material-design-icons/InformationOutline.vue'
 import { ref, watch, onMounted, onBeforeUnmount } from 'vue'
-import {likePlantEndpoint, unlikePlantEndpoint} from "@/services/plantEnpointService.ts";
+import {likePlantEndpoint, unlikePlantEndpoint} from "@/services/plantEndpointService.ts";
 
 const emit = defineEmits(['toggle-like']);
 

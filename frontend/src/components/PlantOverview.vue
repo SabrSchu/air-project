@@ -179,7 +179,7 @@ import {
   filterPlantsByName,
   getAllFavouritePlantsEndpoint,
   filterPlantsByOptions
-} from "@/services/plantEnpointService.ts";
+} from "@/services/plantEndpointService.ts";
 import PlantCard from "@/components/PlantCard.vue";
 
 const plants = ref([]);
