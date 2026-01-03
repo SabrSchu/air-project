@@ -191,6 +191,24 @@ const handleSendFreeText = async (payload: string) => {
     isLoading.value = false;
   }
 }
+
+const resetQuiz = () => {
+  quizStarted.value = false;
+  quizFinished.value = false;
+  currentStep.value = 0;
+
+  answers.value = [];
+  userInput.value = "";
+  finalResults.value = null;
+  recommendations.value = [];
+
+  selectedRating.value = 0;
+  hoveredRating.value = 0;
+  hasRated.value = false;
+  isRating.value = false;
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
 </script>
 
 <template>
@@ -247,6 +265,7 @@ const handleSendFreeText = async (payload: string) => {
               :is="currentComponent"
               v-bind="currentProps"
               @next="isFreeTextMode ? handleSendFreeText($event) : handleNext($event)"
+              @reset-questionnaire="resetQuiz"
           />
           <component
             v-if="isLoading"
