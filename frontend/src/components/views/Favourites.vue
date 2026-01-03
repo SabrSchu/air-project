@@ -90,8 +90,6 @@ onMounted(() => {
     display: flex;
     justify-content: center;
     align-self: flex-start;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
     background-image: url("/background.jpeg");
     background-color: rgba(255,255,255,0.3);
     background-blend-mode: lighten;
@@ -101,14 +99,13 @@ onMounted(() => {
   }
 
   .favourites-grid {
-    padding: 2rem;
+    flex: 1;
     margin: 1rem;
+    padding: 1rem;
     border-radius: 1rem;
     box-shadow: 0 0.6rem 1.5rem rgba(0,0,0,0.15);
     background-color: rgb(183,213,172,0.6);
     max-width: 90%;
-    width: 100%;
-    max-height: 40rem;
     overflow-y: auto;
     scroll-behavior: smooth;
     container-type: inline-size;
