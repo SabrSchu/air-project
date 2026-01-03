@@ -4,7 +4,7 @@ import PlantCard from "@/components/PlantCard.vue";
 import Pin from 'vue-material-design-icons/Pin.vue'
 import PinOff from 'vue-material-design-icons/PinOff.vue'
 
-import {postFreeText} from "@/services/questionsEnpointService.ts";
+import {postFreeText} from "@/services/questionsEndpointService.ts";
 
 defineProps<{
   isPinned: boolean

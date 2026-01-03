@@ -55,7 +55,7 @@
           <label>Soil</label>
           <select v-model="selectedFilters.soil">
             <option>All</option>
-            <option>Well-drained</option>
+            <option>Well drained</option>
             <option>Sandy</option>
             <option>Moist</option>
             <option>Loamy</option>
@@ -64,7 +64,7 @@
         </div>
 
         <div class="filter-group">
-          <label>Sun</label>
+          <label>Sunlight</label>
           <select v-model="selectedFilters.sun">
             <option>All</option>
             <option>Full Sunlight</option>
@@ -74,10 +74,10 @@
         </div>
 
         <div class="filter-group">
-          <label>Water</label>
+          <label>Watering</label>
           <select v-model="selectedFilters.water">
             <option>All</option>
-            <option>Concistently Moist</option>
+            <option>Consistently Moist</option>
             <option>Evenly Moist</option>
             <option>Moist</option>
             <option>Regular Moist</option>
@@ -94,7 +94,7 @@
             <option>Acidic</option>
             <option>Low Nitrogen</option>
             <option>Balanced</option>
-            <option>No Fertilizer</option>
+            <option>No</option>
             <option>Organic</option>
           </select>
         </div>
@@ -179,7 +179,7 @@ import {
   filterPlantsByName,
   getAllFavouritePlantsEndpoint,
   filterPlantsByOptions
-} from "@/services/plantEnpointService.ts";
+} from "@/services/plantEndpointService.ts";
 import PlantCard from "@/components/PlantCard.vue";
 
 const plants = ref([]);
